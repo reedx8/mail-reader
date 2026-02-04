@@ -1,21 +1,56 @@
 'use client';
 import { Picker } from '@react-native-picker/picker';
 import { useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { Camera, useCameraDevice } from 'react-native-vision-camera';
+import { Button, Image, StyleSheet, Text, View } from 'react-native';
+import {
+    Camera,
+    CameraPosition,
+    useCameraDevice,
+} from 'react-native-vision-camera';
 
 export default function Index() {
-    const [selectedRoute, setSelectedRoute] = useState(1);
-    const device = useCameraDevice('back');
+    const [selectedRoute, setSelectedRoute] = useState<number>(1);
+    const [cameraDirection, setCameraDirection] =
+        useState<CameraPosition>('back');
+    const device = useCameraDevice(cameraDirection);
 
-    if (device === undefined) { return <Text>No camera found</Text>; }
+    // if (device === undefined) {
+    //     return <Text>no camera found</Text>;
+    // }
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>USPS Mail Reader</Text>
-            <View style={{ flex: 1 }}>
-                <Camera style={{ width: 300, height: 300 }} device={device} isActive={true} />
+            <View style={{ flexDirection: 'row', alignItems: 'center', gap: 10 }}>
+                <Image
+                    source={require('../assets/images/usps-logo-2.png')}
+                    style={{ width: 35, height: 35}}
+                />
+                <Text style={styles.title}>USPS Mail Reader</Text>
             </View>
+            <View style={{ flex: 1 }}>
+                {device === undefined ? (
+                    <Text style={styles.text}>No camera found </Text>
+                ) : (
+                    <Camera
+                        style={{ width: 300, height: 275 }}
+                        device={device}
+                        isActive={true}
+                    />
+                )}
+            </View>
+            <View style={styles.button}>
+                <Button
+                    title='Switch Camera'
+                    onPress={() =>
+                        setCameraDirection(
+                            cameraDirection === 'back' ? 'front' : 'back',
+                        )
+                    }
+                    color={'#007AFF'}
+                    accessibilityLabel='Switch Camera'
+                />
+            </View>
+
             <Picker
                 selectedValue={selectedRoute}
                 onValueChange={(itemValue, itemIndex) =>
@@ -33,6 +68,7 @@ export default function Index() {
                 <Picker.Item label='Route 25' value={25} style={styles.text} />
                 <Picker.Item label='Route 29' value={29} style={styles.text} />
             </Picker>
+            {/* <Text style={styles.text2}>{selectedRoute}</Text> */}
             <Text style={styles.text2}>L-2</Text>
             <Text style={styles.text2}>Loop 3</Text>
         </View>
@@ -44,6 +80,9 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         backgroundColor: '#25292e',
         alignItems: 'center',
+        padding: 10,
+        // justifyContent: 'space-between',
+        // color: '#fff',
         // justifyContent: 'center',
     },
     text: {
@@ -61,6 +100,11 @@ const styles = StyleSheet.create({
     },
     picker: {
         width: 200,
-        height: 300,
+        height: 'auto',
+        color: '#fff',
+    },
+    button: {
+        backgroundColor: 'white',
+        borderRadius: 10,
     },
 });
