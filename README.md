@@ -1,50 +1,27 @@
-# Welcome to your Expo app 👋
+# USPS Mail Reader
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+iOS Mobile App utilizing computer vision to match mail to the correct loop within routes at USPS, speeding up casing, improving accuracy, and faciliting flexibility in USPS carriers. Future plans include matching mail to the correct shelf within the case using VR/AR glasses.
 
 ## Get started
 
 1. Install dependencies
 
-   ```bash
-   npm install
-   ```
+    ```bash
+    npm install
+    ```
 
-2. Start the app
+2. Plug in your iPhone to computer and turn developer mode on - you may also need to create your code signing certificate ([https://github.com/expo/fyi/blob/main/setup-xcode-signing.md](https://github.com/expo/fyi/blob/main/setup-xcode-signing.md)), and any further setup you may need is explained further in expo doc ([https://docs.expo.dev/get-started/set-up-your-environment/#plug-in-your-device-via-usb-and-enable-developer-mode](https://docs.expo.dev/get-started/set-up-your-environment/#plug-in-your-device-via-usb-and-enable-developer-mode))
 
-   ```bash
-   npx expo start
-   ```
+3. To start the development and run, run the following command in project directory depending on if you're on public or private wifi. Choose your plugged in device when prompted:
 
-In the output, you'll find options to open the app in a
+Public:
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+    ```bash
+    npx expo start --tunnel
+    ```
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+Private:
 
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
-```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+    ```bash
+    npx expo run:ios --device
+    ```

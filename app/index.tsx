@@ -1,4 +1,6 @@
 'use client';
+// import TextRecognition from '@react-native-ml-kit/text-recognition';
+import { performOcr } from '@bear-block/vision-camera-ocr';
 import { Picker } from '@react-native-picker/picker';
 import { useState } from 'react';
 import { Button, Image, StyleSheet, Text, View } from 'react-native';
@@ -6,49 +8,99 @@ import {
     Camera,
     CameraPosition,
     useCameraDevice,
+    useFrameProcessor,
 } from 'react-native-vision-camera';
 
 export default function Index() {
     const [selectedRoute, setSelectedRoute] = useState<number>(1);
+    const [loopResult, setLoopResult] = useState<any>('');
     const [cameraDirection, setCameraDirection] =
-        useState<CameraPosition>('back');
-    const device = useCameraDevice(cameraDirection);
+        useState<CameraPosition>('back'); // front, back, or external
+    const [cameraActive, setCameraActive] = useState<boolean>(true);
+    const imageURL = 'https://www.svgbasics.com/rasters/text_ex1.png';
 
-    // if (device === undefined) {
-    //     return <Text>no camera found</Text>;
-    // }
+    const device = useCameraDevice(cameraDirection);
+    const frameProcessor = useFrameProcessor((frame) => {
+        'worklet';
+        const result = performOcr(frame, {
+            includeBoxes: true,
+            includeConfidence: true,
+            recognitionLevel: 'accurate',
+            recognitionLanguages: ['en-US'],
+        });
+        if (result?.text) {
+            const confidence = result.blocks?.[0]?.lines?.[0].confidence;
+            if (confidence && confidence === 1) {
+                console.log('Detected text: ', result.text);
+                console.log('Confidence: ', confidence);
+            }
+            // console.log('Confidence: ', result.blocks?.[0]?.lines?.[0].confidence );
+        }
+    }, []);
+
+    // useEffect(() => {
+    //     const fetchResult = async () => {
+    //         const result = await getLoop(imageURL);
+    //         setLoopResult(result);
+    //     }
+    //     fetchResult();
+    // }, [imageURL]);
 
     return (
         <View style={styles.container}>
-            <View style={{ flexDirection: 'row', alignItems: 'center', gap: 10 }}>
+            <View
+                style={{ flexDirection: 'row', alignItems: 'center', gap: 10 }}
+            >
                 <Image
                     source={require('../assets/images/usps-logo-2.png')}
-                    style={{ width: 35, height: 35}}
+                    style={{ width: 35, height: 35 }}
                 />
                 <Text style={styles.title}>USPS Mail Reader</Text>
             </View>
             <View style={{ flex: 1 }}>
-                {device === undefined ? (
-                    <Text style={styles.text}>No camera found </Text>
-                ) : (
+                {device === undefined && (
+                    <Text style={styles.text}>No camera found</Text>
+                )}
+
+                {!cameraActive && (
+                    <Text style={styles.text}>Camera is Off</Text>
+                )}
+
+                {cameraActive && device !== undefined && (
                     <Camera
                         style={{ width: 300, height: 275 }}
                         device={device}
-                        isActive={true}
+                        isActive={cameraActive}
+                        frameProcessor={frameProcessor}
+                        fps={3}
+                        isMirrored={false}
+                        photoQualityBalance='quality'
                     />
                 )}
             </View>
-            <View style={styles.button}>
-                <Button
-                    title='Switch Camera'
-                    onPress={() =>
-                        setCameraDirection(
-                            cameraDirection === 'back' ? 'front' : 'back',
-                        )
-                    }
-                    color={'#007AFF'}
-                    accessibilityLabel='Switch Camera'
-                />
+            <View
+                style={{ flexDirection: 'row', alignItems: 'center', gap: 10 }}
+            >
+                <View style={styles.button}>
+                    <Button
+                        title='Switch Camera'
+                        onPress={() =>
+                            setCameraDirection(
+                                cameraDirection === 'back' ? 'front' : 'back',
+                            )
+                        }
+                        color={'#007AFF'}
+                        accessibilityLabel='Switch Camera'
+                    />
+                </View>
+                <View style={styles.button}>
+                    <Button
+                        title='Camera On/Off'
+                        onPress={() => setCameraActive(!cameraActive)}
+                        color={'#007AFF'}
+                        accessibilityLabel='Camera On/Off'
+                    />
+                </View>
             </View>
 
             <Picker
@@ -69,8 +121,9 @@ export default function Index() {
                 <Picker.Item label='Route 29' value={29} style={styles.text} />
             </Picker>
             {/* <Text style={styles.text2}>{selectedRoute}</Text> */}
-            <Text style={styles.text2}>L-2</Text>
-            <Text style={styles.text2}>Loop 3</Text>
+            <Text style={styles.text2}>{loopResult}</Text>
+            {/* <Text style={styles.text2}>L-2</Text> */}
+            {/* <Text style={styles.text2}>Loop {loopResult}</Text> */}
         </View>
     );
 }
@@ -108,3 +161,8 @@ const styles = StyleSheet.create({
         borderRadius: 10,
     },
 });
+
+// async function getLoop(imageURL : string) {
+//     const result = await TextRecognition.recognize(imageURL);
+//     return result.text;
+// }
