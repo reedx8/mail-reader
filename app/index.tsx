@@ -22,6 +22,17 @@ export default function Index() {
     const device = useCameraDevice(cameraDirection);
     const frameProcessor = useFrameProcessor((frame) => {
         'worklet';
+
+        const addressToLoop: Record<string, number> = {
+            '1430 nw hoyt st': 1,
+            '4025 n juneau st': 2,
+            '4722 n lombard st': 3,
+        };
+        // const addressToLoopMap = new Map<string, number>();
+        // addressToLoopMap.set(('1430 nw hoyt st').trim(), 1);
+        // addressToLoopMap.set(('4025 n juneau st').trim(), 2);
+        // addressToLoopMap.set(('4722 n lombard st').trim(), 3);
+
         const result = performOcr(frame, {
             includeBoxes: true,
             includeConfidence: true,
@@ -34,10 +45,15 @@ export default function Index() {
                 // console.log('Detected text: ', result.text);
                 // console.log('Confidence: ', confidence);
 
-                const streetRegex = /^\d+\s+(?:(?:NW|NE|SW|SE|N|S|E|W)\s+)?(?!NN|SS|EE|WW|NM|UN)[A-Z0-9]+(?:\s+[A-Z0-9]+)*\s+(?:ST|AVE|BLVD|DR|RD|LN|CT|WAY|PL|TER|CIR|HWY)\.?\s*$/i;
+                const streetRegex =
+                    /^\d+\s+(?:(?:NW|NE|SW|SE|N|S|E|W)\s+)?(?!NN|SS|EE|WW|NM|UN)[A-Z0-9]+(?:\s+[A-Z0-9]+)*\s+(?:ST|AVE|BLVD|DR|RD|LN|CT|WAY|PL|TER|CIR|HWY)\.?\s*$/i;
                 const normalized = result.text.trim().toUpperCase();
                 if (normalized.match(streetRegex) !== null) {
-                    console.log('Street Address: ', normalized.toLowerCase());
+                    // console.log('Street Address: ', normalized.toLowerCase());
+                    const loop = addressToLoop[normalized.toLowerCase()];
+                    if (loop !== undefined) {
+                        console.log('Loop: ', loop);
+                    }
                 }
             }
             // console.log('Confidence: ', result.blocks?.[0]?.lines?.[0].confidence );
