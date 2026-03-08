@@ -31,20 +31,18 @@ export default function Index() {
         if (result?.text) {
             const confidence = result.blocks?.[0]?.lines?.[0].confidence;
             if (confidence && confidence === 1) {
-                console.log('Detected text: ', result.text);
-                console.log('Confidence: ', confidence);
+                // console.log('Detected text: ', result.text);
+                // console.log('Confidence: ', confidence);
+
+                const streetRegex = /^\d+\s+(?:(?:NW|NE|SW|SE|N|S|E|W)\s+)?(?!NN|SS|EE|WW|NM|UN)[A-Z0-9]+(?:\s+[A-Z0-9]+)*\s+(?:ST|AVE|BLVD|DR|RD|LN|CT|WAY|PL|TER|CIR|HWY)\.?\s*$/i;
+                const normalized = result.text.trim().toUpperCase();
+                if (normalized.match(streetRegex) !== null) {
+                    console.log('Street Address: ', normalized.toLowerCase());
+                }
             }
             // console.log('Confidence: ', result.blocks?.[0]?.lines?.[0].confidence );
         }
     }, []);
-
-    // useEffect(() => {
-    //     const fetchResult = async () => {
-    //         const result = await getLoop(imageURL);
-    //         setLoopResult(result);
-    //     }
-    //     fetchResult();
-    // }, [imageURL]);
 
     return (
         <View style={styles.container}>
@@ -72,7 +70,7 @@ export default function Index() {
                         device={device}
                         isActive={cameraActive}
                         frameProcessor={frameProcessor}
-                        fps={3}
+                        fps={10}
                         isMirrored={false}
                         photoQualityBalance='quality'
                     />
@@ -127,6 +125,7 @@ export default function Index() {
         </View>
     );
 }
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
