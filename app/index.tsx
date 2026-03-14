@@ -2,7 +2,8 @@
 // import TextRecognition from '@react-native-ml-kit/text-recognition';
 import { performOcr } from '@bear-block/vision-camera-ocr';
 import { Picker } from '@react-native-picker/picker';
-import { useState } from 'react';
+import * as Speech from 'expo-speech';
+import { useEffect, useState } from 'react';
 import { Button, Image, StyleSheet, Text, View } from 'react-native';
 import {
     Camera,
@@ -26,6 +27,19 @@ export default function Index() {
 
     const device = useCameraDevice(cameraDirection);
 
+    useEffect(() => {
+        if (loopResult !== 0) {
+            Speech.stop();
+            Speech.speak(String("Loop " + loopResult), {
+                language: 'en-US',
+                rate: 1,
+                pitch: 0.7,
+            });
+            // console.log('Loop ' + loopResult);
+        }
+        // console.log('Loop ' + loopResult);
+    }, [loopResult]);
+
     const updateLoopResult = Worklets.createRunOnJS(
         (loopNumber: number, address: string) => {
             setLoopResult(loopNumber);
@@ -33,57 +47,54 @@ export default function Index() {
         },
     );
 
-    const frameProcessor = useFrameProcessor(
-        (frame) => {
-            'worklet';
+    const frameProcessor = useFrameProcessor((frame) => {
+        'worklet';
 
-            const result = performOcr(frame, {
-                includeBoxes: true,
-                includeConfidence: true,
-                recognitionLevel: 'accurate',
-                recognitionLanguages: ['en-US'],
-            });
-            if (result?.text) {
-                const confidence = result.blocks?.[0]?.lines?.[0].confidence;
-                if (confidence && confidence === 1) {
-                    if (result.text !== undefined) {
-                        // console.log('Detected text: ', result.text.toLowerCase());
-                        // console.log('Confidence: ', confidence);
+        const result = performOcr(frame, {
+            includeBoxes: true,
+            includeConfidence: true,
+            recognitionLevel: 'accurate',
+            recognitionLanguages: ['en-US'],
+        });
+        if (result?.text) {
+            const confidence = result.blocks?.[0]?.lines?.[0].confidence;
+            if (confidence && confidence === 1) {
+                if (result.text !== undefined) {
+                    // console.log('Detected text: ', result.text.toLowerCase());
+                    // console.log('Confidence: ', confidence);
 
-                        const scannedText = result.text.trim().toLowerCase();
-                        // console.log('Address: ', address);
-                        const streets = Object.keys(ROUTE_14);
-                        for (let i = 0; i < streets.length; i++) {
-                            const street = streets[i];
-                            // console.log('Key: ', key);
-                            if (scannedText.includes(street)) {
-                                // console.log('Street: ', street);
-                                // console.log('LOOP -> ', ROUTE_14[street]);
-                                updateLoopResult(ROUTE_14[street], street);
-                                break;
-                            }
+                    const scannedText = result.text.trim().toLowerCase();
+                    // console.log('Address: ', address);
+                    const streets = Object.keys(ROUTE_14);
+                    for (let i = 0; i < streets.length; i++) {
+                        const street = streets[i];
+                        // console.log('Key: ', key);
+                        if (scannedText.includes(street)) {
+                            // console.log('Street: ', street);
+                            // console.log('LOOP -> ', ROUTE_14[street]);
+                            updateLoopResult(ROUTE_14[street], street);
+                            break;
                         }
-
-                        // const streetRegex =
-                        //     /^\d+\s+(?:(?:NW|NE|SW|SE|N|S|E|W)\s+)?(?!NN|SS|EE|WW|NM|UN)[A-Z0-9]+(?:\s+[A-Z0-9]+)*\s+(?:ST|AVE|BLVD|DR|RD|LN|CT|WAY|PL|TER|CIR|HWY)\.?\s*$/i;
-                        // const normalized = result.text.trim().toUpperCase();
-                        // if (normalized.match(streetRegex) !== null) {
-                        //     console.log(
-                        //         'Street Address: ',
-                        //         normalized.toLowerCase(),
-                        //     );
-                        //     const loop = addressToLoop[normalized.toLowerCase()];
-                        //     if (loop !== undefined) {
-                        //         console.log('Loop: ', loop);
-                        //     }
-                        // }
                     }
+
+                    // const streetRegex =
+                    //     /^\d+\s+(?:(?:NW|NE|SW|SE|N|S|E|W)\s+)?(?!NN|SS|EE|WW|NM|UN)[A-Z0-9]+(?:\s+[A-Z0-9]+)*\s+(?:ST|AVE|BLVD|DR|RD|LN|CT|WAY|PL|TER|CIR|HWY)\.?\s*$/i;
+                    // const normalized = result.text.trim().toUpperCase();
+                    // if (normalized.match(streetRegex) !== null) {
+                    //     console.log(
+                    //         'Street Address: ',
+                    //         normalized.toLowerCase(),
+                    //     );
+                    //     const loop = addressToLoop[normalized.toLowerCase()];
+                    //     if (loop !== undefined) {
+                    //         console.log('Loop: ', loop);
+                    //     }
+                    // }
                 }
-                // console.log('Confidence: ', result.blocks?.[0]?.lines?.[0].confidence );
             }
-        },
-        [],
-    );
+            // console.log('Confidence: ', result.blocks?.[0]?.lines?.[0].confidence );
+        }
+    }, []);
 
     return (
         <View style={styles.container}>
@@ -126,7 +137,7 @@ export default function Index() {
                     marginBottom: 20,
                 }}
             >
-                <Text style={styles.text2}>{loopResult}</Text>
+                <Text style={styles.text2}>{loopResult === 0 ? '' : loopResult}</Text>
                 <Text style={styles.text3}>{scannedAddress}</Text>
             </View>
             <View
