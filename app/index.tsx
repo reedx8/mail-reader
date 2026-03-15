@@ -11,35 +11,33 @@ import {
     useCameraDevice,
     useFrameProcessor,
 } from 'react-native-vision-camera';
-import { Worklets } from 'react-native-worklets-core'; // Allows react state to be updated from workflets frameProcessor function
+import { Worklets } from 'react-native-worklets-core'; // Allows react state (eg loopResult) to be updated from workflets frameProcessor function
 import { ROUTE_14 } from '../constants/addressToLoop';
 
 export default function Index() {
     const [selectedRoute, setSelectedRoute] = useState<number>(1);
     const [loopResult, setLoopResult] = useState<number>(0);
     const [scannedAddress, setScannedAddress] = useState<string>('');
-    // const loopResultShared = useSharedValue<number>(0);
     const [cameraDirection, setCameraDirection] =
         useState<CameraPosition>('back'); // front, back, or external
     const [cameraActive, setCameraActive] = useState<boolean>(true);
     const imageURL = 'https://www.svgbasics.com/rasters/text_ex1.png';
-    // const loopResultRef = useRef<number>(0); // ✅ ref to avoid stale closure
 
     const device = useCameraDevice(cameraDirection);
 
     useEffect(() => {
         if (loopResult !== 0) {
             Speech.stop();
-            Speech.speak(String("Loop " + loopResult), {
+            // Speech.speak(String('Loop ' + loopResult), {
+            Speech.speak(String(loopResult), {
                 language: 'en-US',
                 rate: 1,
                 pitch: 0.7,
             });
-            // console.log('Loop ' + loopResult);
         }
-        // console.log('Loop ' + loopResult);
-    }, [loopResult]);
+    }, [loopResult, scannedAddress]);
 
+    // Update react state
     const updateLoopResult = Worklets.createRunOnJS(
         (loopNumber: number, address: string) => {
             setLoopResult(loopNumber);
@@ -60,36 +58,83 @@ export default function Index() {
             const confidence = result.blocks?.[0]?.lines?.[0].confidence;
             if (confidence && confidence === 1) {
                 if (result.text !== undefined) {
-                    // console.log('Detected text: ', result.text.toLowerCase());
-                    // console.log('Confidence: ', confidence);
+                    // const streetRegex =
+                    // /^\d+\s+(?:(?:NW|NE|SW|SE|N|S|E|W|NORTH|SOUTH|EAST|WEST)\s+)?(?!NN|SS|EE|WW|NM|UN)[A-Z0-9]+(?:\s+[A-Z0-9]+)*\s+(?:ST|AVE|BLVD|DR|RD|LN|CT|WAY|PL|TER|CIR|HWY|STREET|ROAD|AVENUE|DRIVE|HIGHWAY|LANE|WAY|PLACE|TERRACE|CIRCLE|COURT|BOULEVARD)\.?\s*$/i;
+                    const addressRegex =
+                        /\b(\d{3,6})\s+(n|s|e|w|ne|nw|se|sw|north|south|east|west|northeast|northwest|southeast|southwest)?\s+([a-z]+)\s+(st|street|ave|avenue|rd|road|dr|drive|ln|lane|blvd|boulevard|ct|court|pl|place|hwy|highway|ter|terrace|cir|circle|way)\b/i;
 
                     const scannedText = result.text.trim().toLowerCase();
-                    // console.log('Address: ', address);
-                    const streets = Object.keys(ROUTE_14);
-                    for (let i = 0; i < streets.length; i++) {
-                        const street = streets[i];
-                        // console.log('Key: ', key);
-                        if (scannedText.includes(street)) {
-                            // console.log('Street: ', street);
-                            // console.log('LOOP -> ', ROUTE_14[street]);
-                            updateLoopResult(ROUTE_14[street], street);
-                            break;
-                        }
-                    }
 
-                    // const streetRegex =
-                    //     /^\d+\s+(?:(?:NW|NE|SW|SE|N|S|E|W)\s+)?(?!NN|SS|EE|WW|NM|UN)[A-Z0-9]+(?:\s+[A-Z0-9]+)*\s+(?:ST|AVE|BLVD|DR|RD|LN|CT|WAY|PL|TER|CIR|HWY)\.?\s*$/i;
-                    // const normalized = result.text.trim().toUpperCase();
-                    // if (normalized.match(streetRegex) !== null) {
-                    //     console.log(
-                    //         'Street Address: ',
-                    //         normalized.toLowerCase(),
-                    //     );
-                    //     const loop = addressToLoop[normalized.toLowerCase()];
-                    //     if (loop !== undefined) {
-                    //         console.log('Loop: ', loop);
+                    const streets = Object.keys(ROUTE_14); // all streets in route
+
+                    // 3) indexOf() solutions:
+                    // 3.1: match entire street address exactly (more reliable):
+                    // for (let i = 0; i < streets.length; i++) {
+                    //     const street = streets[i];
+                    //     const indexOfFirst = scannedText.indexOf(street);
+                    //     if (indexOfFirst !== -1) {
+                    //         updateLoopResult(ROUTE_14[street], street);
+                    //         break;
                     //     }
                     // }
+
+                    // 3.2: match on street number and name only (less reliable):
+                    // for (let i = 0; i < streets.length; i++) {
+                    //     // find street number in scanned text first:
+                    //     const streetNum = streets[i].split(' ')[0];
+                    //     const indexOfFirst = scannedText.indexOf(streetNum);
+                    //     if (indexOfFirst !== -1) {
+                    //         // Now find if street name also matches at that position/index
+                    //         const streetName = streets[i].split(' ')[2];
+                    //         const addressParts = scannedText
+                    //             .slice(indexOfFirst, 100)
+                    //             .split(' ', 4);
+                    //         // console.log('Address Parts: ', addressParts);
+                    //         if (addressParts.join(' ').match(streetRegex)) {
+                    //             console.log('Street Name: ', streetName);
+                    //             if (streetName === addressParts[2]) {
+                    //                 console.log(
+                    //                     'Street Address: ',
+                    //                     addressParts.join(' '),
+                    //                 );
+                    //                 updateLoopResult(
+                    //                     ROUTE_14[streets[i]],
+                    //                     streets[i],
+                    //                 );
+                    //                 break;
+                    //             }
+                    //         }
+                    //     }
+
+                    // 2) includes() solution:
+                    // for (let i = 0; i < streets.length; i++) {
+                    //     const street = streets[i];
+                    //     if (scannedText.includes(street)) {
+                    //         updateLoopResult(ROUTE_14[street], street);
+                    //         break;
+                    //     }
+                    // }
+
+                    // 1.) regex solution 
+                    // first find an address anywhere in the text
+                    const match = scannedText.match(addressRegex);
+                    if (match) {
+                        const fullAddress = match[1] + ' ' + match[2] + ' ' + match[3] + ' ' + match[4];    
+                        // console.log(
+                        //     'Street Address: ',
+                        //     fullAddress,
+                        // );
+
+                        // Now check if that address is in the route
+                        for (let i = 0; i < streets.length; i++) {
+                            if (fullAddress.includes(streets[i])) {
+                                // Display the found loop and address
+                                updateLoopResult(ROUTE_14[fullAddress], fullAddress);
+                                break;
+                            }
+                        }
+                        // updateLoopResult(ROUTE_14[fullAddress], fullAddress);
+                    }
                 }
             }
             // console.log('Confidence: ', result.blocks?.[0]?.lines?.[0].confidence );
@@ -137,7 +182,9 @@ export default function Index() {
                     marginBottom: 20,
                 }}
             >
-                <Text style={styles.text2}>{loopResult === 0 ? '' : loopResult}</Text>
+                <Text style={styles.text2}>
+                    {loopResult === 0 ? '' : loopResult}
+                </Text>
                 <Text style={styles.text3}>{scannedAddress}</Text>
             </View>
             <View
