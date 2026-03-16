@@ -17,7 +17,7 @@ import { db } from '../db/index';
 
 export default function Index() {
     const [selectedRoute, setSelectedRoute] = useState<number>(1);
-    const [loopResult, setLoopResult] = useState<number>(-1);
+    const [loopResult, setLoopResult] = useState<number>(-1); // -1 = initialization, 0 = no loop found after lookup
     const [scannedAddress, setScannedAddress] = useState<string>('');
     const [cameraDirection, setCameraDirection] =
         useState<CameraPosition>('back'); // front, back, or external
@@ -269,12 +269,12 @@ export default function Index() {
                     }
                     style={styles.picker}
                 >
-                    <Picker.Item
+                    {/* <Picker.Item
                         label='Route 1'
                         value={1}
                         style={styles.text}
-                    />
-                    <Picker.Item
+                    /> */}
+                    {/* <Picker.Item
                         label='Route 2'
                         value={2}
                         style={styles.text}
@@ -293,6 +293,16 @@ export default function Index() {
                         label='Route 11'
                         value={11}
                         style={styles.text}
+                    /> */}
+                    <Picker.Item
+                        label='Route 7'
+                        value={7}
+                        style={styles.text}
+                    />
+                    <Picker.Item
+                        label='Route 12'
+                        value={12}
+                        style={styles.text}
                     />
                     <Picker.Item
                         label='Route 14'
@@ -309,11 +319,11 @@ export default function Index() {
                         value={16}
                         style={styles.text}
                     />
-                    <Picker.Item
+                    {/* <Picker.Item
                         label='Route 25'
                         value={25}
                         style={styles.text}
-                    />
+                    /> */}
                     <Picker.Item
                         label='Route 29'
                         value={29}
