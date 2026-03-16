@@ -9,14 +9,15 @@ import {
     Camera,
     CameraPosition,
     useCameraDevice,
-    useFrameProcessor,
+    useFrameProcessor
 } from 'react-native-vision-camera';
 import { Worklets } from 'react-native-worklets-core'; // Allows react state (eg loopResult) to be updated from workflets frameProcessor function
-import { ROUTE_14 } from '../constants/addressToLoop';
+// import { ROUTE_14 } from '../constants/addressToLoop';
+import { db } from '../db/index';
 
 export default function Index() {
     const [selectedRoute, setSelectedRoute] = useState<number>(1);
-    const [loopResult, setLoopResult] = useState<number>(0);
+    const [loopResult, setLoopResult] = useState<number>(-1);
     const [scannedAddress, setScannedAddress] = useState<string>('');
     const [cameraDirection, setCameraDirection] =
         useState<CameraPosition>('back'); // front, back, or external
@@ -26,10 +27,10 @@ export default function Index() {
     const device = useCameraDevice(cameraDirection);
 
     useEffect(() => {
-        if (loopResult !== 0) {
+        if (loopResult !== -1) {
             Speech.stop();
             // Speech.speak(String('Loop ' + loopResult), {
-            Speech.speak(String(loopResult), {
+            Speech.speak(String(loopResult === 0 ? 'Loop Not Found' : loopResult), {
                 language: 'en-US',
                 rate: 1,
                 pitch: 0.7,
@@ -38,10 +39,41 @@ export default function Index() {
     }, [loopResult, scannedAddress]);
 
     // Update react state
-    const updateLoopResult = Worklets.createRunOnJS(
-        (loopNumber: number, address: string) => {
-            setLoopResult(loopNumber);
-            setScannedAddress(address);
+    // const updateLoopResult = Worklets.createRunOnJS(
+    //     (loopNumber: number, address: string) => {
+    //         setLoopResult(loopNumber);
+    //         setScannedAddress(address);
+    //     },
+    // );
+
+    const lookupAddressInDb = Worklets.createRunOnJS(
+        async (match : string[], fullAddress : string) => {
+            try {
+                // match[1]: num, match[2]: dir, match[3]: name, match[4]: suffix
+                // console.log('route: ', selectedRoute);
+                const result = await db.getFirstAsync(
+                    'SELECT loop_num FROM street_loops WHERE route_num = ? AND dir = ? AND street_name = ? AND suffix = ? AND ? BETWEEN begin_num AND end_num',
+                    [
+                        Number(selectedRoute),
+                        match[2].toLowerCase(),
+                        match[3].toLowerCase(),
+                        match[4].toLowerCase(),
+                        Number(match[1]),
+                    ],
+                );
+
+                if (result) {
+                    setLoopResult(result.loop_num);
+                    setScannedAddress(fullAddress);
+                    // console.log('result: ', result);
+                } else {
+                    // console.log('No result found');
+                    setLoopResult(0);
+                    setScannedAddress('Loop Not Found');
+                }
+            } catch (error) {
+                console.error('Database error:', error);
+            }
         },
     );
 
@@ -65,8 +97,7 @@ export default function Index() {
 
                     const scannedText = result.text.trim().toLowerCase();
 
-                    const streets = Object.keys(ROUTE_14); // all streets in route
-
+                    // const streets = Object.keys(ROUTE_14); // all streets in route
                     // 3) indexOf() solutions:
                     // 3.1: match entire street address exactly (more reliable):
                     // for (let i = 0; i < streets.length; i++) {
@@ -115,31 +146,41 @@ export default function Index() {
                     //     }
                     // }
 
-                    // 1.) regex solution 
+                    // 1.) regex solution
                     // first find an address anywhere in the text
                     const match = scannedText.match(addressRegex);
                     if (match) {
-                        const fullAddress = match[1] + ' ' + match[2] + ' ' + match[3] + ' ' + match[4];    
-                        // console.log(
-                        //     'Street Address: ',
-                        //     fullAddress,
-                        // );
+                        const fullAddress =
+                            match[1] +
+                            ' ' +
+                            match[2] +
+                            ' ' +
+                            match[3] +
+                            ' ' +
+                            match[4];
+                        // console.log('Street Address: ', fullAddress);
 
                         // Now check if that address is in the route
-                        for (let i = 0; i < streets.length; i++) {
-                            if (fullAddress.includes(streets[i])) {
-                                // Display the found loop and address
-                                updateLoopResult(ROUTE_14[fullAddress], fullAddress);
-                                break;
-                            }
-                        }
+                        lookupAddressInDb(match, fullAddress);
+                        
+                        // for (let i = 0; i < streets.length; i++) {
+                        //     if (fullAddress.includes(streets[i])) {
+                        //         // Display the found loop and address
+                        //         updateLoopResult(
+                        //             ROUTE_14[fullAddress],
+                        //             fullAddress,
+                        //         );
+                        //         break;
+                        //     }
+                        // }
                         // updateLoopResult(ROUTE_14[fullAddress], fullAddress);
                     }
                 }
             }
             // console.log('Confidence: ', result.blocks?.[0]?.lines?.[0].confidence );
         }
-    }, []);
+    }, [selectedRoute]);
+    // console.log('selectedRoute: ', selectedRoute);
 
     return (
         <View style={styles.container}>
@@ -183,7 +224,7 @@ export default function Index() {
                 }}
             >
                 <Text style={styles.text2}>
-                    {loopResult === 0 ? '' : loopResult}
+                    {loopResult === -1 || loopResult === 0 ? '' : loopResult}
                 </Text>
                 <Text style={styles.text3}>{scannedAddress}</Text>
             </View>
