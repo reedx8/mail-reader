@@ -9,7 +9,7 @@ import {
     Camera,
     CameraPosition,
     useCameraDevice,
-    useFrameProcessor
+    useFrameProcessor,
 } from 'react-native-vision-camera';
 import { Worklets } from 'react-native-worklets-core'; // Allows react state (eg loopResult) to be updated from workflets frameProcessor function
 // import { ROUTE_14 } from '../constants/addressToLoop';
@@ -17,7 +17,8 @@ import { db } from '../db/index';
 
 export default function Index() {
     const [selectedRoute, setSelectedRoute] = useState<number>(1);
-    const [loopResult, setLoopResult] = useState<number>(-1); // -1 = initialization, 0 = no loop found after lookup
+    const [loopResult, setLoopResult] = useState<string>(''); // loop could be a number (2), number plus letter (eg 16b), or dismount/drive off (D.O.)
+    // const [loopResult, setLoopResult] = useState<number>(-1); // -1 = initialization, 0 = no loop found after lookup
     const [scannedAddress, setScannedAddress] = useState<string>('');
     const [cameraDirection, setCameraDirection] =
         useState<CameraPosition>('back'); // front, back, or external
@@ -27,10 +28,10 @@ export default function Index() {
     const device = useCameraDevice(cameraDirection);
 
     useEffect(() => {
-        if (loopResult !== -1) {
+        if (loopResult !== '') {
             Speech.stop();
             // Speech.speak(String('Loop ' + loopResult), {
-            Speech.speak(String(loopResult === 0 ? 'Loop Not Found' : loopResult), {
+            Speech.speak(String(loopResult), {
                 language: 'en-US',
                 rate: 1,
                 pitch: 0.7,
@@ -47,139 +48,191 @@ export default function Index() {
     // );
 
     const lookupAddressInDb = Worklets.createRunOnJS(
-        async (match : string[], fullAddress : string) => {
+        async (match: string[], fullAddress: string) => {
             try {
                 // match[1]: num, match[2]: dir, match[3]: name, match[4]: suffix
                 // console.log('route: ', selectedRoute);
+                const streetName = match[3].toLowerCase();
+                let suffix = match[4].toLowerCase();
+                const streetNum = match[1];
+
+                switch (suffix) {
+                    case 'street':
+                        suffix = 'st';
+                        break;
+                    case 'avenue':
+                        suffix = 'ave';
+                        break;
+                    case 'boulevard':
+                        suffix = 'blvd';
+                        break;
+                    case 'drive':
+                        suffix = 'dr';
+                        break;
+                    case 'road':
+                        suffix = 'rd';
+                        break;
+                    case 'lane':
+                        suffix = 'ln';
+                        break;
+                    case 'place':
+                        suffix = 'pl';
+                        break;
+                    case 'court':
+                        suffix = 'ct';
+                        break;
+                    case 'circle':
+                        suffix = 'cir';
+                        break;
+                    case 'highway':
+                        suffix = 'hwy';
+                        break;
+                    case 'terrace':
+                        suffix = 'ter';
+                        break;
+                }
+
+                // if (suffix === '' || suffix === undefined) {
+                //     result = await db.getFirstAsync(
+                //         'SELECT loop_num FROM street_loops WHERE route_num = ? AND street_name = ? AND ? BETWEEN begin_num AND end_num',
+                //         [Number(selectedRoute), streetName, streetNum],
+                //     );
+                // } else {
                 const result = await db.getFirstAsync(
-                    'SELECT loop_num FROM street_loops WHERE route_num = ? AND dir = ? AND street_name = ? AND suffix = ? AND ? BETWEEN begin_num AND end_num',
+                    'SELECT loop_num FROM street_loops WHERE route_num = ? AND street_name = ? AND suffix = ? AND ? BETWEEN begin_num AND end_num',
+                    // 'SELECT loop_num FROM street_loops WHERE route_num = ? AND dir = ? AND street_name = ? AND suffix = ? AND ? BETWEEN begin_num AND end_num',
                     [
                         Number(selectedRoute),
-                        match[2].toLowerCase(),
-                        match[3].toLowerCase(),
-                        match[4].toLowerCase(),
-                        Number(match[1]),
+                        // match[2].toLowerCase(),
+                        streetName,
+                        suffix,
+                        streetNum,
                     ],
                 );
+                // }
 
                 if (result) {
                     setLoopResult(result.loop_num);
                     setScannedAddress(fullAddress);
                     // console.log('result: ', result);
-                } else {
-                    // console.log('No result found');
-                    setLoopResult(0);
-                    setScannedAddress('Loop Not Found');
                 }
+                // } else {
+                // console.log('No result found');
+                // setLoopResult(0);
+                // setScannedAddress('Loop Not Found');
+                // }
             } catch (error) {
                 console.error('Database error:', error);
             }
         },
     );
 
-    const frameProcessor = useFrameProcessor((frame) => {
-        'worklet';
+    const frameProcessor = useFrameProcessor(
+        (frame) => {
+            'worklet';
 
-        const result = performOcr(frame, {
-            includeBoxes: true,
-            includeConfidence: true,
-            recognitionLevel: 'accurate',
-            recognitionLanguages: ['en-US'],
-        });
-        if (result?.text) {
-            const confidence = result.blocks?.[0]?.lines?.[0].confidence;
-            if (confidence && confidence === 1) {
-                if (result.text !== undefined) {
-                    // const streetRegex =
-                    // /^\d+\s+(?:(?:NW|NE|SW|SE|N|S|E|W|NORTH|SOUTH|EAST|WEST)\s+)?(?!NN|SS|EE|WW|NM|UN)[A-Z0-9]+(?:\s+[A-Z0-9]+)*\s+(?:ST|AVE|BLVD|DR|RD|LN|CT|WAY|PL|TER|CIR|HWY|STREET|ROAD|AVENUE|DRIVE|HIGHWAY|LANE|WAY|PLACE|TERRACE|CIRCLE|COURT|BOULEVARD)\.?\s*$/i;
-                    const addressRegex =
-                        /\b(\d{3,6})\s+(n|s|e|w|ne|nw|se|sw|north|south|east|west|northeast|northwest|southeast|southwest)?\s+([a-z]+)\s+(st|street|ave|avenue|rd|road|dr|drive|ln|lane|blvd|boulevard|ct|court|pl|place|hwy|highway|ter|terrace|cir|circle|way)\b/i;
+            const result = performOcr(frame, {
+                includeBoxes: true,
+                includeConfidence: true,
+                recognitionLevel: 'accurate',
+                recognitionLanguages: ['en-US'],
+            });
+            if (result?.text) {
+                const confidence = result.blocks?.[0]?.lines?.[0].confidence;
+                if (confidence && confidence === 1) {
+                    if (result.text !== undefined) {
+                        // const streetRegex =
+                        // /^\d+\s+(?:(?:NW|NE|SW|SE|N|S|E|W|NORTH|SOUTH|EAST|WEST)\s+)?(?!NN|SS|EE|WW|NM|UN)[A-Z0-9]+(?:\s+[A-Z0-9]+)*\s+(?:ST|AVE|BLVD|DR|RD|LN|CT|WAY|PL|TER|CIR|HWY|STREET|ROAD|AVENUE|DRIVE|HIGHWAY|LANE|WAY|PLACE|TERRACE|CIRCLE|COURT|BOULEVARD)\.?\s*$/i;
+                        const addressRegex =
+                            /\b(\d{3,6})\s+(n|s|e|w|ne|nw|se|sw|north|south|east|west|northeast|northwest|southeast|southwest)?\s+([a-z]+)\s+(st|street|ave|avenue|rd|road|dr|drive|ln|lane|blvd|boulevard|ct|court|pl|place|hwy|highway|ter|terrace|cir|circle|way)\b/i;
 
-                    const scannedText = result.text.trim().toLowerCase();
+                        const scannedText = result.text.trim().toLowerCase();
 
-                    // const streets = Object.keys(ROUTE_14); // all streets in route
-                    // 3) indexOf() solutions:
-                    // 3.1: match entire street address exactly (more reliable):
-                    // for (let i = 0; i < streets.length; i++) {
-                    //     const street = streets[i];
-                    //     const indexOfFirst = scannedText.indexOf(street);
-                    //     if (indexOfFirst !== -1) {
-                    //         updateLoopResult(ROUTE_14[street], street);
-                    //         break;
-                    //     }
-                    // }
-
-                    // 3.2: match on street number and name only (less reliable):
-                    // for (let i = 0; i < streets.length; i++) {
-                    //     // find street number in scanned text first:
-                    //     const streetNum = streets[i].split(' ')[0];
-                    //     const indexOfFirst = scannedText.indexOf(streetNum);
-                    //     if (indexOfFirst !== -1) {
-                    //         // Now find if street name also matches at that position/index
-                    //         const streetName = streets[i].split(' ')[2];
-                    //         const addressParts = scannedText
-                    //             .slice(indexOfFirst, 100)
-                    //             .split(' ', 4);
-                    //         // console.log('Address Parts: ', addressParts);
-                    //         if (addressParts.join(' ').match(streetRegex)) {
-                    //             console.log('Street Name: ', streetName);
-                    //             if (streetName === addressParts[2]) {
-                    //                 console.log(
-                    //                     'Street Address: ',
-                    //                     addressParts.join(' '),
-                    //                 );
-                    //                 updateLoopResult(
-                    //                     ROUTE_14[streets[i]],
-                    //                     streets[i],
-                    //                 );
-                    //                 break;
-                    //             }
-                    //         }
-                    //     }
-
-                    // 2) includes() solution:
-                    // for (let i = 0; i < streets.length; i++) {
-                    //     const street = streets[i];
-                    //     if (scannedText.includes(street)) {
-                    //         updateLoopResult(ROUTE_14[street], street);
-                    //         break;
-                    //     }
-                    // }
-
-                    // 1.) regex solution
-                    // first find an address anywhere in the text
-                    const match = scannedText.match(addressRegex);
-                    if (match) {
-                        const fullAddress =
-                            match[1] +
-                            ' ' +
-                            match[2] +
-                            ' ' +
-                            match[3] +
-                            ' ' +
-                            match[4];
-                        // console.log('Street Address: ', fullAddress);
-
-                        // Now check if that address is in the route
-                        lookupAddressInDb(match, fullAddress);
-                        
+                        // const streets = Object.keys(ROUTE_14); // all streets in route
+                        // 3) indexOf() solutions:
+                        // 3.1: match entire street address exactly (more reliable):
                         // for (let i = 0; i < streets.length; i++) {
-                        //     if (fullAddress.includes(streets[i])) {
-                        //         // Display the found loop and address
-                        //         updateLoopResult(
-                        //             ROUTE_14[fullAddress],
-                        //             fullAddress,
-                        //         );
+                        //     const street = streets[i];
+                        //     const indexOfFirst = scannedText.indexOf(street);
+                        //     if (indexOfFirst !== -1) {
+                        //         updateLoopResult(ROUTE_14[street], street);
                         //         break;
                         //     }
                         // }
-                        // updateLoopResult(ROUTE_14[fullAddress], fullAddress);
+
+                        // 3.2: match on street number and name only (less reliable):
+                        // for (let i = 0; i < streets.length; i++) {
+                        //     // find street number in scanned text first:
+                        //     const streetNum = streets[i].split(' ')[0];
+                        //     const indexOfFirst = scannedText.indexOf(streetNum);
+                        //     if (indexOfFirst !== -1) {
+                        //         // Now find if street name also matches at that position/index
+                        //         const streetName = streets[i].split(' ')[2];
+                        //         const addressParts = scannedText
+                        //             .slice(indexOfFirst, 100)
+                        //             .split(' ', 4);
+                        //         // console.log('Address Parts: ', addressParts);
+                        //         if (addressParts.join(' ').match(streetRegex)) {
+                        //             console.log('Street Name: ', streetName);
+                        //             if (streetName === addressParts[2]) {
+                        //                 console.log(
+                        //                     'Street Address: ',
+                        //                     addressParts.join(' '),
+                        //                 );
+                        //                 updateLoopResult(
+                        //                     ROUTE_14[streets[i]],
+                        //                     streets[i],
+                        //                 );
+                        //                 break;
+                        //             }
+                        //         }
+                        //     }
+
+                        // 2) includes() solution:
+                        // for (let i = 0; i < streets.length; i++) {
+                        //     const street = streets[i];
+                        //     if (scannedText.includes(street)) {
+                        //         updateLoopResult(ROUTE_14[street], street);
+                        //         break;
+                        //     }
+                        // }
+
+                        // 1.) regex solution
+                        // first find an address anywhere in the text
+                        const match = scannedText.match(addressRegex);
+                        if (match) {
+                            const fullAddress =
+                                match[1] +
+                                ' ' +
+                                match[2] +
+                                ' ' +
+                                match[3] +
+                                ' ' +
+                                match[4];
+                            // console.log('Street Address: ', fullAddress);
+
+                            // Now check if that address is in the route
+                            lookupAddressInDb(match, fullAddress);
+
+                            // for (let i = 0; i < streets.length; i++) {
+                            //     if (fullAddress.includes(streets[i])) {
+                            //         // Display the found loop and address
+                            //         updateLoopResult(
+                            //             ROUTE_14[fullAddress],
+                            //             fullAddress,
+                            //         );
+                            //         break;
+                            //     }
+                            // }
+                            // updateLoopResult(ROUTE_14[fullAddress], fullAddress);
+                        }
                     }
                 }
+                // console.log('Confidence: ', result.blocks?.[0]?.lines?.[0].confidence );
             }
-            // console.log('Confidence: ', result.blocks?.[0]?.lines?.[0].confidence );
-        }
-    }, [selectedRoute]);
+        },
+        [selectedRoute],
+    );
     // console.log('selectedRoute: ', selectedRoute);
 
     return (
@@ -224,7 +277,8 @@ export default function Index() {
                 }}
             >
                 <Text style={styles.text2}>
-                    {loopResult === -1 || loopResult === 0 ? '' : loopResult}
+                    {loopResult}
+                    {/* {loopResult === -1 || loopResult === 0 ? '' : loopResult} */}
                 </Text>
                 <Text style={styles.text3}>{scannedAddress}</Text>
             </View>
@@ -319,11 +373,11 @@ export default function Index() {
                         value={16}
                         style={styles.text}
                     />
-                    {/* <Picker.Item
+                    <Picker.Item
                         label='Route 25'
                         value={25}
                         style={styles.text}
-                    /> */}
+                    />
                     <Picker.Item
                         label='Route 29'
                         value={29}
