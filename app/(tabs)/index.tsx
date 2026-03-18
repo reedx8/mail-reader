@@ -13,8 +13,22 @@ import {
 } from 'react-native-vision-camera';
 import { Worklets } from 'react-native-worklets-core'; // Allows react state (eg loopResult) to be updated from workflets frameProcessor function
 // import { ROUTE_14 } from '../constants/addressToLoop';
-import { db } from '../db/index';
+import { useIsFocused } from '@react-navigation/native';
+import { db } from '../../db/index';
 
+type Schema = {
+    id: number;
+    begin_num: number;
+    end_num: number;
+    street_name: string;
+    dir: string;
+    suffix: string;
+    loop_num: string;
+    route_num: number;
+}
+
+
+// Scan page
 export default function Index() {
     const [selectedRoute, setSelectedRoute] = useState<number>(1);
     const [loopResult, setLoopResult] = useState<string>(''); // loop could be a number (2), number plus letter (eg 16b), or dismount/drive off (D.O.)
@@ -23,7 +37,8 @@ export default function Index() {
     const [cameraDirection, setCameraDirection] =
         useState<CameraPosition>('back'); // front, back, or external
     const [cameraActive, setCameraActive] = useState<boolean>(true);
-    const imageURL = 'https://www.svgbasics.com/rasters/text_ex1.png';
+    // const imageURL = 'https://www.svgbasics.com/rasters/text_ex1.png';
+    const isFocused = useIsFocused();
 
     const device = useCameraDevice(cameraDirection);
 
@@ -98,7 +113,7 @@ export default function Index() {
                 //         [Number(selectedRoute), streetName, streetNum],
                 //     );
                 // } else {
-                const result = await db.getFirstAsync(
+                const result : Schema | null = await db.getFirstAsync(
                     'SELECT loop_num FROM street_loops WHERE route_num = ? AND street_name = ? AND suffix = ? AND ? BETWEEN begin_num AND end_num',
                     // 'SELECT loop_num FROM street_loops WHERE route_num = ? AND dir = ? AND street_name = ? AND suffix = ? AND ? BETWEEN begin_num AND end_num',
                     [
@@ -241,7 +256,7 @@ export default function Index() {
                 style={{ flexDirection: 'row', alignItems: 'center', gap: 10 }}
             >
                 <Image
-                    source={require('../assets/images/usps-logo-2.png')}
+                    source={require('../../assets/images/usps-logo-2.png')}
                     style={{ width: 35, height: 35 }}
                 />
                 <Text style={styles.title}>USPS Mail Reader</Text>
@@ -255,11 +270,11 @@ export default function Index() {
                     <Text style={styles.text}>Camera is Off</Text>
                 )}
 
-                {cameraActive && device !== undefined && (
+                {cameraActive && device !== undefined && isFocused && (
                     <Camera
-                        style={{ width: 300, height: 275 }}
+                        style={{ width: 320, height: 200 }}
                         device={device}
-                        isActive={cameraActive}
+                        isActive={cameraActive && isFocused}
                         frameProcessor={frameProcessor}
                         fps={10}
                         isMirrored={false}
@@ -399,7 +414,7 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         backgroundColor: '#25292e',
         alignItems: 'center',
-        padding: 10,
+        // padding: 10,
         // justifyContent: 'flex-start',
         // alignContent: 'center',
         // color: '#fff',
@@ -424,7 +439,8 @@ const styles = StyleSheet.create({
     },
     picker: {
         width: 200,
-        height: 270,
+        height: 200,
+        // height: 270,
         // height: 'auto',
         color: '#fff',
         padding: 0,
