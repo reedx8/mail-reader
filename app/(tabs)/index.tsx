@@ -303,16 +303,6 @@ export default function Index() {
                 style={{ flexDirection: 'row', alignItems: 'center', gap: 10 }}
             >
                 <View style={styles.button}>
-                    {/* <Button
-                        title='Switch Camera'
-                        onPress={() =>
-                            setCameraDirection(
-                                cameraDirection === 'back' ? 'front' : 'back',
-                            )
-                        }
-                        color={'#007AFF'}
-                        accessibilityLabel='Switch Camera'
-                    /> */}
                     <Pressable
                         onPress={() =>
                             setCameraDirection(
@@ -320,9 +310,8 @@ export default function Index() {
                             )
                         }
                         style={styles.cameraButton}
+                        accessibilityLabel='Switch Camera'
                     >
-                        {/* <MaterialIcons name="cameraswitch" size={24} color="black" /> */}
-                        {/* <Feather name="camera" size={24} color="black" /> */}
                         <Entypo name="camera" size={24} color="black" />
                         <Text style={styles.buttonText}>Switch</Text>
                     </Pressable>
@@ -353,11 +342,11 @@ export default function Index() {
                     }
                     style={styles.picker}
                 >
-                    {/* <Picker.Item
+                    <Picker.Item
                         label='Route 1'
                         value={1}
                         style={styles.text}
-                    /> */}
+                    />
                     {/* <Picker.Item
                         label='Route 2'
                         value={2}
@@ -415,10 +404,6 @@ export default function Index() {
                     />
                 </Picker>
             </View>
-            {/* <Text style={styles.text2}>{selectedRoute}</Text> */}
-            {/* <Text style={styles.text2}>{loopResult}</Text> */}
-            {/* <Text style={styles.text2}>L-2</Text> */}
-            {/* <Text style={styles.text2}>Loop {loopResult}</Text> */}
         </View>
     );
 }
