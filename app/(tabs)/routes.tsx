@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         backgroundColor: '#25292e',
         alignItems: 'center',
-        padding: 10,
+        padding: 30,
         // justifyContent: 'flex-start',
         // alignContent: 'center',
         // color: '#fff',

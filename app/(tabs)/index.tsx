@@ -1,7 +1,6 @@
 'use client';
 // import TextRecognition from '@react-native-ml-kit/text-recognition';
 import { performOcr } from '@bear-block/vision-camera-ocr';
-import { Picker } from '@react-native-picker/picker';
 import * as Speech from 'expo-speech';
 import { useEffect, useState } from 'react';
 import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
@@ -17,6 +16,9 @@ import { useIsFocused } from '@react-navigation/native';
 import { db } from '../../db/index';
 // import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import Entypo from '@expo/vector-icons/Entypo';
+import Feather from '@expo/vector-icons/Feather';
+// import { Link } from 'expo-router';
+import { Picker } from '@react-native-picker/picker';
 
 type Schema = {
     id: number;
@@ -27,21 +29,24 @@ type Schema = {
     suffix: string;
     loop_num: string;
     route_num: number;
-}
+};
 
+const SCANNER_WIDTH = 325;
+const SCANNER_HEIGHT = 150;
+const CORNER_SIZE = 20; // Length of the corner lines
+const CORNER_THICKNESS = 1; // Thickness of the lines
+const GAP = 10; // Space between the camera and the corners
 
 // Scan page
 export default function Index() {
     const [selectedRoute, setSelectedRoute] = useState<number>(1);
     const [loopResult, setLoopResult] = useState<string>(''); // loop could be a number (2), number plus letter (eg 16b), or dismount/drive off (D.O.)
-    // const [loopResult, setLoopResult] = useState<number>(-1); // -1 = initialization, 0 = no loop found after lookup
     const [scannedAddress, setScannedAddress] = useState<string>('');
     const [cameraDirection, setCameraDirection] =
         useState<CameraPosition>('back'); // front, back, or external
     const [cameraActive, setCameraActive] = useState<boolean>(true);
     // const imageURL = 'https://www.svgbasics.com/rasters/text_ex1.png';
     const isFocused = useIsFocused();
-
     const device = useCameraDevice(cameraDirection);
 
     useEffect(() => {
@@ -115,7 +120,7 @@ export default function Index() {
                 //         [Number(selectedRoute), streetName, streetNum],
                 //     );
                 // } else {
-                const result : Schema | null = await db.getFirstAsync(
+                const result: Schema | null = await db.getFirstAsync(
                     'SELECT loop_num FROM street_loops WHERE route_num = ? AND street_name = ? AND suffix = ? AND ? BETWEEN begin_num AND end_num',
                     // 'SELECT loop_num FROM street_loops WHERE route_num = ? AND dir = ? AND street_name = ? AND suffix = ? AND ? BETWEEN begin_num AND end_num',
                     [
@@ -139,7 +144,7 @@ export default function Index() {
                 // setScannedAddress('Loop Not Found');
                 // }
             } catch (error) {
-                console.error('Database error:', error);
+                console.error('Database error: ', error);
             }
         },
     );
@@ -273,24 +278,73 @@ export default function Index() {
                 )}
 
                 {cameraActive && device !== undefined && isFocused && (
-                    <Camera
-                        style={{ width: 320, height: 200 }}
-                        device={device}
-                        isActive={cameraActive && isFocused}
-                        frameProcessor={frameProcessor}
-                        fps={10}
-                        isMirrored={false}
-                        photoQualityBalance='quality'
-                    />
+                    <View style={styles.cameraWrapper}>
+                        <Camera
+                            style={{
+                                width: 325,
+                                height: 150,
+                                // margin: 10,
+                            }}
+                            device={device}
+                            isActive={cameraActive && isFocused}
+                            frameProcessor={frameProcessor}
+                            fps={10}
+                            isMirrored={false}
+                            photoQualityBalance='quality'
+                        />
+                        <View
+                            style={[
+                                styles.corner,
+                                styles.topLeft,
+                                {
+                                    borderTopWidth: CORNER_THICKNESS,
+                                    borderLeftWidth: CORNER_THICKNESS,
+                                },
+                            ]}
+                        />
+                        <View
+                            style={[
+                                styles.corner,
+                                styles.topRight,
+                                {
+                                    borderTopWidth: CORNER_THICKNESS,
+                                    borderRightWidth: CORNER_THICKNESS,
+                                },
+                            ]}
+                        />
+                        <View
+                            style={[
+                                styles.corner,
+                                styles.bottomLeft,
+                                {
+                                    borderBottomWidth: CORNER_THICKNESS,
+                                    borderLeftWidth: CORNER_THICKNESS,
+                                },
+                            ]}
+                        />
+                        <View
+                            style={[
+                                styles.corner,
+                                styles.bottomRight,
+                                {
+                                    borderBottomWidth: CORNER_THICKNESS,
+                                    borderRightWidth: CORNER_THICKNESS,
+                                },
+                            ]}
+                        />
+                    </View>
                 )}
             </View>
             {/* <Text style={styles.text2}>{loopResultShared.value}</Text> */}
             <View
                 style={{
+                    flex: 1,
                     flexDirection: 'column',
                     alignItems: 'center',
                     gap: 5,
-                    marginBottom: 20,
+                    justifyContent: 'center',
+                    // alignContent: 'center',
+                    // marginBottom: 50,
                 }}
             >
                 <Text style={styles.text2}>
@@ -312,10 +366,26 @@ export default function Index() {
                         style={styles.cameraButton}
                         accessibilityLabel='Switch Camera'
                     >
-                        <Entypo name="camera" size={24} color="black" />
+                        <Entypo name='camera' size={24} color='black' />
                         <Text style={styles.buttonText}>Switch</Text>
                     </Pressable>
                 </View>
+                <Pressable
+                    onPress={() => {
+                        setCameraActive(!cameraActive);
+                    }}
+                    style={styles.cameraButton}
+                    accessibilityLabel='Camera On/Off'
+                >
+                    <Feather
+                        name={cameraActive ? 'video' : 'video-off'}
+                        size={24}
+                        color='black'
+                    />
+                    <Text style={styles.buttonText}>
+                        {cameraActive ? 'On' : 'Off'}
+                    </Text>
+                </Pressable>
                 {/* <View style={styles.button}>
                     <Button
                         title='Camera On/Off'
@@ -333,6 +403,11 @@ export default function Index() {
                     />
                 </View> */}
             </View>
+            {/* <View>
+                <Link href='../route-modal' style={styles.routeButton}>
+                    <Text style={styles.buttonText}>Route {selectedRoute}</Text>
+                </Link>
+            </View> */}
 
             <View>
                 <Picker
@@ -347,26 +422,6 @@ export default function Index() {
                         value={1}
                         style={styles.text}
                     />
-                    {/* <Picker.Item
-                        label='Route 2'
-                        value={2}
-                        style={styles.text}
-                    />
-                    <Picker.Item
-                        label='Route 4'
-                        value={4}
-                        style={styles.text}
-                    />
-                    <Picker.Item
-                        label='Route 5'
-                        value={5}
-                        style={styles.text}
-                    />
-                    <Picker.Item
-                        label='Route 11'
-                        value={11}
-                        style={styles.text}
-                    /> */}
                     <Picker.Item
                         label='Route 7'
                         value={7}
@@ -414,8 +469,9 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         backgroundColor: '#25292e',
         alignItems: 'center',
-        // padding: 10,
-        // justifyContent: 'flex-start',
+        paddingTop: 75,
+        // marginTop: 50,
+        // justifyContent: 'flex-end',
         // alignContent: 'center',
         // color: '#fff',
         // justifyContent: 'center',
@@ -449,6 +505,16 @@ const styles = StyleSheet.create({
     button: {
         backgroundColor: 'white',
         borderRadius: 10,
+        // marginTop: 10,
+        // padding: 10,
+    },
+    routeButton: {
+        backgroundColor: 'white',
+        borderRadius: 10,
+        padding: 10,
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 10,
     },
     cameraButton: {
         backgroundColor: 'white',
@@ -463,6 +529,28 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: 'bold',
     },
+    cameraWrapper: {
+        width: SCANNER_WIDTH + GAP * 2.5, // Total width including gaps
+        height: SCANNER_HEIGHT + GAP * 2.5,
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginTop: 20,
+    },
+    camera: {
+        width: SCANNER_WIDTH,
+        height: SCANNER_HEIGHT,
+        borderRadius: 2,
+    },
+    corner: {
+        position: 'absolute',
+        width: CORNER_SIZE,
+        height: CORNER_SIZE,
+        borderColor: 'white',
+    },
+    topLeft: { top: 0, left: 0 },
+    topRight: { top: 0, right: 0 },
+    bottomLeft: { bottom: 0, left: 0 },
+    bottomRight: { bottom: 0, right: 0 },
 });
 
 // async function getLoop(imageURL : string) {

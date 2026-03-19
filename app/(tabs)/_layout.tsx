@@ -9,7 +9,6 @@ import { Tabs } from 'expo-router';
 //   return <Stack />;
 // }
 
-
 export default function TabLayout() {
     return (
         <Tabs
@@ -31,8 +30,13 @@ export default function TabLayout() {
                 options={{
                     title: 'Scan',
                     tabBarIcon: ({ color }) => (
-                        <MaterialCommunityIcons name="line-scan" size={28} color={color} />
+                        <MaterialCommunityIcons
+                            name='line-scan'
+                            size={28}
+                            color={color}
+                        />
                     ),
+                    headerShown: false,
                 }}
             />
             <Tabs.Screen
@@ -42,6 +46,7 @@ export default function TabLayout() {
                     tabBarIcon: ({ color }) => (
                         <MaterialIcons size={28} name='route' color={color} />
                     ),
+                    headerShown: false,
                 }}
             />
             <Tabs.Screen
@@ -51,6 +56,17 @@ export default function TabLayout() {
                     tabBarIcon: ({ color }) => (
                         <MaterialIcons size={28} name='map' color={color} />
                     ),
+                    headerShown: false,
+                }}
+            />
+            <Tabs.Screen
+                name='search'
+                options={{
+                    title: 'Search',
+                    tabBarIcon: ({ color }) => (
+                        <MaterialIcons size={28} name='search' color={color} />
+                    ),
+                    headerShown: false,
                 }}
             />
         </Tabs>
