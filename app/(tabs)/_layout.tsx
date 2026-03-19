@@ -31,16 +31,16 @@ export default function TabLayout() {
                 options={{
                     title: 'Scan',
                     tabBarIcon: ({ color }) => (
-                        <MaterialCommunityIcons name="line-scan" size={24} color={color} />
+                        <MaterialCommunityIcons name="line-scan" size={28} color={color} />
                     ),
                 }}
             />
             <Tabs.Screen
-                name='add-route'
+                name='routes'
                 options={{
-                    title: 'Add Route',
+                    title: 'Routes',
                     tabBarIcon: ({ color }) => (
-                        <MaterialIcons size={28} name='add' color={color} />
+                        <MaterialIcons size={28} name='route' color={color} />
                     ),
                 }}
             />

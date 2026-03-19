@@ -1,8 +1,8 @@
 import { StyleSheet, Text, View } from 'react-native';
-export default function AddRoute() {
+export default function Routes() {
     return (
         <View style={styles.container}>
-            <Text style={styles.text}>Add Route Page</Text>
+            <Text style={styles.text}>Routes Page</Text>
         </View>
     )
 };

@@ -4,7 +4,7 @@ import { performOcr } from '@bear-block/vision-camera-ocr';
 import { Picker } from '@react-native-picker/picker';
 import * as Speech from 'expo-speech';
 import { useEffect, useState } from 'react';
-import { Button, Image, StyleSheet, Text, View } from 'react-native';
+import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
 import {
     Camera,
     CameraPosition,
@@ -15,6 +15,8 @@ import { Worklets } from 'react-native-worklets-core'; // Allows react state (eg
 // import { ROUTE_14 } from '../constants/addressToLoop';
 import { useIsFocused } from '@react-navigation/native';
 import { db } from '../../db/index';
+// import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import Entypo from '@expo/vector-icons/Entypo';
 
 type Schema = {
     id: number;
@@ -300,8 +302,8 @@ export default function Index() {
             <View
                 style={{ flexDirection: 'row', alignItems: 'center', gap: 10 }}
             >
-                {/* <View style={styles.button}>
-                    <Button
+                <View style={styles.button}>
+                    {/* <Button
                         title='Switch Camera'
                         onPress={() =>
                             setCameraDirection(
@@ -310,16 +312,29 @@ export default function Index() {
                         }
                         color={'#007AFF'}
                         accessibilityLabel='Switch Camera'
-                    />
-                </View> */}
-                <View style={styles.button}>
+                    /> */}
+                    <Pressable
+                        onPress={() =>
+                            setCameraDirection(
+                                cameraDirection === 'back' ? 'front' : 'back',
+                            )
+                        }
+                        style={styles.cameraButton}
+                    >
+                        {/* <MaterialIcons name="cameraswitch" size={24} color="black" /> */}
+                        {/* <Feather name="camera" size={24} color="black" /> */}
+                        <Entypo name="camera" size={24} color="black" />
+                        <Text style={styles.buttonText}>Switch</Text>
+                    </Pressable>
+                </View>
+                {/* <View style={styles.button}>
                     <Button
                         title='Camera On/Off'
                         onPress={() => setCameraActive(!cameraActive)}
                         color={'#007AFF'}
                         accessibilityLabel='Camera On/Off'
                     />
-                </View>
+                </View> */}
                 {/* <View style={styles.button}>
                     <Button
                         title='Next Loop'
@@ -449,6 +464,19 @@ const styles = StyleSheet.create({
     button: {
         backgroundColor: 'white',
         borderRadius: 10,
+    },
+    cameraButton: {
+        backgroundColor: 'white',
+        borderRadius: 10,
+        padding: 10,
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 10,
+    },
+    buttonText: {
+        color: 'black',
+        fontSize: 16,
+        fontWeight: 'bold',
     },
 });
 
