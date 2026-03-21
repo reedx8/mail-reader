@@ -106,6 +106,58 @@ export function setupSchema(db: SQLite.SQLiteDatabase) {
     insert into street_loops (route_num, begin_num, end_num, dir, street_name, suffix, loop_num) values (1, 8436, 8448, 'n', 'ivanhoe', 'st', '32');
     insert into street_loops (route_num, begin_num, end_num, dir, street_name, suffix, loop_num) values (1, 7232, 7302, 'n', 'richmond', 'ave', '32');
 
+    -- Route 3
+    insert into street_loops (route_num, begin_num, end_num, dir, street_name, suffix, loop_num) values (3, 7810, 7955, 'n', 'lombard', 'st', '1');
+    insert into street_loops (route_num, begin_num, end_num, dir, street_name, suffix, loop_num) values (3, 7550, 7686, 'n', 'lombard', 'st', '2');
+    insert into street_loops (route_num, begin_num, end_num, dir, street_name, suffix, loop_num) values (3, 7301, 7522, 'n', 'lombard', 'st', '3');
+    insert into street_loops (route_num, begin_num, end_num, dir, street_name, suffix, loop_num) values (3, 6903, 7233, 'n', 'lombard', 'st', '4');
+    insert into street_loops (route_num, begin_num, end_num, dir, street_name, suffix, loop_num) values (3, 7487, 7487, 'n', 'ida', 'st', '4');
+    insert into street_loops (route_num, begin_num, end_num, dir, street_name, suffix, loop_num) values (3, 7455, 7466, 'n', 'burr', 'ave', '5');
+    insert into street_loops (route_num, begin_num, end_num, dir, street_name, suffix, loop_num) values (3, 7304, 7634, 'n', 'kellogg', 'st', '5');
+    insert into street_loops (route_num, begin_num, end_num, dir, street_name, suffix, loop_num) values (3, 7461, 7461, 'n', 'buchanan', 'ave', '5');
+    insert into street_loops (route_num, begin_num, end_num, dir, street_name, suffix, loop_num) values (3, 7460, 7474, 'n', 'polk', 'ave', '5');
+    insert into street_loops (route_num, begin_num, end_num, dir, street_name, suffix, loop_num) values (3, 7423, 7435, 'n', 'buchanan', 'ave', '5');
+    insert into street_loops (route_num, begin_num, end_num, dir, street_name, suffix, loop_num) values (3, 7430, 7430, 'n', 'burr', 'ave', '6');
+    insert into street_loops (route_num, begin_num, end_num, dir, street_name, suffix, loop_num) values (3, 7118, 7232, 'n', 'kellogg', 'st', '6');
+    insert into street_loops (route_num, begin_num, end_num, dir, street_name, suffix, loop_num) values (3, 7420, 7434, 'n', 'alma', 'ave', '6');
+    insert into street_loops (route_num, begin_num, end_num, dir, street_name, suffix, loop_num) values (3, 6910, 7010, 'n', 'kellogg', 'ave', '6');
+    insert into street_loops (route_num, begin_num, end_num, dir, street_name, suffix, loop_num) values (3, 7423, 7423, 'n', 'ida', 'ave', '6');
+    insert into street_loops (route_num, begin_num, end_num, dir, street_name, suffix, loop_num) values (3, 7009, 7015, 'n', 'kellogg', 'st', '6');
+    insert into street_loops (route_num, begin_num, end_num, dir, street_name, suffix, loop_num) values (3, 7454, 7474, 'n', 'alma', 'ave', '6');
+    insert into street_loops (route_num, begin_num, end_num, dir, street_name, suffix, loop_num) values (3, 7125, 7215, 'n', 'kellogg', 'st', '6');
+    insert into street_loops (route_num, begin_num, end_num, dir, street_name, suffix, loop_num) values (3, 7304, 7640, 'n', 'jersey', 'st', '7');
+    insert into street_loops (route_num, begin_num, end_num, dir, street_name, suffix, loop_num) values (3, 7342, 7342, 'n', 'buchanan', 'ave', '7');
+    insert into street_loops (route_num, begin_num, end_num, dir, street_name, suffix, loop_num) values (3, 7336, 7336, 'n', 'burr', 'ave', '8');
+    insert into street_loops (route_num, begin_num, end_num, dir, street_name, suffix, loop_num) values (3, 6905, 7227, 'n', 'jersey', 'st', '8');
+    insert into street_loops (route_num, begin_num, end_num, dir, street_name, suffix, loop_num) values (3, 7342, 7342, 'n', 'alma', 'ave', '8');
+    insert into street_loops (route_num, begin_num, end_num, dir, street_name, suffix, loop_num) values (3, 7317, 7415, 'n', 'ida', 'ave', '8');
+    insert into street_loops (route_num, begin_num, end_num, dir, street_name, suffix, loop_num) values (3, 7407, 7412, 'n', 'alma', 'ave', '8');
+    insert into street_loops (route_num, begin_num, end_num, dir, street_name, suffix, loop_num) values (3, 7410, 7410, 'n', 'burr', 'ave', '8');
+    insert into street_loops (route_num, begin_num, end_num, dir, street_name, suffix, loop_num) values (3, 7314, 7314, 'n', 'burr', 'ave', '9');
+    insert into street_loops (route_num, begin_num, end_num, dir, street_name, suffix, loop_num) values (3, 7302, 7634, 'n', 'ivanhoe', 'ave', '9');
+    insert into street_loops (route_num, begin_num, end_num, dir, street_name, suffix, loop_num) values (3, 7230, 7365, 'n', 'buchanan', 'ave', '9');
+    insert into street_loops (route_num, begin_num, end_num, dir, street_name, suffix, loop_num) values (3, 6904, 7236, 'n', 'ivanhoe', 'st', '10');
+    insert into street_loops (route_num, begin_num, end_num, dir, street_name, suffix, loop_num) values (3, 7303, 7616, 'n', 'syracuse', 'st', '11');
+    insert into street_loops (route_num, begin_num, end_num, dir, street_name, suffix, loop_num) values (3, 7209, 7218, 'n', 'buchanan', 'ave', '11');
+    insert into street_loops (route_num, begin_num, end_num, dir, street_name, suffix, loop_num) values (3, 7133, 7133, 'n', 'buchanan', 'ave', '11');
+    insert into street_loops (route_num, begin_num, end_num, dir, street_name, suffix, loop_num) values (3, 6907, 7237, 'n', 'syracuse', 'st', '12');
+    insert into street_loops (route_num, begin_num, end_num, dir, street_name, suffix, loop_num) values (3, 7119, 7210, 'n', 'ida', 'ave', '12');
+    insert into street_loops (route_num, begin_num, end_num, dir, street_name, suffix, loop_num) values (3, 7305, 7420, 'n', 'princeton', 'st', '13');
+    insert into street_loops (route_num, begin_num, end_num, dir, street_name, suffix, loop_num) values (3, 6917, 7235, 'n', 'princeton', 'st', '14');
+    insert into street_loops (route_num, begin_num, end_num, dir, street_name, suffix, loop_num) values (3, 6910, 7583, 'n', 'edgewater', 'st', '15');
+    insert into street_loops (route_num, begin_num, end_num, dir, street_name, suffix, loop_num) values (3, 7625, 7625, 'n', 'willamette', 'blvd', '16');
+    insert into street_loops (route_num, begin_num, end_num, dir, street_name, suffix, loop_num) values (3, 7010, 7058, 'n', 'pierce', 'ave', '16');
+    insert into street_loops (route_num, begin_num, end_num, dir, street_name, suffix, loop_num) values (3, 7525, 7531, 'n', 'willamette', 'ave', '16');
+    insert into street_loops (route_num, begin_num, end_num, dir, street_name, suffix, loop_num) values (3, 7009, 7129, 'n', 'buchanan', 'ave', '16');
+    insert into street_loops (route_num, begin_num, end_num, dir, street_name, suffix, loop_num) values (3, 7600, 7751, 'n', 'willamette', 'blvd', '17');
+    insert into street_loops (route_num, begin_num, end_num, dir, street_name, suffix, loop_num) values (3, 7023, 7227, 'n', 'polk', 'ave', '18');
+    insert into street_loops (route_num, begin_num, end_num, dir, street_name, suffix, loop_num) values (3, 7724, 7736, 'n', 'princeton', 'st', '18');
+    insert into street_loops (route_num, begin_num, end_num, dir, street_name, suffix, loop_num) values (3, 7722, 7729, 'n', 'ivanhoe', 'st', '18');
+    insert into street_loops (route_num, begin_num, end_num, dir, street_name, suffix, loop_num) values (3, 7245, 7319, 'n', 'polk', 'ave', '18');
+    insert into street_loops (route_num, begin_num, end_num, dir, street_name, suffix, loop_num) values (3, 7710, 7979, 'n', 'jersey', 'st', '19');
+    insert into street_loops (route_num, begin_num, end_num, dir, street_name, suffix, loop_num) values (3, 7407, 7455, 'n', 'polk', 'ave', '19');
+    insert into street_loops (route_num, begin_num, end_num, dir, street_name, suffix, loop_num) values (3, 7706, 7916, 'n', 'kellogg', 'st', '20');
+
     -- Route 7
     INSERT INTO street_loops (route_num, begin_num, end_num, dir, street_name, suffix, loop_num) VALUES (7, 4735, 4789, 'n', 'harvard', 'st', '1');
     INSERT INTO street_loops (route_num, begin_num, end_num, dir, street_name, suffix, loop_num) VALUES (7, 6717, 6737, 'n', 'olin', 'ave', '1');

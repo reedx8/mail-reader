@@ -423,6 +423,11 @@ export default function Index() {
                         style={styles.text}
                     />
                     <Picker.Item
+                        label='Route 3'
+                        value={3}
+                        style={styles.text}
+                    />
+                    <Picker.Item
                         label='Route 7'
                         value={7}
                         style={styles.text}
