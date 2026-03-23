@@ -37,6 +37,7 @@ const CORNER_SIZE = 20; // Length of the corner lines
 const CORNER_THICKNESS = 1; // Thickness of the lines
 const GAP = 10; // Space between the camera and the corners
 
+
 // Scan page
 export default function Index() {
     const [selectedRoute, setSelectedRoute] = useState<number>(1);
@@ -48,6 +49,7 @@ export default function Index() {
     // const imageURL = 'https://www.svgbasics.com/rasters/text_ex1.png';
     const isFocused = useIsFocused();
     const device = useCameraDevice(cameraDirection);
+    const routes = [1, 3, 7, 12, 14, 15, 16, 21, 25, 29];
 
     useEffect(() => {
         if (loopResult !== '') {
@@ -417,7 +419,15 @@ export default function Index() {
                     }
                     style={styles.picker}
                 >
-                    <Picker.Item
+                    {routes.map((routeNum, index) => (
+                        <Picker.Item
+                            label={'Route ' + routeNum}
+                            value={routeNum}
+                            style={styles.text}
+                            key={index}
+                        />
+                    ))}
+                    {/* <Picker.Item
                         label='Route 1'
                         value={1}
                         style={styles.text}
@@ -453,6 +463,11 @@ export default function Index() {
                         style={styles.text}
                     />
                     <Picker.Item
+                        label='Route 21'
+                        value={21}
+                        style={styles.text}
+                    />
+                    <Picker.Item
                         label='Route 25'
                         value={25}
                         style={styles.text}
@@ -461,7 +476,7 @@ export default function Index() {
                         label='Route 29'
                         value={29}
                         style={styles.text}
-                    />
+                    /> */}
                 </Picker>
             </View>
         </View>
