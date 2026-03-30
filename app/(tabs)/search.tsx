@@ -22,7 +22,16 @@ export default function Search() {
 
     async function lookUpAddressInDb(address: string) {
         try {
+            if (address === '' || address === null || address === undefined) {
+                setResult({
+                    route: 0,
+                    loop: '',
+                })
+                return;
+            }
+
             address = address.trim().toLowerCase();
+            address = address.replace(/\./g, ''); // remove any dots if present
 
             // street name may be multiple words
             const streetName = address.split(' ').slice(2, -1).join(' ');
@@ -74,8 +83,8 @@ export default function Search() {
                 // minimize keyboard on press out
                 // onPressOut={}
                 returnKeyType={'search'}
-                enablesReturnKeyAutomatically={true}
-                selectTextOnFocus={true}
+                // enablesReturnKeyAutomatically={true}
+                // selectTextOnFocus={true}
             />
             <View style={styles.header}>
                 {result.route > 0 && (
