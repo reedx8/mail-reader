@@ -12,6 +12,7 @@ export default ({ config }) => ({
         ...config.android,
         package: getUniqueIdentifier(),
     },
+    icon: getIcon(),
 });
 
 const getUniqueIdentifier = () => {
@@ -36,4 +37,16 @@ const getAppName = () => {
     }
 
     return 'Mail Reader';
+};
+
+const getIcon = () => {
+    if (IS_DEV) {
+        return './assets/images/icon.png';
+    }
+
+    if (IS_PREVIEW) {
+        return './assets/images/icon-preview.png';
+    }
+
+    return './assets/images/icon.png';
 };
