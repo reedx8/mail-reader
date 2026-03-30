@@ -76,8 +76,11 @@ export default function Index() {
             try {
                 // match[1]: num, match[2]: dir, match[3]: name, match[4]: suffix
                 // console.log('route: ', selectedRoute);
-                const streetName = match[3].toLowerCase();
-                let suffix = match[4].toLowerCase();
+                const streetName = match.slice(3,-1).join(' ').toLowerCase();
+                let suffix = match[match.length - 1].toLowerCase();
+
+                // const streetName = match[3].toLowerCase();
+                // let suffix = match[4].toLowerCase();
                 const streetNum = match[1];
 
                 switch (suffix) {
@@ -167,10 +170,20 @@ export default function Index() {
                     if (result.text !== undefined) {
                         // const streetRegex =
                         // /^\d+\s+(?:(?:NW|NE|SW|SE|N|S|E|W|NORTH|SOUTH|EAST|WEST)\s+)?(?!NN|SS|EE|WW|NM|UN)[A-Z0-9]+(?:\s+[A-Z0-9]+)*\s+(?:ST|AVE|BLVD|DR|RD|LN|CT|WAY|PL|TER|CIR|HWY|STREET|ROAD|AVENUE|DRIVE|HIGHWAY|LANE|WAY|PLACE|TERRACE|CIRCLE|COURT|BOULEVARD)\.?\s*$/i;
-                        const addressRegex =
-                            /\b(\d{3,6})\s+(n|s|e|w|ne|nw|se|sw|north|south|east|west|northeast|northwest|southeast|southwest)?\s+([a-z]+)\s+(st|street|ave|avenue|rd|road|dr|drive|ln|lane|blvd|boulevard|ct|court|pl|place|hwy|highway|ter|terrace|cir|circle|way)\b/i;
 
-                        const scannedText = result.text.trim().toLowerCase();
+                        // previous regex: worked ok for most addresses, but crucially misses addresses with multiple street names
+                        // const addressRegex =
+                            // /\b(\d{3,6})\s+(n|s|e|w|ne|nw|se|sw|north|south|east|west|northeast|northwest|southeast|southwest)?\s+([a-z]+)\s+(st|street|ave|avenue|rd|road|dr|drive|ln|lane|blvd|boulevard|ct|court|pl|place|hwy|highway|ter|terrace|cir|circle|way)\b/i;
+                        
+                        // new regex: now includes addresses with dots on suffix + up to 4 street names in address + street names that are numbers
+                        // const addressRegex = /\b(\d{3,6})\s+(n|s|e|w|ne|nw|se|sw|north|south|east|west|northeast|northwest|southeast|southwest)?\s+([a-z0-9]+)\s+(st|street|ave|avenue|rd|road|dr|drive|ln|lane|blvd|boulevard|ct|court|pl|place|hwy|highway|ter|terrace|cir|circle|way)\b/i;
+                        const addressRegex = /\b(\d{3,6})\s+(n|s|e|w|ne|nw|se|sw|north|south|east|west|northeast|northwest|southeast|southwest)?\s+([a-z0-9]+(?:\s+[a-z0-9]+){0,3})\s+(st|street|ave|avenue|rd|road|dr|drive|ln|lane|blvd|boulevard|ct|court|pl|place|hwy|highway|ter|terrace|cir|circle|way)\b/i;
+
+                        // const addressRegex = /\b\d{3,6}\s+(n|s|e|w|ne|nw|se|sw|north|south|east|west|northeast|northwest|southeast|southwest)\.?\s+?(?:[a-z0-9]+\s+){1,4}(?:st|street|ave|avenue|rd|road|dr|drive|ln|lane|blvd|boulevard|ct|court|pl|place|hwy|highway|ter|terrace|cir|circle|way)\b/i;
+
+                        let scannedText = result.text.trim().toLowerCase();
+                        scannedText = scannedText.replace(/\./g, ''); // remove any dots if present
+
 
                         // const streets = Object.keys(ROUTE_14); // all streets in route
                         // 3) indexOf() solutions:

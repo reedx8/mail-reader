@@ -22,12 +22,20 @@ export default function Search() {
 
     async function lookUpAddressInDb(address: string) {
         try {
+            address = address.trim().toLowerCase();
+
+            // street name may be multiple words
+            const streetName = address.split(' ').slice(2, -1).join(' ');
+            const suffixName = address.split(' ').slice(-1)[0];
+
             const dbResult: Schema | null = await db.getFirstAsync(
-                'SELECT loop_num, route_num FROM street_loops WHERE street_name = ? AND ? BETWEEN begin_num AND end_num',
+                'SELECT loop_num, route_num FROM street_loops WHERE street_name = ? AND suffix = ? AND ? BETWEEN begin_num AND end_num',
                 [
                     // address.split(' ')[0],
                     // address.split(' ')[1],
-                    address.split(' ')[2],
+                    // address.split(' ')[2],
+                    streetName,
+                    suffixName,
                     address.split(' ')[0],
                 ],
             );
