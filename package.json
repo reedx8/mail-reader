@@ -9,9 +9,9 @@
         "ios": "expo run:ios",
         "web": "expo start --web",
         "lint": "expo lint",
-        "dev:ios": "npx expo prebuild --clean && npx expo run:ios --device",
+        "dev:ios": "APP_VARIANT=development npx expo prebuild --clean && npx expo run:ios --device",
         "tunnel": "npx expo start --tunnel",
-        "preview:ios": "npx expo prebuild --clean && npx expo run:ios --configuration Release --device"
+        "preview:ios": "APP_VARIANT=preview npx expo prebuild --clean && npx expo run:ios --configuration Release --device"
     },
     "dependencies": {
         "@bear-block/vision-camera-ocr": "^1.1.2",
