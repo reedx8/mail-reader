@@ -49,7 +49,7 @@ export default function Index() {
     // const imageURL = 'https://www.svgbasics.com/rasters/text_ex1.png';
     const isFocused = useIsFocused();
     const device = useCameraDevice(cameraDirection);
-    const routes = [1, 3, 7, 12, 14, 15, 16, 21, 24, 25, 26, 29];
+    const routes = [1, 3, 7, 12, 14, 15, 16, 21, 24, 25, 26, 29, 36];
 
     useEffect(() => {
         if (loopResult !== '') {
