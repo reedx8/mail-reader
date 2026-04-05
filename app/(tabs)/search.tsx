@@ -26,41 +26,67 @@ export default function Search() {
                 setResult({
                     route: 0,
                     loop: '',
-                })
+                });
                 return;
             }
 
             address = address.trim().toLowerCase();
             address = address.replace(/\./g, ''); // remove any dots if present
 
-            // street name may be multiple words
-            const streetName = address.split(' ').slice(2, -1).join(' ');
+            // try assuming user inputs full address (street number + dir + steet name + suffix)
+            // const dir = address.split(' ')[1]; // only used in 2nd attempt
+            const streetNum = address.split(' ')[0];
+            let streetName = address.split(' ').slice(2, -1).join(' '); // street name my be multiple words
             const suffixName = address.split(' ').slice(-1)[0];
 
-            const dbResult: Schema | null = await db.getFirstAsync(
+            let dbResult: Schema | null = await db.getFirstAsync(
                 'SELECT loop_num, route_num FROM street_loops WHERE street_name = ? AND suffix = ? AND ? BETWEEN begin_num AND end_num',
-                [
-                    // address.split(' ')[0],
-                    // address.split(' ')[1],
-                    // address.split(' ')[2],
-                    streetName,
-                    suffixName,
-                    address.split(' ')[0],
-                ],
+                [streetName, suffixName, streetNum],
             );
+
             if (dbResult) {
                 setResult({
                     route: dbResult.route_num,
                     loop: dbResult.loop_num,
                 });
             } else {
-                setResult({
-                    route: -1,
-                    loop: '',
-                });
+                // try again if user inputs partial address (eg street number + name or street number + name + suffix)
+                if (!checkForDir(address) && !checkForSuffix(address)) {
+                    // 1. check for only number + name
+                    streetName = address.split(' ').slice(1).join(' ');
+                } else if (checkForDir(address) && !checkForSuffix(address)) {
+                    // 2. check for number + dir + name
+                    if (address.split(' ').length === 3) {
+                        streetName = address.split(' ').slice(2).join(' ');
+                    }
+                } else if (!checkForDir(address) && checkForSuffix(address)) {
+                    // check for number + name + suffix
+                    streetName = address.split(' ').slice(1, -1).join(' ');
+                }
+
+                dbResult = await db.getFirstAsync(
+                    'SELECT loop_num, route_num FROM street_loops WHERE street_name = ? AND ? BETWEEN begin_num AND end_num',
+                    [streetName, streetNum],
+                );
+
+                if (dbResult) {
+                    setResult({
+                        route: dbResult.route_num,
+                        loop: dbResult.loop_num,
+                    });
+                } else {
+                    setResult({
+                        route: -1,
+                        loop: '',
+                    });
+                }
             }
         } catch (error) {
             console.error('Database error:', error);
+            setResult({
+                route: -1,
+                loop: '',
+            })
         }
     }
 
@@ -103,6 +129,98 @@ export default function Search() {
             </View>
         </View>
     );
+}
+function checkForSuffix(address: string) {
+    let suffix = address.split(' ').slice(-1)[0];
+
+    if (suffix === 'steet' || suffix === 'st') {
+        suffix = 'st';
+        // return suffix;
+        return true;
+    } else if (suffix === 'avenue' || suffix === 'ave') {
+        suffix = 'ave';
+        // return suffix;
+        return true;
+    } else if (suffix === 'boulevard' || suffix === 'blvd') {
+        suffix = 'blvd';
+        // return suffix;
+        return true;
+    } else if (suffix === 'drive' || suffix === 'dr') {
+        suffix = 'dr';
+        // return suffix;
+        return true;
+    } else if (suffix === 'road' || suffix === 'rd') {
+        suffix = 'rd';
+        // return suffix;
+        return true;
+    } else if (suffix === 'lane' || suffix === 'ln') {
+        suffix = 'ln';
+        // return suffix;
+        return true;
+    } else if (suffix === 'place' || suffix === 'pl') {
+        suffix = 'pl';
+        // return suffix;
+        return true;
+    } else if (suffix === 'court' || suffix === 'ct') {
+        suffix = 'ct';
+        return suffix;
+    } else if (suffix === 'circle' || suffix === 'cir') {
+        suffix = 'cir';
+        // return suffix;
+        return true;
+    } else if (suffix === 'highway' || suffix === 'hwy') {
+        suffix = 'hwy';
+        // return suffix;
+        return true;
+    } else if (suffix === 'terrace' || suffix === 'ter') {
+        suffix = 'ter';
+        // return suffix;
+        return true;
+    } else {
+        // return 'none';
+        return false;
+    }
+}
+
+function checkForDir(address: string) {
+    let dir = address.split(' ').slice(1, 2)[0];
+
+    if (dir === 'north' || dir === 'n') {
+        dir = 'n';
+        // return dir;
+        return true;
+    } else if (dir === 'south' || dir === 's') {
+        dir = 's';
+        // return dir;
+        return true;
+    } else if (dir === 'east' || dir === 'e') {
+        dir = 'e';
+        // return dir;
+        return true;
+    } else if (dir === 'west' || dir === 'w') {
+        dir = 'w';
+        // return dir;
+        return true;
+    } else if (dir === 'northeast' || dir === 'ne') {
+        dir = 'ne';
+        // return dir;
+        return true;
+    } else if (dir === 'northwest' || dir === 'nw') {
+        dir = 'nw';
+        // return dir;
+        return true;
+    } else if (dir === 'southeast' || dir === 'se') {
+        dir = 'se';
+        // return dir;
+        return true;
+    } else if (dir === 'southwest' || dir === 'sw') {
+        dir = 'sw';
+        // return dir;
+        return true;
+    } else {
+        // return 'none';
+        return false;
+    }
 }
 
 const styles = StyleSheet.create({

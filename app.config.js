@@ -12,6 +12,7 @@ export default ({ config }) => ({
         ...config.android,
         package: getUniqueIdentifier(),
     },
+    scheme: IS_DEV ? 'mailreader-dev' : 'mailreader',
     icon: getIcon(),
 });
 

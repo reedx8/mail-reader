@@ -10,7 +10,7 @@
         "web": "expo start --web",
         "lint": "expo lint",
         "dev:ios": "APP_VARIANT=development npx expo prebuild --clean && npx expo run:ios --device",
-        "tunnel": "npx expo start --tunnel",
+        "tunnel": "APP_VARIANT=development npx expo start --tunnel",
         "preview:ios": "APP_VARIANT=preview npx expo prebuild --clean && npx expo run:ios --configuration Release --device"
     },
     "dependencies": {
