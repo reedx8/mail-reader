@@ -1,15 +1,14 @@
-// Map page not used yet
+// routes page not used yet
 
-// import { StyleSheet, Text, View } from "react-native";
-
-export default function Map() {
-    return <></>
+// import { StyleSheet } from 'react-native';
+// export default function Routes() {
 //     return (
 //         <View style={styles.container}>
-//             <Text style={styles.text}>Map Page</Text>
+//             <Text style={styles.text}>Routes Page</Text>
 //         </View>
 //     )
-};
+// };
+
 
 // const styles = StyleSheet.create({
 //     container: {
@@ -17,7 +16,7 @@ export default function Map() {
 //         flexDirection: 'column',
 //         backgroundColor: '#25292e',
 //         alignItems: 'center',
-//         padding: 10,
+//         padding: 30,
 //     },
 //     text: {
 //         color: '#fff',

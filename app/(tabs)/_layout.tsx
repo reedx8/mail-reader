@@ -39,7 +39,7 @@ export default function TabLayout() {
                     headerShown: false,
                 }}
             />
-            <Tabs.Screen
+            {/* <Tabs.Screen
                 name='routes'
                 options={{
                     title: 'Routes',
@@ -48,8 +48,8 @@ export default function TabLayout() {
                     ),
                     headerShown: false,
                 }}
-            />
-            <Tabs.Screen
+            /> */}
+            {/* <Tabs.Screen
                 name='map'
                 options={{
                     title: 'Map',
@@ -58,7 +58,7 @@ export default function TabLayout() {
                     ),
                     headerShown: false,
                 }}
-            />
+            /> */}
             <Tabs.Screen
                 name='search'
                 options={{

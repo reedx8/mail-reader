@@ -1,8 +1,7 @@
 'use client';
 // import TextRecognition from '@react-native-ml-kit/text-recognition';
 import { performOcr } from '@bear-block/vision-camera-ocr';
-import * as Speech from 'expo-speech';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
 import {
     Camera,
@@ -19,6 +18,7 @@ import Entypo from '@expo/vector-icons/Entypo';
 import Feather from '@expo/vector-icons/Feather';
 // import { Link } from 'expo-router';
 import { Picker } from '@react-native-picker/picker';
+import * as Speech from 'expo-speech';
 
 type Schema = {
     id: number;
@@ -37,12 +37,14 @@ const CORNER_SIZE = 20; // Length of the corner lines
 const CORNER_THICKNESS = 1; // Thickness of the lines
 const GAP = 10; // Space between the camera and the corners
 
-
 // Scan page
 export default function Index() {
     const [selectedRoute, setSelectedRoute] = useState<number>(1);
-    const [loopResult, setLoopResult] = useState<string>(''); // loop could be a number (2), number plus letter (eg 16b), or dismount/drive off (D.O.)
+    const [loopResult, setLoopResult] = useState<string[]>([]); // loop could be a number (2), number plus letter (eg 16b), or dismount/drive off (D.O.)
+    // const [loopResult, setLoopResult] = useState<string>(''); // loop could be a number (2), number plus letter (eg 16b), or dismount/drive off (D.O.)
     const [scannedAddress, setScannedAddress] = useState<string>('');
+    const prevScannedAddress = useRef<string>(''); // this and lastSpokenAt are used to prevent never ending speech (happens with loopResult[], not loopResult, fyi)
+    const lastSpokenAt = useRef<number>(0);
     const [cameraDirection, setCameraDirection] =
         useState<CameraPosition>('back'); // front, back, or external
     const [cameraActive, setCameraActive] = useState<boolean>(true);
@@ -52,31 +54,43 @@ export default function Index() {
     const routes = [1, 3, 7, 12, 14, 15, 16, 21, 24, 25, 26, 29, 36];
 
     useEffect(() => {
-        if (loopResult !== '') {
+        if (loopResult.length > 0) {
+            // if (loopResult !== '') {
             Speech.stop();
-            // Speech.speak(String('Loop ' + loopResult), {
-            Speech.speak(String(loopResult), {
-                language: 'en-US',
-                rate: 1,
-                pitch: 0.7,
-            });
+            // Speech.speak(String(loopResult), {
+
+            if (loopResult.length > 1) {
+                Speech.speak('Multiple loops found', {
+                    language: 'en-US',
+                    rate: 1,
+                    pitch: 0.7,
+                });
+            } else {
+                Speech.speak(String(loopResult[0]), {
+                    language: 'en-US',
+                    rate: 1,
+                    pitch: 0.7,
+                });
+            }
+            lastSpokenAt.current = Date.now();
         }
     }, [loopResult, scannedAddress]);
-
-    // Update react state
-    // const updateLoopResult = Worklets.createRunOnJS(
-    //     (loopNumber: number, address: string) => {
-    //         setLoopResult(loopNumber);
-    //         setScannedAddress(address);
-    //     },
-    // );
 
     const lookupAddressInDb = Worklets.createRunOnJS(
         async (match: string[], fullAddress: string) => {
             try {
                 // match[1]: num, match[2]: dir, match[3]: name, match[4]: suffix
                 // console.log('route: ', selectedRoute);
-                const streetName = match.slice(3,-1).join(' ').toLowerCase();
+
+                const now = Date.now();
+
+                if (
+                    fullAddress === prevScannedAddress.current &&
+                    now - lastSpokenAt.current < 5000
+                ) {
+                    return;
+                }
+                const streetName = match.slice(3, -1).join(' ').toLowerCase();
                 let suffix = match[match.length - 1].toLowerCase();
 
                 // const streetName = match[3].toLowerCase();
@@ -119,34 +133,27 @@ export default function Index() {
                         break;
                 }
 
-                // if (suffix === '' || suffix === undefined) {
-                //     result = await db.getFirstAsync(
-                //         'SELECT loop_num FROM street_loops WHERE route_num = ? AND street_name = ? AND ? BETWEEN begin_num AND end_num',
-                //         [Number(selectedRoute), streetName, streetNum],
-                //     );
-                // } else {
-                const result: Schema | null = await db.getFirstAsync(
+                const result: Schema[] | unknown[] = await db.getAllAsync(
                     'SELECT loop_num FROM street_loops WHERE route_num = ? AND street_name = ? AND suffix = ? AND ? BETWEEN begin_num AND end_num',
-                    // 'SELECT loop_num FROM street_loops WHERE route_num = ? AND dir = ? AND street_name = ? AND suffix = ? AND ? BETWEEN begin_num AND end_num',
-                    [
-                        Number(selectedRoute),
-                        // match[2].toLowerCase(),
-                        streetName,
-                        suffix,
-                        streetNum,
-                    ],
+                    [Number(selectedRoute), streetName, suffix, streetNum],
                 );
-                // }
 
-                if (result) {
-                    setLoopResult(result.loop_num);
+                if (result && result.length > 0) {
+                    setLoopResult(
+                        result.map((result) => (result as Schema).loop_num),
+                    );
                     setScannedAddress(fullAddress);
-                    // console.log('result: ', result);
+                    prevScannedAddress.current = fullAddress;
                 }
-                // } else {
-                // console.log('No result found');
-                // setLoopResult(0);
-                // setScannedAddress('Loop Not Found');
+
+                // const result: Schema | null = await db.getFirstAsync(
+                //     'SELECT loop_num FROM street_loops WHERE route_num = ? AND street_name = ? AND suffix = ? AND ? BETWEEN begin_num AND end_num',
+                //     [Number(selectedRoute), streetName, suffix, streetNum],
+                // );
+
+                // if (result) {
+                //     setLoopResult(result.loop_num);
+                //     setScannedAddress(fullAddress);
                 // }
             } catch (error) {
                 console.error('Database error: ', error);
@@ -173,17 +180,17 @@ export default function Index() {
 
                         // previous regex: worked ok for most addresses, but crucially misses addresses with multiple street names
                         // const addressRegex =
-                            // /\b(\d{3,6})\s+(n|s|e|w|ne|nw|se|sw|north|south|east|west|northeast|northwest|southeast|southwest)?\s+([a-z]+)\s+(st|street|ave|avenue|rd|road|dr|drive|ln|lane|blvd|boulevard|ct|court|pl|place|hwy|highway|ter|terrace|cir|circle|way)\b/i;
-                        
+                        // /\b(\d{3,6})\s+(n|s|e|w|ne|nw|se|sw|north|south|east|west|northeast|northwest|southeast|southwest)?\s+([a-z]+)\s+(st|street|ave|avenue|rd|road|dr|drive|ln|lane|blvd|boulevard|ct|court|pl|place|hwy|highway|ter|terrace|cir|circle|way)\b/i;
+
                         // new regex: now includes addresses with dots on suffix + up to 4 street names in address + street names that are numbers
                         // const addressRegex = /\b(\d{3,6})\s+(n|s|e|w|ne|nw|se|sw|north|south|east|west|northeast|northwest|southeast|southwest)?\s+([a-z0-9]+)\s+(st|street|ave|avenue|rd|road|dr|drive|ln|lane|blvd|boulevard|ct|court|pl|place|hwy|highway|ter|terrace|cir|circle|way)\b/i;
-                        const addressRegex = /\b(\d{3,6})\s+(n|s|e|w|ne|nw|se|sw|north|south|east|west|northeast|northwest|southeast|southwest)?\s+([a-z0-9]+(?:\s+[a-z0-9]+){0,3})\s+(st|street|ave|avenue|rd|road|dr|drive|ln|lane|blvd|boulevard|ct|court|pl|place|hwy|highway|ter|terrace|cir|circle|way)\b/i;
+                        const addressRegex =
+                            /\b(\d{3,6})\s+(n|s|e|w|ne|nw|se|sw|north|south|east|west|northeast|northwest|southeast|southwest)?\s+([a-z0-9]+(?:\s+[a-z0-9]+){0,3})\s+(st|street|ave|avenue|rd|road|dr|drive|ln|lane|blvd|boulevard|ct|court|pl|place|hwy|highway|ter|terrace|cir|circle|way)\b/i;
 
                         // const addressRegex = /\b\d{3,6}\s+(n|s|e|w|ne|nw|se|sw|north|south|east|west|northeast|northwest|southeast|southwest)\.?\s+?(?:[a-z0-9]+\s+){1,4}(?:st|street|ave|avenue|rd|road|dr|drive|ln|lane|blvd|boulevard|ct|court|pl|place|hwy|highway|ter|terrace|cir|circle|way)\b/i;
 
                         let scannedText = result.text.trim().toLowerCase();
                         scannedText = scannedText.replace(/\./g, ''); // remove any dots if present
-
 
                         // const streets = Object.keys(ROUTE_14); // all streets in route
                         // 3) indexOf() solutions:
@@ -363,9 +370,25 @@ export default function Index() {
                 }}
             >
                 <Text style={styles.text2}>
-                    {loopResult}
+                    {loopResult[0]}
+                    {/* {loopResult} */}
                     {/* {loopResult === -1 || loopResult === 0 ? '' : loopResult} */}
                 </Text>
+                {loopResult.length > 1 && (
+                    <Text style={styles.text4}>
+                        (Other Loops: {loopResult[1]}
+                        {loopResult.map(
+                            (loopResult, index) =>
+                                index > 1 && (
+                                    <Text key={index} style={styles.text4}>
+                                        {', '}
+                                        {loopResult}
+                                    </Text>
+                                ),
+                        )}
+                        )
+                    </Text>
+                )}
                 <Text style={styles.text3}>{scannedAddress}</Text>
             </View>
             <View
@@ -519,7 +542,11 @@ const styles = StyleSheet.create({
     },
     text3: {
         color: '#fff',
-        fontSize: 23,
+        fontSize: 24,
+    },
+    text4: {
+        color: 'red',
+        fontSize: 21,
     },
     title: {
         fontSize: 34,

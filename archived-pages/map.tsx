@@ -2,14 +2,13 @@
 
 // import { StyleSheet, Text, View } from "react-native";
 
-export default function Map() {
-    return <></>
+// export default function Map() {
 //     return (
 //         <View style={styles.container}>
 //             <Text style={styles.text}>Map Page</Text>
 //         </View>
 //     )
-};
+// };
 
 // const styles = StyleSheet.create({
 //     container: {
