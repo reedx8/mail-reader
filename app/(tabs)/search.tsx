@@ -15,18 +15,19 @@ type Schema = {
 
 export default function Search() {
     const [address, setAddress] = useState<string>('');
-    const [result, setResult] = useState<any>({
-        route: 0,
-        loop: '',
-    });
+    const [result, setResult] = useState<any[]>([
+        {
+            route: 0, // cant assume a single route for multiple loop matches
+            loop: '',
+            queryResult: 0, // 1 = match , 0 = initial state/invalid search, -1 = no match, -2 = db error
+        },
+    ]);
 
     async function lookUpAddressInDb(address: string) {
         try {
             if (address === '' || address === null || address === undefined) {
-                setResult({
-                    route: 0,
-                    loop: '',
-                });
+                setResult([{ route: 0, loop: '', queryResult: 0 }]);
+                // console.log('No address found');
                 return;
             }
 
@@ -39,16 +40,20 @@ export default function Search() {
             let streetName = address.split(' ').slice(2, -1).join(' '); // street name my be multiple words
             const suffixName = address.split(' ').slice(-1)[0];
 
-            let dbResult: Schema | null = await db.getFirstAsync(
+            // dbresult = allRows (an array of objects)
+            let dbResult: Schema[] | unknown[] = await db.getAllAsync(
                 'SELECT loop_num, route_num FROM street_loops WHERE street_name = ? AND suffix = ? AND ? BETWEEN begin_num AND end_num',
                 [streetName, suffixName, streetNum],
             );
 
-            if (dbResult) {
-                setResult({
-                    route: dbResult.route_num,
-                    loop: dbResult.loop_num,
-                });
+            if (dbResult && dbResult.length > 0) {
+                setResult(
+                    dbResult.map((row) => ({
+                        route: (row as Schema).route_num,
+                        loop: (row as Schema).loop_num,
+                        queryResult: 1,
+                    })),
+                );
             } else {
                 // try again if user inputs partial address (eg street number + name or street number + name + suffix)
                 if (!checkForDir(address) && !checkForSuffix(address)) {
@@ -64,29 +69,38 @@ export default function Search() {
                     streetName = address.split(' ').slice(1, -1).join(' ');
                 }
 
-                dbResult = await db.getFirstAsync(
+                dbResult = await db.getAllAsync(
                     'SELECT loop_num, route_num FROM street_loops WHERE street_name = ? AND ? BETWEEN begin_num AND end_num',
                     [streetName, streetNum],
                 );
 
-                if (dbResult) {
-                    setResult({
-                        route: dbResult.route_num,
-                        loop: dbResult.loop_num,
-                    });
+                if (dbResult && dbResult.length > 0) {
+                    setResult(
+                        dbResult.map((row) => ({
+                            route: (row as Schema).route_num,
+                            loop: (row as Schema).loop_num,
+                            queryResult: 1,
+                        })),
+                    );
                 } else {
-                    setResult({
-                        route: -1,
-                        loop: '',
-                    });
+                    setResult([
+                        {
+                            route: 0,
+                            loop: '',
+                            queryResult: -1,
+                        },
+                    ]);
                 }
             }
         } catch (error) {
             console.error('Database error:', error);
-            setResult({
-                route: -1,
-                loop: '',
-            })
+            setResult([
+                {
+                    route: 0,
+                    loop: '',
+                    queryResult: -2,
+                },
+            ]);
         }
     }
 
@@ -113,17 +127,36 @@ export default function Search() {
                 // selectTextOnFocus={true}
             />
             <View style={styles.header}>
-                {result.route > 0 && (
+                {result && result[0].queryResult === 1 && (
                     <>
-                        <Text style={styles.headerText}>
-                            Route {result.route === 0 ? '' : result.route}
-                        </Text>
-                        <Text style={styles.subHeaderText}>
-                            Loop {result.loop === 0 ? '' : result.loop}
-                        </Text>
+                        {result.length === 1 && (
+                            <>
+                                <Text style={styles.headerText}>
+                                    Route {result[0].route}
+                                </Text>
+                                <Text style={styles.subHeaderText}>
+                                    Loop {result[0].loop}
+                                </Text>
+                            </>
+                        )}
+                        {result.length > 1 && (
+                            <>
+                                <Text style={styles.headerText2}>
+                                    Multiple Matches
+                                </Text>
+                                {result.map((row, index) => (
+                                    <Text
+                                        style={styles.subHeaderText2}
+                                        key={index}
+                                    >
+                                        Route {row.route} - Loop {row.loop}
+                                    </Text>
+                                ))}
+                            </>
+                        )}
                     </>
                 )}
-                {result.route === -1 && (
+                {result && result[0].queryResult <= -1 && (
                     <Text style={styles.subHeaderText}>No results found</Text>
                 )}
             </View>
@@ -255,8 +288,18 @@ const styles = StyleSheet.create({
         color: '#fff',
         fontWeight: 'bold',
     },
+    headerText2: {
+        fontSize: 45,
+        color: '#fff',
+        fontWeight: 'bold',
+    },
     subHeaderText: {
         fontSize: 50,
+        color: '#fff',
+        fontWeight: 'ultralight',
+    },
+    subHeaderText2: {
+        fontSize: 40,
         color: '#fff',
         fontWeight: 'ultralight',
     },
