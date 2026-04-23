@@ -39,6 +39,7 @@ const GAP = 10; // Space between the camera and the corners
 
 // Scan page
 export default function Index() {
+    const [selectedOffice] = useState<number>(0);
     const [selectedRoute, setSelectedRoute] = useState<number>(1);
     const [loopResult, setLoopResult] = useState<string[]>([]); // loop could be a number (2), number plus letter (eg 16b), or dismount/drive off (D.O.)
     // const [loopResult, setLoopResult] = useState<string>(''); // loop could be a number (2), number plus letter (eg 16b), or dismount/drive off (D.O.)
@@ -134,8 +135,8 @@ export default function Index() {
                 }
 
                 const result: Schema[] | unknown[] = await db.getAllAsync(
-                    'SELECT loop_num FROM street_loops WHERE route_num = ? AND street_name = ? AND suffix = ? AND ? BETWEEN begin_num AND end_num',
-                    [Number(selectedRoute), streetName, suffix, streetNum],
+                    'SELECT loop_num FROM loops WHERE office_id = ? AND route_num = ? AND street_name = ? AND suffix = ? AND ? BETWEEN begin_num AND end_num',
+                    [selectedOffice, Number(selectedRoute), streetName, suffix, streetNum],
                 );
 
                 if (result && result.length > 0) {

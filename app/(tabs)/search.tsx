@@ -14,6 +14,7 @@ type Schema = {
 };
 
 export default function Search() {
+    const [selectedOffice] = useState<number>(0);
     const [address, setAddress] = useState<string>('');
     const [result, setResult] = useState<any[]>([
         {
@@ -42,8 +43,8 @@ export default function Search() {
 
             // dbresult = allRows (an array of objects)
             let dbResult: Schema[] | unknown[] = await db.getAllAsync(
-                'SELECT loop_num, route_num FROM street_loops WHERE street_name = ? AND suffix = ? AND ? BETWEEN begin_num AND end_num',
-                [streetName, suffixName, streetNum],
+                'SELECT loop_num, route_num FROM loops WHERE office_id = ? AND street_name = ? AND suffix = ? AND ? BETWEEN begin_num AND end_num',
+                [selectedOffice, streetName, suffixName, streetNum],
             );
 
             if (dbResult && dbResult.length > 0) {
@@ -70,8 +71,8 @@ export default function Search() {
                 }
 
                 dbResult = await db.getAllAsync(
-                    'SELECT loop_num, route_num FROM street_loops WHERE street_name = ? AND ? BETWEEN begin_num AND end_num',
-                    [streetName, streetNum],
+                    'SELECT loop_num, route_num FROM loops WHERE office_id = ? AND street_name = ? AND ? BETWEEN begin_num AND end_num',
+                    [selectedOffice, streetName, streetNum],
                 );
 
                 if (dbResult && dbResult.length > 0) {

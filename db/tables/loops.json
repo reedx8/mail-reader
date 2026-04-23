@@ -1,0 +1,3713 @@
+{
+"loops": [
+	{
+		"route_num" : 1,
+		"loop_num" : "1",
+		"begin_num" : 7002,
+		"end_num" : 7140,
+		"dir" : "n",
+		"street_name" : "alta",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 1,
+		"loop_num" : "2",
+		"begin_num" : 8633,
+		"end_num" : 8682,
+		"dir" : "n",
+		"street_name" : "willamette",
+		"suffix" : "blvd",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 1,
+		"loop_num" : "3",
+		"begin_num" : 8606,
+		"end_num" : 8621,
+		"dir" : "n",
+		"street_name" : "edison",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 1,
+		"loop_num" : "4",
+		"begin_num" : 6855,
+		"end_num" : 6855,
+		"dir" : "n",
+		"street_name" : "burlington",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 1,
+		"loop_num" : "5",
+		"begin_num" : 6825,
+		"end_num" : 6825,
+		"dir" : "n",
+		"street_name" : "salem",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 1,
+		"loop_num" : "6",
+		"begin_num" : 6819,
+		"end_num" : 6819,
+		"dir" : "n",
+		"street_name" : "salem",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 1,
+		"loop_num" : "7",
+		"begin_num" : 8625,
+		"end_num" : 8643,
+		"dir" : "n",
+		"street_name" : "crawford",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 1,
+		"loop_num" : "8",
+		"begin_num" : 6700,
+		"end_num" : 6748,
+		"dir" : "n",
+		"street_name" : "pittsburgh",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 1,
+		"loop_num" : "9",
+		"begin_num" : 8645,
+		"end_num" : 8663,
+		"dir" : "n",
+		"street_name" : "crawford",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 1,
+		"loop_num" : "10",
+		"begin_num" : 6830,
+		"end_num" : 6840,
+		"dir" : "n",
+		"street_name" : "pittsburgh",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 1,
+		"loop_num" : "11 D.O.",
+		"begin_num" : 8675,
+		"end_num" : 8675,
+		"dir" : "n",
+		"street_name" : "crawford",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 1,
+		"loop_num" : "11",
+		"begin_num" : 8712,
+		"end_num" : 8712,
+		"dir" : "n",
+		"street_name" : "decatur",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 1,
+		"loop_num" : "12",
+		"begin_num" : 6717,
+		"end_num" : 6721,
+		"dir" : "n",
+		"street_name" : "alta",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 1,
+		"loop_num" : "13",
+		"begin_num" : 6718,
+		"end_num" : 6722,
+		"dir" : "n",
+		"street_name" : "baltimore",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 1,
+		"loop_num" : "14 d.o.",
+		"begin_num" : 8940,
+		"end_num" : 9269,
+		"dir" : "n",
+		"street_name" : "bradford",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 1,
+		"loop_num" : "15",
+		"begin_num" : 6600,
+		"end_num" : 6635,
+		"dir" : "n",
+		"street_name" : "baltimore",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 1,
+		"loop_num" : "16",
+		"begin_num" : 6802,
+		"end_num" : 6818,
+		"dir" : "n",
+		"street_name" : "baltimore",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 1,
+		"loop_num" : "17",
+		"begin_num" : 8801,
+		"end_num" : 8936,
+		"dir" : "n",
+		"street_name" : "edison",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 1,
+		"loop_num" : "18",
+		"begin_num" : 8687,
+		"end_num" : 8735,
+		"dir" : "n",
+		"street_name" : "edison",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 1,
+		"loop_num" : "19",
+		"begin_num" : 8700,
+		"end_num" : 8935,
+		"dir" : "n",
+		"street_name" : "willamette",
+		"suffix" : "blvd",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 1,
+		"loop_num" : "20",
+		"begin_num" : 7214,
+		"end_num" : 7214,
+		"dir" : "n",
+		"street_name" : "baltimore",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 1,
+		"loop_num" : "21",
+		"begin_num" : 8720,
+		"end_num" : 8820,
+		"dir" : "n",
+		"street_name" : "ivanhoe",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 1,
+		"loop_num" : "22",
+		"begin_num" : 8832,
+		"end_num" : 8832,
+		"dir" : "n",
+		"street_name" : "syracuse",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 1,
+		"loop_num" : "23",
+		"begin_num" : 8915,
+		"end_num" : 8915,
+		"dir" : "n",
+		"street_name" : "ivanhoe",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 1,
+		"loop_num" : "24",
+		"begin_num" : 7326,
+		"end_num" : 7337,
+		"dir" : "n",
+		"street_name" : "chicago",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 1,
+		"loop_num" : "25",
+		"begin_num" : 8800,
+		"end_num" : 8800,
+		"dir" : "n",
+		"street_name" : "lombard",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 1,
+		"loop_num" : "26",
+		"begin_num" : 7304,
+		"end_num" : 7330,
+		"dir" : "n",
+		"street_name" : "leavitt",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 1,
+		"loop_num" : "27",
+		"begin_num" : 8409,
+		"end_num" : 8425,
+		"dir" : "n",
+		"street_name" : "lombard",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 1,
+		"loop_num" : "28",
+		"begin_num" : 7428,
+		"end_num" : 7428,
+		"dir" : "n",
+		"street_name" : "charleston",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 1,
+		"loop_num" : "29A",
+		"begin_num" : 7439,
+		"end_num" : 7509,
+		"dir" : "n",
+		"street_name" : "charleston",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 1,
+		"loop_num" : "29B",
+		"begin_num" : 7215,
+		"end_num" : 7229,
+		"dir" : "n",
+		"street_name" : "richmond",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 1,
+		"loop_num" : "30",
+		"begin_num" : 7227,
+		"end_num" : 7227,
+		"dir" : "n",
+		"street_name" : "philadelphia",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 1,
+		"loop_num" : "31",
+		"begin_num" : 7210,
+		"end_num" : 7238,
+		"dir" : "n",
+		"street_name" : "burlington",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 1,
+		"loop_num" : "32",
+		"begin_num" : 8510,
+		"end_num" : 8510,
+		"dir" : "n",
+		"street_name" : "ivanhoe",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 3,
+		"loop_num" : "1",
+		"begin_num" : 7810,
+		"end_num" : 7955,
+		"dir" : "n",
+		"street_name" : "lombard",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 3,
+		"loop_num" : "2",
+		"begin_num" : 7550,
+		"end_num" : 7686,
+		"dir" : "n",
+		"street_name" : "lombard",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 3,
+		"loop_num" : "3",
+		"begin_num" : 7301,
+		"end_num" : 7522,
+		"dir" : "n",
+		"street_name" : "lombard",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 3,
+		"loop_num" : "4",
+		"begin_num" : 6903,
+		"end_num" : 7233,
+		"dir" : "n",
+		"street_name" : "lombard",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 3,
+		"loop_num" : "5",
+		"begin_num" : 7455,
+		"end_num" : 7466,
+		"dir" : "n",
+		"street_name" : "burr",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 3,
+		"loop_num" : "6",
+		"begin_num" : 7430,
+		"end_num" : 7430,
+		"dir" : "n",
+		"street_name" : "burr",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 3,
+		"loop_num" : "7",
+		"begin_num" : 7304,
+		"end_num" : 7640,
+		"dir" : "n",
+		"street_name" : "jersey",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 3,
+		"loop_num" : "8",
+		"begin_num" : 7336,
+		"end_num" : 7336,
+		"dir" : "n",
+		"street_name" : "burr",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 3,
+		"loop_num" : "9",
+		"begin_num" : 7314,
+		"end_num" : 7314,
+		"dir" : "n",
+		"street_name" : "burr",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 3,
+		"loop_num" : "10",
+		"begin_num" : 6904,
+		"end_num" : 7236,
+		"dir" : "n",
+		"street_name" : "ivanhoe",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 3,
+		"loop_num" : "11",
+		"begin_num" : 7303,
+		"end_num" : 7616,
+		"dir" : "n",
+		"street_name" : "syracuse",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 3,
+		"loop_num" : "12",
+		"begin_num" : 6907,
+		"end_num" : 7237,
+		"dir" : "n",
+		"street_name" : "syracuse",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 3,
+		"loop_num" : "13",
+		"begin_num" : 7305,
+		"end_num" : 7420,
+		"dir" : "n",
+		"street_name" : "princeton",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 3,
+		"loop_num" : "14",
+		"begin_num" : 6917,
+		"end_num" : 7235,
+		"dir" : "n",
+		"street_name" : "princeton",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 3,
+		"loop_num" : "15",
+		"begin_num" : 6910,
+		"end_num" : 7583,
+		"dir" : "n",
+		"street_name" : "edgewater",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 3,
+		"loop_num" : "16",
+		"begin_num" : 7625,
+		"end_num" : 7625,
+		"dir" : "n",
+		"street_name" : "willamette",
+		"suffix" : "blvd",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 3,
+		"loop_num" : "17",
+		"begin_num" : 7600,
+		"end_num" : 7751,
+		"dir" : "n",
+		"street_name" : "willamette",
+		"suffix" : "blvd",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 3,
+		"loop_num" : "18",
+		"begin_num" : 7023,
+		"end_num" : 7227,
+		"dir" : "n",
+		"street_name" : "polk",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 3,
+		"loop_num" : "19",
+		"begin_num" : 7710,
+		"end_num" : 7979,
+		"dir" : "n",
+		"street_name" : "jersey",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 3,
+		"loop_num" : "20",
+		"begin_num" : 7706,
+		"end_num" : 7916,
+		"dir" : "n",
+		"street_name" : "kellogg",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 6,
+		"loop_num" : "1",
+		"begin_num" : 5200,
+		"end_num" : 5273,
+		"dir" : "n",
+		"street_name" : "princeton",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 6,
+		"loop_num" : "2",
+		"begin_num" : 5018,
+		"end_num" : 5118,
+		"dir" : "n",
+		"street_name" : "princeton",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 6,
+		"loop_num" : "3",
+		"begin_num" : 6934,
+		"end_num" : 6934,
+		"dir" : "n",
+		"street_name" : "hodge",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 6,
+		"loop_num" : "4",
+		"begin_num" : 7004,
+		"end_num" : 7011,
+		"dir" : "n",
+		"street_name" : "hodge",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 6,
+		"loop_num" : "5",
+		"begin_num" : 5012,
+		"end_num" : 5130,
+		"dir" : "n",
+		"street_name" : "yale",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 6,
+		"loop_num" : "6",
+		"begin_num" : 5202,
+		"end_num" : 5294,
+		"dir" : "n",
+		"street_name" : "yale",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 6,
+		"loop_num" : "7",
+		"begin_num" : 6736,
+		"end_num" : 6736,
+		"dir" : "n",
+		"street_name" : "hodge",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 6,
+		"loop_num" : "8",
+		"begin_num" : 6805,
+		"end_num" : 6805,
+		"dir" : "n",
+		"street_name" : "hodge",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 6,
+		"loop_num" : "9",
+		"begin_num" : 4805,
+		"end_num" : 5127,
+		"dir" : "n",
+		"street_name" : "willamette",
+		"suffix" : "blvd",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 6,
+		"loop_num" : "10",
+		"begin_num" : 5205,
+		"end_num" : 5239,
+		"dir" : "n",
+		"street_name" : "willamette",
+		"suffix" : "blvd",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 6,
+		"loop_num" : "11",
+		"begin_num" : 6718,
+		"end_num" : 6837,
+		"dir" : "n",
+		"street_name" : "portsmouth",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 6,
+		"loop_num" : "12",
+		"begin_num" : 6906,
+		"end_num" : 7040,
+		"dir" : "n",
+		"street_name" : "portsmouth",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 6,
+		"loop_num" : "13",
+		"begin_num" : 7212,
+		"end_num" : 7347,
+		"dir" : "n",
+		"street_name" : "portsmouth",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 6,
+		"loop_num" : "14",
+		"begin_num" : 5279,
+		"end_num" : 5279,
+		"dir" : "n",
+		"street_name" : "oberlin",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 6,
+		"loop_num" : "15",
+		"begin_num" : 5003,
+		"end_num" : 5287,
+		"dir" : "n",
+		"street_name" : "lombard",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 6,
+		"loop_num" : "16",
+		"begin_num" : 7407,
+		"end_num" : 7463,
+		"dir" : "n",
+		"street_name" : "fiske",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 6,
+		"loop_num" : "17",
+		"begin_num" : 7107,
+		"end_num" : 7117,
+		"dir" : "n",
+		"street_name" : "fiske",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 6,
+		"loop_num" : "18",
+		"begin_num" : 5011,
+		"end_num" : 5101,
+		"dir" : "n",
+		"street_name" : "syracuse",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 6,
+		"loop_num" : "19",
+		"begin_num" : 7224,
+		"end_num" : 7337,
+		"dir" : "n",
+		"street_name" : "haven",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 6,
+		"loop_num" : "20",
+		"begin_num" : 7410,
+		"end_num" : 7467,
+		"dir" : "n",
+		"street_name" : "jordan",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 6,
+		"loop_num" : "21",
+		"begin_num" : 7132,
+		"end_num" : 7330,
+		"dir" : "n",
+		"street_name" : "jordan",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 6,
+		"loop_num" : "22",
+		"begin_num" : 4914,
+		"end_num" : 5110,
+		"dir" : "n",
+		"street_name" : "oberlin",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 6,
+		"loop_num" : "23",
+		"begin_num" : 7451,
+		"end_num" : 7455,
+		"dir" : "n",
+		"street_name" : "hodge",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 6,
+		"loop_num" : "24",
+		"begin_num" : 5006,
+		"end_num" : 5122,
+		"dir" : "n",
+		"street_name" : "bowdoin",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 6,
+		"loop_num" : "25",
+		"begin_num" : 7307,
+		"end_num" : 7340,
+		"dir" : "n",
+		"street_name" : "stanford",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 6,
+		"loop_num" : "26",
+		"begin_num" : 7205,
+		"end_num" : 7205,
+		"dir" : "n",
+		"street_name" : "stanford",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 7,
+		"loop_num" : "1",
+		"begin_num" : 4735,
+		"end_num" : 4789,
+		"dir" : "n",
+		"street_name" : "harvard",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 7,
+		"loop_num" : "2",
+		"begin_num" : 4750,
+		"end_num" : 4796,
+		"dir" : "n",
+		"street_name" : "yale",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 7,
+		"loop_num" : "3",
+		"begin_num" : 4745,
+		"end_num" : 4796,
+		"dir" : "n",
+		"street_name" : "amherst",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 7,
+		"loop_num" : "4",
+		"begin_num" : 4744,
+		"end_num" : 4780,
+		"dir" : "n",
+		"street_name" : "princeton",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 7,
+		"loop_num" : "5",
+		"begin_num" : 4742,
+		"end_num" : 4781,
+		"dir" : "n",
+		"street_name" : "syracuse",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 7,
+		"loop_num" : "6",
+		"begin_num" : 4715,
+		"end_num" : 4784,
+		"dir" : "n",
+		"street_name" : "depauw",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 7,
+		"loop_num" : "7",
+		"begin_num" : 4768,
+		"end_num" : 4768,
+		"dir" : "n",
+		"street_name" : "oberlin",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 7,
+		"loop_num" : "8",
+		"begin_num" : 7405,
+		"end_num" : 7475,
+		"dir" : "n",
+		"street_name" : "olin",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 7,
+		"loop_num" : "9",
+		"begin_num" : 7403,
+		"end_num" : 7485,
+		"dir" : "n",
+		"street_name" : "huron",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 7,
+		"loop_num" : "10",
+		"begin_num" : 7050,
+		"end_num" : 7470,
+		"dir" : "n",
+		"street_name" : "newman",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 7,
+		"loop_num" : "11",
+		"begin_num" : 4005,
+		"end_num" : 4005,
+		"dir" : "n",
+		"street_name" : "stafford",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 7,
+		"loop_num" : "12",
+		"begin_num" : 7045,
+		"end_num" : 7473,
+		"dir" : "n",
+		"street_name" : "woolsey",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 7,
+		"loop_num" : "13",
+		"begin_num" : 4037,
+		"end_num" : 4340,
+		"dir" : "n",
+		"street_name" : "lombard",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 7,
+		"loop_num" : "14",
+		"begin_num" : 4005,
+		"end_num" : 4033,
+		"dir" : "n",
+		"street_name" : "willamette",
+		"suffix" : "blvd",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 7,
+		"loop_num" : "15",
+		"begin_num" : 4115,
+		"end_num" : 4133,
+		"dir" : "n",
+		"street_name" : "willamette",
+		"suffix" : "blvd",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 7,
+		"loop_num" : "16",
+		"begin_num" : 4215,
+		"end_num" : 4333,
+		"dir" : "n",
+		"street_name" : "willamette",
+		"suffix" : "blvd",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 7,
+		"loop_num" : "17",
+		"begin_num" : 7014,
+		"end_num" : 7034,
+		"dir" : "n",
+		"street_name" : "wellesley",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 7,
+		"loop_num" : "18",
+		"begin_num" : 7051,
+		"end_num" : 7089,
+		"dir" : "n",
+		"street_name" : "wellesley",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 7,
+		"loop_num" : "19",
+		"begin_num" : 7033,
+		"end_num" : 7033,
+		"dir" : "n",
+		"street_name" : "wellesley",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 7,
+		"loop_num" : "20",
+		"begin_num" : 7051,
+		"end_num" : 7097,
+		"dir" : "n",
+		"street_name" : "university",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 7,
+		"loop_num" : "21",
+		"begin_num" : 7047,
+		"end_num" : 7096,
+		"dir" : "n",
+		"street_name" : "cambridge",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 7,
+		"loop_num" : "22",
+		"begin_num" : 4725,
+		"end_num" : 4735,
+		"dir" : "n",
+		"street_name" : "willamette",
+		"suffix" : "blvd",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 7,
+		"loop_num" : "23",
+		"begin_num" : 6805,
+		"end_num" : 7115,
+		"dir" : "n",
+		"street_name" : "olin",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 12,
+		"loop_num" : "1",
+		"begin_num" : 8205,
+		"end_num" : 8836,
+		"dir" : "n",
+		"street_name" : "smith",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 12,
+		"loop_num" : "2",
+		"begin_num" : 9216,
+		"end_num" : 9464,
+		"dir" : "n",
+		"street_name" : "charleston",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 12,
+		"loop_num" : "3",
+		"begin_num" : 9106,
+		"end_num" : 9334,
+		"dir" : "n",
+		"street_name" : "john",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 12,
+		"loop_num" : "4",
+		"begin_num" : 9211,
+		"end_num" : 9455,
+		"dir" : "n",
+		"street_name" : "chicago",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 12,
+		"loop_num" : "5",
+		"begin_num" : 8507,
+		"end_num" : 9064,
+		"dir" : "n",
+		"street_name" : "chicago",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 12,
+		"loop_num" : "6",
+		"begin_num" : 8925,
+		"end_num" : 8937,
+		"dir" : "n",
+		"street_name" : "smith",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 12,
+		"loop_num" : "7",
+		"begin_num" : 8520,
+		"end_num" : 8580,
+		"dir" : "n",
+		"street_name" : "john",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 12,
+		"loop_num" : "8",
+		"begin_num" : 8427,
+		"end_num" : 8427,
+		"dir" : "n",
+		"street_name" : "central",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 12,
+		"loop_num" : "9",
+		"begin_num" : 7501,
+		"end_num" : 7585,
+		"dir" : "n",
+		"street_name" : "leavitt",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 12,
+		"loop_num" : "10",
+		"begin_num" : 8003,
+		"end_num" : 8083,
+		"dir" : "n",
+		"street_name" : "leavitt",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 12,
+		"loop_num" : "11",
+		"begin_num" : 8542,
+		"end_num" : 8564,
+		"dir" : "n",
+		"street_name" : "central",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 12,
+		"loop_num" : "12",
+		"begin_num" : 7502,
+		"end_num" : 7586,
+		"dir" : "n",
+		"street_name" : "burlington",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 12,
+		"loop_num" : "13",
+		"begin_num" : 8605,
+		"end_num" : 8635,
+		"dir" : "n",
+		"street_name" : "leonard",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 12,
+		"loop_num" : "14",
+		"begin_num" : 8912,
+		"end_num" : 8950,
+		"dir" : "n",
+		"street_name" : "kellogg",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 12,
+		"loop_num" : "15",
+		"begin_num" : 7506,
+		"end_num" : 8024,
+		"dir" : "n",
+		"street_name" : "chicago",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 12,
+		"loop_num" : "16",
+		"begin_num" : 8934,
+		"end_num" : 9020,
+		"dir" : "n",
+		"street_name" : "central",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 12,
+		"loop_num" : "17",
+		"begin_num" : 8011,
+		"end_num" : 9247,
+		"dir" : "n",
+		"street_name" : "st louis",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 12,
+		"loop_num" : "18",
+		"begin_num" : 7437,
+		"end_num" : 7437,
+		"dir" : "n",
+		"street_name" : "st louis",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 12,
+		"loop_num" : "19",
+		"begin_num" : 9109,
+		"end_num" : 9336,
+		"dir" : "n",
+		"street_name" : "leonard",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 12,
+		"loop_num" : "20",
+		"begin_num" : 9110,
+		"end_num" : 9540,
+		"dir" : "n",
+		"street_name" : "central",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 12,
+		"loop_num" : "21",
+		"begin_num" : 8514,
+		"end_num" : 8540,
+		"dir" : "n",
+		"street_name" : "trumbull",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 12,
+		"loop_num" : "22",
+		"begin_num" : 9220,
+		"end_num" : 9327,
+		"dir" : "n",
+		"street_name" : "trumbull",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 12,
+		"loop_num" : "23",
+		"begin_num" : 9127,
+		"end_num" : 9239,
+		"dir" : "n",
+		"street_name" : "seneca",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 12,
+		"loop_num" : "24",
+		"begin_num" : 9426,
+		"end_num" : 9499,
+		"dir" : "n",
+		"street_name" : "trumbull",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 14,
+		"loop_num" : "1",
+		"begin_num" : 7003,
+		"end_num" : 7136,
+		"dir" : "n",
+		"street_name" : "tyler",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 14,
+		"loop_num" : "2",
+		"begin_num" : 7146,
+		"end_num" : 7307,
+		"dir" : "n",
+		"street_name" : "tyler",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 14,
+		"loop_num" : "3",
+		"begin_num" : 7025,
+		"end_num" : 7215,
+		"dir" : "n",
+		"street_name" : "mohawk",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 14,
+		"loop_num" : "4",
+		"begin_num" : 7112,
+		"end_num" : 7128,
+		"dir" : "n",
+		"street_name" : "richmond",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 14,
+		"loop_num" : "5",
+		"begin_num" : 8008,
+		"end_num" : 8233,
+		"dir" : "n",
+		"street_name" : "syracuse",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 14,
+		"loop_num" : "6",
+		"begin_num" : 7922,
+		"end_num" : 8126,
+		"dir" : "n",
+		"street_name" : "ivanhoe",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 14,
+		"loop_num" : "7",
+		"begin_num" : 7425,
+		"end_num" : 7471,
+		"dir" : "n",
+		"street_name" : "mohawk",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 14,
+		"loop_num" : "8",
+		"begin_num" : 8005,
+		"end_num" : 8179,
+		"dir" : "n",
+		"street_name" : "lombard",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 14,
+		"loop_num" : "9",
+		"begin_num" : 7807,
+		"end_num" : 8044,
+		"dir" : "n",
+		"street_name" : "central",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 14,
+		"loop_num" : "10",
+		"begin_num" : 7525,
+		"end_num" : 8051,
+		"dir" : "n",
+		"street_name" : "richmond",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 14,
+		"loop_num" : "11",
+		"begin_num" : 8520,
+		"end_num" : 8580,
+		"dir" : "n",
+		"street_name" : "charleston",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 14,
+		"loop_num" : "12",
+		"begin_num" : 8044,
+		"end_num" : 9119,
+		"dir" : "n",
+		"street_name" : "richmond",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 14,
+		"loop_num" : "13",
+		"begin_num" : 8501,
+		"end_num" : 9147,
+		"dir" : "n",
+		"street_name" : "oswego",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 14,
+		"loop_num" : "14",
+		"begin_num" : 8507,
+		"end_num" : 9135,
+		"dir" : "n",
+		"street_name" : "mohawk",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 14,
+		"loop_num" : "15",
+		"begin_num" : 7909,
+		"end_num" : 7937,
+		"dir" : "n",
+		"street_name" : "smith",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 14,
+		"loop_num" : "16",
+		"begin_num" : 8503,
+		"end_num" : 9141,
+		"dir" : "n",
+		"street_name" : "allegheny",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 14,
+		"loop_num" : "17",
+		"begin_num" : 7805,
+		"end_num" : 7828,
+		"dir" : "n",
+		"street_name" : "smith",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 14,
+		"loop_num" : "18",
+		"begin_num" : 8518,
+		"end_num" : 9130,
+		"dir" : "n",
+		"street_name" : "tyler",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 14,
+		"loop_num" : "19",
+		"begin_num" : 7731,
+		"end_num" : 7731,
+		"dir" : "n",
+		"street_name" : "smith",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 15,
+		"loop_num" : "1",
+		"begin_num" : 7635,
+		"end_num" : 7659,
+		"dir" : "n",
+		"street_name" : "smith",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 15,
+		"loop_num" : "2",
+		"begin_num" : 8512,
+		"end_num" : 9180,
+		"dir" : "n",
+		"street_name" : "polk",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 15,
+		"loop_num" : "3",
+		"begin_num" : 7505,
+		"end_num" : 7612,
+		"dir" : "n",
+		"street_name" : "smith",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 15,
+		"loop_num" : "4",
+		"begin_num" : 8516,
+		"end_num" : 9123,
+		"dir" : "n",
+		"street_name" : "tioga",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 15,
+		"loop_num" : "5",
+		"begin_num" : 9206,
+		"end_num" : 9337,
+		"dir" : "n",
+		"street_name" : "buchanan",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 15,
+		"loop_num" : "6",
+		"begin_num" : 8516,
+		"end_num" : 9140,
+		"dir" : "n",
+		"street_name" : "buchanan",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 15,
+		"loop_num" : "7",
+		"begin_num" : 7315,
+		"end_num" : 7413,
+		"dir" : "n",
+		"street_name" : "smith",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 15,
+		"loop_num" : "8",
+		"begin_num" : 9121,
+		"end_num" : 9121,
+		"dir" : "n",
+		"street_name" : "burr",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 15,
+		"loop_num" : "9",
+		"begin_num" : 7325,
+		"end_num" : 7325,
+		"dir" : "n",
+		"street_name" : "hudson",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 15,
+		"loop_num" : "10",
+		"begin_num" : 7406,
+		"end_num" : 7414,
+		"dir" : "n",
+		"street_name" : "hudson",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 15,
+		"loop_num" : "11",
+		"begin_num" : 6941,
+		"end_num" : 6941,
+		"dir" : "n",
+		"street_name" : "central",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 15,
+		"loop_num" : "12",
+		"begin_num" : 9207,
+		"end_num" : 9466,
+		"dir" : "n",
+		"street_name" : "burr",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 15,
+		"loop_num" : "13",
+		"begin_num" : 9201,
+		"end_num" : 9335,
+		"dir" : "n",
+		"street_name" : "fairhaven",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 15,
+		"loop_num" : "14",
+		"begin_num" : 6929,
+		"end_num" : 6951,
+		"dir" : "n",
+		"street_name" : "nashton",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 15,
+		"loop_num" : "15",
+		"begin_num" : 6870,
+		"end_num" : 6957,
+		"dir" : "n",
+		"street_name" : "columbia",
+		"suffix" : "way",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 15,
+		"loop_num" : "16",
+		"begin_num" : 7003,
+		"end_num" : 7129,
+		"dir" : "n",
+		"street_name" : "sedro",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 15,
+		"loop_num" : "17",
+		"begin_num" : 9226,
+		"end_num" : 9310,
+		"dir" : "n",
+		"street_name" : "ida",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 15,
+		"loop_num" : "18",
+		"begin_num" : 6740,
+		"end_num" : 7007,
+		"dir" : "n",
+		"street_name" : "smith",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 15,
+		"loop_num" : "19",
+		"begin_num" : 8027,
+		"end_num" : 8027,
+		"dir" : "n",
+		"street_name" : "burr",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 15,
+		"loop_num" : "20",
+		"begin_num" : 7324,
+		"end_num" : 7754,
+		"dir" : "n",
+		"street_name" : "central",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 15,
+		"loop_num" : "21",
+		"begin_num" : 8004,
+		"end_num" : 8033,
+		"dir" : "n",
+		"street_name" : "polk",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 15,
+		"loop_num" : "22",
+		"begin_num" : 7303,
+		"end_num" : 7426,
+		"dir" : "n",
+		"street_name" : "leonard",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 15,
+		"loop_num" : "23",
+		"begin_num" : 6905,
+		"end_num" : 7238,
+		"dir" : "n",
+		"street_name" : "leonard",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 16,
+		"loop_num" : "1",
+		"begin_num" : 5003,
+		"end_num" : 5209,
+		"dir" : "n",
+		"street_name" : "hudson",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 16,
+		"loop_num" : "2",
+		"begin_num" : 8904,
+		"end_num" : 9044,
+		"dir" : "n",
+		"street_name" : "portsmouth",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 16,
+		"loop_num" : "3",
+		"begin_num" : 5337,
+		"end_num" : 5430,
+		"dir" : "n",
+		"street_name" : "hudson",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 16,
+		"loop_num" : "4",
+		"begin_num" : 7611,
+		"end_num" : 8717,
+		"dir" : "n",
+		"street_name" : "exeter",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 16,
+		"loop_num" : "5",
+		"begin_num" : 7555,
+		"end_num" : 8015,
+		"dir" : "n",
+		"street_name" : "portsmouth",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 16,
+		"loop_num" : "6",
+		"begin_num" : 8101,
+		"end_num" : 8888,
+		"dir" : "n",
+		"street_name" : "portsmouth",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 16,
+		"loop_num" : "7",
+		"begin_num" : 5240,
+		"end_num" : 5264,
+		"dir" : "n",
+		"street_name" : "willis",
+		"suffix" : "blvd",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 16,
+		"loop_num" : "8",
+		"begin_num" : 5206,
+		"end_num" : 5235,
+		"dir" : "n",
+		"street_name" : "willis",
+		"suffix" : "blvd",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 16,
+		"loop_num" : "9",
+		"begin_num" : 7508,
+		"end_num" : 7934,
+		"dir" : "n",
+		"street_name" : "hereford",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 16,
+		"loop_num" : "10",
+		"begin_num" : 5114,
+		"end_num" : 5130,
+		"dir" : "n",
+		"street_name" : "willis",
+		"suffix" : "blvd",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 16,
+		"loop_num" : "11",
+		"begin_num" : 7920,
+		"end_num" : 7973,
+		"dir" : "n",
+		"street_name" : "courtenay",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 16,
+		"loop_num" : "12",
+		"begin_num" : 7960,
+		"end_num" : 8191,
+		"dir" : "n",
+		"street_name" : "haven",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 16,
+		"loop_num" : "13",
+		"begin_num" : 4708,
+		"end_num" : 4970,
+		"dir" : "n",
+		"street_name" : "willis",
+		"suffix" : "blvd",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 16,
+		"loop_num" : "14",
+		"begin_num" : 4702,
+		"end_num" : 4940,
+		"dir" : "n",
+		"street_name" : "lombard",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 16,
+		"loop_num" : "15",
+		"begin_num" : 4747,
+		"end_num" : 4791,
+		"dir" : "n",
+		"street_name" : "vanderbilt",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 16,
+		"loop_num" : "16",
+		"begin_num" : 7707,
+		"end_num" : 7720,
+		"dir" : "n",
+		"street_name" : "fiske",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 16,
+		"loop_num" : "17",
+		"begin_num" : 4748,
+		"end_num" : 4794,
+		"dir" : "n",
+		"street_name" : "girard",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 16,
+		"loop_num" : "18",
+		"begin_num" : 7807,
+		"end_num" : 8006,
+		"dir" : "n",
+		"street_name" : "fiske",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 16,
+		"loop_num" : "19",
+		"begin_num" : 8016,
+		"end_num" : 8290,
+		"dir" : "n",
+		"street_name" : "fiske",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 16,
+		"loop_num" : "20",
+		"begin_num" : 4821,
+		"end_num" : 4872,
+		"dir" : "n",
+		"street_name" : "drew",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 16,
+		"loop_num" : "21",
+		"begin_num" : 8724,
+		"end_num" : 8826,
+		"dir" : "n",
+		"street_name" : "courtenay",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 16,
+		"loop_num" : "22",
+		"begin_num" : 8705,
+		"end_num" : 8836,
+		"dir" : "n",
+		"street_name" : "haven",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 16,
+		"loop_num" : "23",
+		"begin_num" : 8705,
+		"end_num" : 8823,
+		"dir" : "n",
+		"street_name" : "druid",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 21,
+		"loop_num" : "1",
+		"begin_num" : 8020,
+		"end_num" : 8041,
+		"dir" : "n",
+		"street_name" : "saint johns",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 21,
+		"loop_num" : "2",
+		"begin_num" : 7536,
+		"end_num" : 8019,
+		"dir" : "n",
+		"street_name" : "saint johns",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 21,
+		"loop_num" : "3",
+		"begin_num" : 7535,
+		"end_num" : 7535,
+		"dir" : "n",
+		"street_name" : "saint johns",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 21,
+		"loop_num" : "4",
+		"begin_num" : 9505,
+		"end_num" : 9666,
+		"dir" : "n",
+		"street_name" : "kellogg",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 21,
+		"loop_num" : "5",
+		"begin_num" : 10033,
+		"end_num" : 10235,
+		"dir" : "n",
+		"street_name" : "lombard",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 21,
+		"loop_num" : "6",
+		"begin_num" : 9902,
+		"end_num" : 10251,
+		"dir" : "n",
+		"street_name" : "leonard",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 21,
+		"loop_num" : "7",
+		"begin_num" : 8507,
+		"end_num" : 8512,
+		"dir" : "n",
+		"street_name" : "weyerhaeuser",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 21,
+		"loop_num" : "8",
+		"begin_num" : 8517,
+		"end_num" : 8517,
+		"dir" : "n",
+		"street_name" : "weyerhaeuser",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 21,
+		"loop_num" : "9",
+		"begin_num" : 9228,
+		"end_num" : 9228,
+		"dir" : "n",
+		"street_name" : "weyerhaeuser",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 21,
+		"loop_num" : "10",
+		"begin_num" : 10101,
+		"end_num" : 10247,
+		"dir" : "n",
+		"street_name" : "smith",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 21,
+		"loop_num" : "11",
+		"begin_num" : 9707,
+		"end_num" : 9837,
+		"dir" : "n",
+		"street_name" : "smith",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 21,
+		"loop_num" : "12",
+		"begin_num" : 8534,
+		"end_num" : 9041,
+		"dir" : "n",
+		"street_name" : "saint johns",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 21,
+		"loop_num" : "13",
+		"begin_num" : 9302,
+		"end_num" : 9668,
+		"dir" : "n",
+		"street_name" : "smith",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 21,
+		"loop_num" : "14",
+		"begin_num" : 8523,
+		"end_num" : 9333,
+		"dir" : "n",
+		"street_name" : "bristol",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 21,
+		"loop_num" : "15",
+		"begin_num" : 9304,
+		"end_num" : 9649,
+		"dir" : "n",
+		"street_name" : "seneca",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 21,
+		"loop_num" : "16",
+		"begin_num" : 9414,
+		"end_num" : 9493,
+		"dir" : "n",
+		"street_name" : "bristol",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 21,
+		"loop_num" : "17",
+		"begin_num" : 9315,
+		"end_num" : 9656,
+		"dir" : "n",
+		"street_name" : "pier park",
+		"suffix" : "pl",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 21,
+		"loop_num" : "18",
+		"begin_num" : 9505,
+		"end_num" : 9647,
+		"dir" : "n",
+		"street_name" : "kalmar",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 21,
+		"loop_num" : "19",
+		"begin_num" : 8615,
+		"end_num" : 8718,
+		"dir" : "n",
+		"street_name" : "swenson",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 24,
+		"loop_num" : "1",
+		"begin_num" : 6850,
+		"end_num" : 6850,
+		"dir" : "n",
+		"street_name" : "lombard",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 24,
+		"loop_num" : "2",
+		"begin_num" : 7533,
+		"end_num" : 8644,
+		"dir" : "n",
+		"street_name" : "gilbert",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 24,
+		"loop_num" : "3",
+		"begin_num" : 7529,
+		"end_num" : 7580,
+		"dir" : "n",
+		"street_name" : "heppner",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 24,
+		"loop_num" : "4",
+		"begin_num" : 7526,
+		"end_num" : 8027,
+		"dir" : "n",
+		"street_name" : "ida",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 24,
+		"loop_num" : "5",
+		"begin_num" : 8530,
+		"end_num" : 8530,
+		"dir" : "n",
+		"street_name" : "ida",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 24,
+		"loop_num" : "6",
+		"begin_num" : 6809,
+		"end_num" : 6884,
+		"dir" : "n",
+		"street_name" : "hudson",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 24,
+		"loop_num" : "7",
+		"begin_num" : 6809,
+		"end_num" : 6867,
+		"dir" : "n",
+		"street_name" : "rochester",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 24,
+		"loop_num" : "8",
+		"begin_num" : 9006,
+		"end_num" : 9134,
+		"dir" : "n",
+		"street_name" : "gilbert",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 24,
+		"loop_num" : "9",
+		"begin_num" : 9216,
+		"end_num" : 9334,
+		"dir" : "n",
+		"street_name" : "gilbert",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 24,
+		"loop_num" : "10",
+		"begin_num" : 9135,
+		"end_num" : 9330,
+		"dir" : "n",
+		"street_name" : "minerva",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 24,
+		"loop_num" : "11",
+		"begin_num" : 9205,
+		"end_num" : 9249,
+		"dir" : "n",
+		"street_name" : "macrum",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 24,
+		"loop_num" : "12",
+		"begin_num" : 9250,
+		"end_num" : 9250,
+		"dir" : "n",
+		"street_name" : "macrum",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 24,
+		"loop_num" : "13",
+		"begin_num" : 9315,
+		"end_num" : 9449,
+		"dir" : "n",
+		"street_name" : "geneva",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 24,
+		"loop_num" : "14",
+		"begin_num" : 9371,
+		"end_num" : 9371,
+		"dir" : "n",
+		"street_name" : "wall",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 24,
+		"loop_num" : "15",
+		"begin_num" : 5412,
+		"end_num" : 5432,
+		"dir" : "n",
+		"street_name" : "fessenden",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 24,
+		"loop_num" : "16",
+		"begin_num" : 9102,
+		"end_num" : 9440,
+		"dir" : "n",
+		"street_name" : "exeter",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 24,
+		"loop_num" : "17",
+		"begin_num" : 9104,
+		"end_num" : 9438,
+		"dir" : "n",
+		"street_name" : "portsmouth",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 24,
+		"loop_num" : "18",
+		"begin_num" : 9511,
+		"end_num" : 9833,
+		"dir" : "n",
+		"street_name" : "portsmouth",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 24,
+		"loop_num" : "19",
+		"begin_num" : 5327,
+		"end_num" : 5327,
+		"dir" : "n",
+		"street_name" : "cecelia",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 24,
+		"loop_num" : "20",
+		"begin_num" : 9507,
+		"end_num" : 9837,
+		"dir" : "n",
+		"street_name" : "van houten",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 24,
+		"loop_num" : "21",
+		"begin_num" : 9504,
+		"end_num" : 9836,
+		"dir" : "n",
+		"street_name" : "clarendon",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 24,
+		"loop_num" : "22",
+		"begin_num" : 5701,
+		"end_num" : 5777,
+		"dir" : "n",
+		"street_name" : "cecelia",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 24,
+		"loop_num" : "23",
+		"begin_num" : 9521,
+		"end_num" : 9641,
+		"dir" : "n",
+		"street_name" : "berkeley",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 24,
+		"loop_num" : "24",
+		"begin_num" : 5801,
+		"end_num" : 5939,
+		"dir" : "n",
+		"street_name" : "fessenden",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 24,
+		"loop_num" : "25",
+		"begin_num" : 5941,
+		"end_num" : 6061,
+		"dir" : "n",
+		"street_name" : "fessenden",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 24,
+		"loop_num" : "26",
+		"begin_num" : 6255,
+		"end_num" : 6283,
+		"dir" : "n",
+		"street_name" : "fessenden",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 25,
+		"loop_num" : "1",
+		"begin_num" : 7708,
+		"end_num" : 8925,
+		"dir" : "n",
+		"street_name" : "newell",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 25,
+		"loop_num" : "2A",
+		"begin_num" : 8916,
+		"end_num" : 8916,
+		"dir" : "n",
+		"street_name" : "westanna",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 25,
+		"loop_num" : "2B",
+		"begin_num" : 8937,
+		"end_num" : 8937,
+		"dir" : "n",
+		"street_name" : "westanna",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 25,
+		"loop_num" : "3",
+		"begin_num" : 5900,
+		"end_num" : 6300,
+		"dir" : "n",
+		"street_name" : "lombard",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 25,
+		"loop_num" : "4",
+		"begin_num" : 6313,
+		"end_num" : 6525,
+		"dir" : "n",
+		"street_name" : "lombard",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 25,
+		"loop_num" : "5",
+		"begin_num" : 5923,
+		"end_num" : 6006,
+		"dir" : "n",
+		"street_name" : "lovely",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 25,
+		"loop_num" : "6",
+		"begin_num" : 7706,
+		"end_num" : 7929,
+		"dir" : "n",
+		"street_name" : "wall",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 25,
+		"loop_num" : "7",
+		"begin_num" : 6105,
+		"end_num" : 6225,
+		"dir" : "n",
+		"street_name" : "lovely",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 25,
+		"loop_num" : "8",
+		"begin_num" : 6126,
+		"end_num" : 6158,
+		"dir" : "n",
+		"street_name" : "superior",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 25,
+		"loop_num" : "9",
+		"begin_num" : 8913,
+		"end_num" : 8913,
+		"dir" : "n",
+		"street_name" : "fortune",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 25,
+		"loop_num" : "10",
+		"begin_num" : 6309,
+		"end_num" : 6317,
+		"dir" : "n",
+		"street_name" : "hudson",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 25,
+		"loop_num" : "11",
+		"begin_num" : 9004,
+		"end_num" : 9243,
+		"dir" : "n",
+		"street_name" : "fortune",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 25,
+		"loop_num" : "12",
+		"begin_num" : 8917,
+		"end_num" : 8994,
+		"dir" : "n",
+		"street_name" : "kimball",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 25,
+		"loop_num" : "13",
+		"begin_num" : 8913,
+		"end_num" : 9251,
+		"dir" : "n",
+		"street_name" : "wall",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 25,
+		"loop_num" : "13 D.O.",
+		"begin_num" : 8900,
+		"end_num" : 8900,
+		"dir" : "n",
+		"street_name" : "wall",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 25,
+		"loop_num" : "14",
+		"begin_num" : 9008,
+		"end_num" : 9208,
+		"dir" : "n",
+		"street_name" : "geneva",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 25,
+		"loop_num" : "15",
+		"begin_num" : 5825,
+		"end_num" : 5825,
+		"dir" : "n",
+		"street_name" : "hudson",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 25,
+		"loop_num" : "16",
+		"begin_num" : 5709,
+		"end_num" : 5709,
+		"dir" : "n",
+		"street_name" : "hudson",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 25,
+		"loop_num" : "17",
+		"begin_num" : 5511,
+		"end_num" : 5525,
+		"dir" : "n",
+		"street_name" : "hudson",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 25,
+		"loop_num" : "18",
+		"begin_num" : 5510,
+		"end_num" : 5510,
+		"dir" : "n",
+		"street_name" : "hudson",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 25,
+		"loop_num" : "19",
+		"begin_num" : 5528,
+		"end_num" : 5710,
+		"dir" : "n",
+		"street_name" : "willis",
+		"suffix" : "blvd",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 25,
+		"loop_num" : "20",
+		"begin_num" : 7512,
+		"end_num" : 8023,
+		"dir" : "n",
+		"street_name" : "berkeley",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 26,
+		"loop_num" : "1",
+		"begin_num" : 4902,
+		"end_num" : 4902,
+		"dir" : "n",
+		"street_name" : "houghton",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 26,
+		"loop_num" : "2",
+		"begin_num" : 4505,
+		"end_num" : 4515,
+		"dir" : "n",
+		"street_name" : "houghton",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 26,
+		"loop_num" : "3",
+		"begin_num" : 8960,
+		"end_num" : 8960,
+		"dir" : "n",
+		"street_name" : "woolsey",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 26,
+		"loop_num" : "4",
+		"begin_num" : 8908,
+		"end_num" : 8910,
+		"dir" : "n",
+		"street_name" : "dwight",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 26,
+		"loop_num" : "5",
+		"begin_num" : 9009,
+		"end_num" : 9009,
+		"dir" : "n",
+		"street_name" : "foss",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 26,
+		"loop_num" : "6",
+		"begin_num" : 4002,
+		"end_num" : 4225,
+		"dir" : "n",
+		"street_name" : "juneau",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 26,
+		"loop_num" : "7",
+		"begin_num" : 4010,
+		"end_num" : 4095,
+		"dir" : "n",
+		"street_name" : "attu",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 26,
+		"loop_num" : "8",
+		"begin_num" : 4007,
+		"end_num" : 4007,
+		"dir" : "n",
+		"street_name" : "alaska",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 26,
+		"loop_num" : "9",
+		"begin_num" : 4045,
+		"end_num" : 4077,
+		"dir" : "n",
+		"street_name" : "alaska",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 26,
+		"loop_num" : "10",
+		"begin_num" : 4021,
+		"end_num" : 4033,
+		"dir" : "n",
+		"street_name" : "alaska",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 26,
+		"loop_num" : "11",
+		"begin_num" : 4103,
+		"end_num" : 4119,
+		"dir" : "n",
+		"street_name" : "alaska",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 26,
+		"loop_num" : "12",
+		"begin_num" : 4205,
+		"end_num" : 4225,
+		"dir" : "n",
+		"street_name" : "alaska",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 26,
+		"loop_num" : "13",
+		"begin_num" : 4233,
+		"end_num" : 4257,
+		"dir" : "n",
+		"street_name" : "alaska",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 26,
+		"loop_num" : "14",
+		"begin_num" : 4430,
+		"end_num" : 4475,
+		"dir" : "n",
+		"street_name" : "trenton",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 26,
+		"loop_num" : "15",
+		"begin_num" : 9118,
+		"end_num" : 9142,
+		"dir" : "n",
+		"street_name" : "woolsey",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 26,
+		"loop_num" : "16",
+		"begin_num" : 9211,
+		"end_num" : 9211,
+		"dir" : "n",
+		"street_name" : "woolsey",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 26,
+		"loop_num" : "17",
+		"begin_num" : 9146,
+		"end_num" : 9210,
+		"dir" : "n",
+		"street_name" : "woolsey",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 26,
+		"loop_num" : "18",
+		"begin_num" : 4503,
+		"end_num" : 4533,
+		"dir" : "n",
+		"street_name" : "newark",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 26,
+		"loop_num" : "19",
+		"begin_num" : 9417,
+		"end_num" : 9417,
+		"dir" : "n",
+		"street_name" : "woolsey",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 26,
+		"loop_num" : "20",
+		"begin_num" : 9500,
+		"end_num" : 9500,
+		"dir" : "n",
+		"street_name" : "woolsey",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 26,
+		"loop_num" : "21",
+		"begin_num" : 9620,
+		"end_num" : 9680,
+		"dir" : "n",
+		"street_name" : "woolsey",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 26,
+		"loop_num" : "22",
+		"begin_num" : 9508,
+		"end_num" : 9627,
+		"dir" : "n",
+		"street_name" : "dwight",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 26,
+		"loop_num" : "23",
+		"begin_num" : 9327,
+		"end_num" : 9417,
+		"dir" : "n",
+		"street_name" : "dwight",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 26,
+		"loop_num" : "24",
+		"begin_num" : 9205,
+		"end_num" : 9255,
+		"dir" : "n",
+		"street_name" : "dwight",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 26,
+		"loop_num" : "25",
+		"begin_num" : 4605,
+		"end_num" : 4625,
+		"dir" : "n",
+		"street_name" : "trenton",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 26,
+		"loop_num" : "26",
+		"begin_num" : 4607,
+		"end_num" : 4619,
+		"dir" : "n",
+		"street_name" : "houghton",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 26,
+		"loop_num" : "27",
+		"begin_num" : 4816,
+		"end_num" : 4902,
+		"dir" : "n",
+		"street_name" : "mccoy",
+		"suffix" : "ct",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 26,
+		"loop_num" : "28",
+		"begin_num" : 4606,
+		"end_num" : 4720,
+		"dir" : "n",
+		"street_name" : "mccoy",
+		"suffix" : "ct",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 26,
+		"loop_num" : "29",
+		"begin_num" : 8911,
+		"end_num" : 8911,
+		"dir" : "n",
+		"street_name" : "dwight",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 26,
+		"loop_num" : "30",
+		"begin_num" : 9030,
+		"end_num" : 9030,
+		"dir" : "n",
+		"street_name" : "newman",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 26,
+		"loop_num" : "31",
+		"begin_num" : 9022,
+		"end_num" : 9022,
+		"dir" : "n",
+		"street_name" : "newman",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 26,
+		"loop_num" : "32",
+		"begin_num" : 4720,
+		"end_num" : 4720,
+		"dir" : "n",
+		"street_name" : "trenton",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 26,
+		"loop_num" : "33",
+		"begin_num" : 9118,
+		"end_num" : 9118,
+		"dir" : "n",
+		"street_name" : "newman",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 26,
+		"loop_num" : "34",
+		"begin_num" : 9208,
+		"end_num" : 9250,
+		"dir" : "n",
+		"street_name" : "newman",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 26,
+		"loop_num" : "35",
+		"begin_num" : 4625,
+		"end_num" : 4637,
+		"dir" : "n",
+		"street_name" : "newark",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 26,
+		"loop_num" : "36",
+		"begin_num" : 9529,
+		"end_num" : 9650,
+		"dir" : "n",
+		"street_name" : "fiske",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 26,
+		"loop_num" : "37",
+		"begin_num" : 9509,
+		"end_num" : 9525,
+		"dir" : "n",
+		"street_name" : "fiske",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 26,
+		"loop_num" : "38",
+		"begin_num" : 9407,
+		"end_num" : 9443,
+		"dir" : "n",
+		"street_name" : "fiske",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 26,
+		"loop_num" : "39",
+		"begin_num" : 9305,
+		"end_num" : 9349,
+		"dir" : "n",
+		"street_name" : "fiske",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 26,
+		"loop_num" : "40",
+		"begin_num" : 4820,
+		"end_num" : 4820,
+		"dir" : "n",
+		"street_name" : "newark",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 26,
+		"loop_num" : "41",
+		"begin_num" : 8956,
+		"end_num" : 8956,
+		"dir" : "n",
+		"street_name" : "haven",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 26,
+		"loop_num" : "42",
+		"begin_num" : 4961,
+		"end_num" : 4961,
+		"dir" : "n",
+		"street_name" : "mccoy",
+		"suffix" : "ct",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 26,
+		"loop_num" : "43",
+		"begin_num" : 8901,
+		"end_num" : 8955,
+		"dir" : "n",
+		"street_name" : "haven",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 26,
+		"loop_num" : "44",
+		"begin_num" : 4902,
+		"end_num" : 4918,
+		"dir" : "n",
+		"street_name" : "trenton",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 26,
+		"loop_num" : "45",
+		"begin_num" : 9112,
+		"end_num" : 9237,
+		"dir" : "n",
+		"street_name" : "haven",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 26,
+		"loop_num" : "46",
+		"begin_num" : 4923,
+		"end_num" : 4935,
+		"dir" : "n",
+		"street_name" : "newark",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 26,
+		"loop_num" : "47",
+		"begin_num" : 9416,
+		"end_num" : 9446,
+		"dir" : "n",
+		"street_name" : "haven",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 26,
+		"loop_num" : "48",
+		"begin_num" : 9511,
+		"end_num" : 9615,
+		"dir" : "n",
+		"street_name" : "haven",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 26,
+		"loop_num" : "49",
+		"begin_num" : 4902,
+		"end_num" : 4902,
+		"dir" : "n",
+		"street_name" : "cecelia",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 26,
+		"loop_num" : "50",
+		"begin_num" : 4909,
+		"end_num" : 5050,
+		"dir" : "n",
+		"street_name" : "cecelia",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 26,
+		"loop_num" : "51",
+		"begin_num" : 4914,
+		"end_num" : 5040,
+		"dir" : "n",
+		"street_name" : "esperanza",
+		"suffix" : "ct",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 26,
+		"loop_num" : "52",
+		"begin_num" : 9719,
+		"end_num" : 9755,
+		"dir" : "n",
+		"street_name" : "adriatic",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 26,
+		"loop_num" : "53",
+		"begin_num" : 9738,
+		"end_num" : 9767,
+		"dir" : "n",
+		"street_name" : "hodge",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 26,
+		"loop_num" : "54",
+		"begin_num" : 9524,
+		"end_num" : 9632,
+		"dir" : "n",
+		"street_name" : "hodge",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 26,
+		"loop_num" : "55",
+		"begin_num" : 5007,
+		"end_num" : 5037,
+		"dir" : "n",
+		"street_name" : "trenton",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 26,
+		"loop_num" : "56",
+		"begin_num" : 9035,
+		"end_num" : 9035,
+		"dir" : "n",
+		"street_name" : "haven",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 26,
+		"loop_num" : "57",
+		"begin_num" : 9220,
+		"end_num" : 9220,
+		"dir" : "n",
+		"street_name" : "adriatic",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 26,
+		"loop_num" : "58",
+		"begin_num" : 5004,
+		"end_num" : 5040,
+		"dir" : "n",
+		"street_name" : "fessenden",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 26,
+		"loop_num" : "59",
+		"begin_num" : 9530,
+		"end_num" : 9530,
+		"dir" : "n",
+		"street_name" : "adriatic",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 29,
+		"loop_num" : "1",
+		"begin_num" : 9404,
+		"end_num" : 9486,
+		"dir" : "n",
+		"street_name" : "alma",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 29,
+		"loop_num" : "2",
+		"begin_num" : 9405,
+		"end_num" : 9465,
+		"dir" : "n",
+		"street_name" : "fairhaven",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 29,
+		"loop_num" : "3",
+		"begin_num" : 7007,
+		"end_num" : 7240,
+		"dir" : "n",
+		"street_name" : "fessenden",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 29,
+		"loop_num" : "4",
+		"begin_num" : 7315,
+		"end_num" : 7535,
+		"dir" : "n",
+		"street_name" : "fessenden",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 29,
+		"loop_num" : "5",
+		"begin_num" : 1000,
+		"end_num" : 1000,
+		"dir" : "n",
+		"street_name" : "burr",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 29,
+		"loop_num" : "6",
+		"begin_num" : 9525,
+		"end_num" : 10125,
+		"dir" : "n",
+		"street_name" : "burr",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 29,
+		"loop_num" : "7",
+		"begin_num" : 10005,
+		"end_num" : 10148,
+		"dir" : "n",
+		"street_name" : "calhoun",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 29,
+		"loop_num" : "8",
+		"begin_num" : 9523,
+		"end_num" : 9574,
+		"dir" : "n",
+		"street_name" : "calhoun",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 29,
+		"loop_num" : "9",
+		"begin_num" : 10003,
+		"end_num" : 10225,
+		"dir" : "n",
+		"street_name" : "buchanan",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 29,
+		"loop_num" : "10",
+		"begin_num" : 9523,
+		"end_num" : 9595,
+		"dir" : "n",
+		"street_name" : "buchanan",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 29,
+		"loop_num" : "11",
+		"begin_num" : 10002,
+		"end_num" : 10265,
+		"dir" : "n",
+		"street_name" : "tioga",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 29,
+		"loop_num" : "12",
+		"begin_num" : 9524,
+		"end_num" : 9568,
+		"dir" : "n",
+		"street_name" : "tioga",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 29,
+		"loop_num" : "13",
+		"begin_num" : 10215,
+		"end_num" : 10275,
+		"dir" : "n",
+		"street_name" : "polk",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 29,
+		"loop_num" : "14",
+		"begin_num" : 9524,
+		"end_num" : 10146,
+		"dir" : "n",
+		"street_name" : "polk",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 29,
+		"loop_num" : "15",
+		"begin_num" : 7714,
+		"end_num" : 7734,
+		"dir" : "n",
+		"street_name" : "bank",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 29,
+		"loop_num" : "16 D.O.",
+		"begin_num" : 7814,
+		"end_num" : 7814,
+		"dir" : "n",
+		"street_name" : "bank",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 29,
+		"loop_num" : "16A",
+		"begin_num" : 9523,
+		"end_num" : 10001,
+		"dir" : "n",
+		"street_name" : "allegheny",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 29,
+		"loop_num" : "16B",
+		"begin_num" : 8003,
+		"end_num" : 8003,
+		"dir" : "n",
+		"street_name" : "bank",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 29,
+		"loop_num" : "17",
+		"begin_num" : 7816,
+		"end_num" : 7841,
+		"dir" : "n",
+		"street_name" : "olympia",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 29,
+		"loop_num" : "18",
+		"begin_num" : 10003,
+		"end_num" : 10130,
+		"dir" : "n",
+		"street_name" : "tyler",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 29,
+		"loop_num" : "19",
+		"begin_num" : 9545,
+		"end_num" : 9591,
+		"dir" : "n",
+		"street_name" : "tyler",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 29,
+		"loop_num" : "20",
+		"begin_num" : 9406,
+		"end_num" : 9488,
+		"dir" : "n",
+		"street_name" : "allegheny",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 29,
+		"loop_num" : "21",
+		"begin_num" : 7607,
+		"end_num" : 7937,
+		"dir" : "n",
+		"street_name" : "fessenden",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 29,
+		"loop_num" : "22",
+		"begin_num" : 9406,
+		"end_num" : 9474,
+		"dir" : "n",
+		"street_name" : "tyler",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 29,
+		"loop_num" : "23",
+		"begin_num" : 9406,
+		"end_num" : 9465,
+		"dir" : "n",
+		"street_name" : "polk",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 29,
+		"loop_num" : "24",
+		"begin_num" : 9406,
+		"end_num" : 9486,
+		"dir" : "n",
+		"street_name" : "tioga",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 29,
+		"loop_num" : "25",
+		"begin_num" : 9405,
+		"end_num" : 9486,
+		"dir" : "n",
+		"street_name" : "buchanan",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 36,
+		"loop_num" : "0",
+		"begin_num" : 8444,
+		"end_num" : 11426,
+		"dir" : "nw",
+		"street_name" : "saint helens",
+		"suffix" : "rd",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 36,
+		"loop_num" : "1",
+		"begin_num" : 10807,
+		"end_num" : 10807,
+		"dir" : "nw",
+		"street_name" : "2nd",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 36,
+		"loop_num" : "2",
+		"begin_num" : 11022,
+		"end_num" : 11028,
+		"dir" : "nw",
+		"street_name" : "2nd",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 36,
+		"loop_num" : "3",
+		"begin_num" : 10254,
+		"end_num" : 10255,
+		"dir" : "nw",
+		"street_name" : "109th",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 36,
+		"loop_num" : "4",
+		"begin_num" : 10205,
+		"end_num" : 10225,
+		"dir" : "nw",
+		"street_name" : "107th",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 36,
+		"loop_num" : "5",
+		"begin_num" : 10529,
+		"end_num" : 10529,
+		"dir" : "nw",
+		"street_name" : "4th",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 36,
+		"loop_num" : "6",
+		"begin_num" : 10503,
+		"end_num" : 10633,
+		"dir" : "nw",
+		"street_name" : "3rd",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 36,
+		"loop_num" : "7",
+		"begin_num" : 10505,
+		"end_num" : 10547,
+		"dir" : "nw",
+		"street_name" : "2nd",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 36,
+		"loop_num" : "8",
+		"begin_num" : 10450,
+		"end_num" : 10470,
+		"dir" : "nw",
+		"street_name" : "2nd",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 36,
+		"loop_num" : "9",
+		"begin_num" : 10140,
+		"end_num" : 10160,
+		"dir" : "nw",
+		"street_name" : "107th",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 36,
+		"loop_num" : "10",
+		"begin_num" : 9889,
+		"end_num" : 9940,
+		"dir" : "nw",
+		"street_name" : "hoge",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 36,
+		"loop_num" : "11",
+		"begin_num" : 10060,
+		"end_num" : 10131,
+		"dir" : "nw",
+		"street_name" : "wilark",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 36,
+		"loop_num" : "12",
+		"begin_num" : 10035,
+		"end_num" : 10035,
+		"dir" : "nw",
+		"street_name" : "wilark",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 36,
+		"loop_num" : "13",
+		"begin_num" : 9820,
+		"end_num" : 9912,
+		"dir" : "nw",
+		"street_name" : "wilark",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 36,
+		"loop_num" : "14",
+		"begin_num" : 9335,
+		"end_num" : 9538,
+		"dir" : "nw",
+		"street_name" : "roseway",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 36,
+		"loop_num" : "15",
+		"begin_num" : 9360,
+		"end_num" : 9360,
+		"dir" : "nw",
+		"street_name" : "harbor",
+		"suffix" : "blvd",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 36,
+		"loop_num" : "16",
+		"begin_num" : 9607,
+		"end_num" : 9613,
+		"dir" : "nw",
+		"street_name" : "elva",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 36,
+		"loop_num" : "17",
+		"begin_num" : 8767,
+		"end_num" : 9290,
+		"dir" : "nw",
+		"street_name" : "springville",
+		"suffix" : "rd",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 36,
+		"loop_num" : "18",
+		"begin_num" : 8527,
+		"end_num" : 8737,
+		"dir" : "nw",
+		"street_name" : "ogden",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 36,
+		"loop_num" : "19",
+		"begin_num" : 8617,
+		"end_num" : 8825,
+		"dir" : "nw",
+		"street_name" : "wood",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 36,
+		"loop_num" : "20",
+		"begin_num" : 8918,
+		"end_num" : 8918,
+		"dir" : "nw",
+		"street_name" : "midway",
+		"suffix" : "ave",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 36,
+		"loop_num" : "21",
+		"begin_num" : 8631,
+		"end_num" : 8631,
+		"dir" : "nw",
+		"street_name" : "bailey",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 36,
+		"loop_num" : "22",
+		"begin_num" : 8802,
+		"end_num" : 8842,
+		"dir" : "nw",
+		"street_name" : "shephard",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 36,
+		"loop_num" : "23",
+		"begin_num" : 8825,
+		"end_num" : 8845,
+		"dir" : "nw",
+		"street_name" : "bailey",
+		"suffix" : "st",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 36,
+		"loop_num" : "24",
+		"begin_num" : 8790,
+		"end_num" : 8900,
+		"dir" : "nw",
+		"street_name" : "springville",
+		"suffix" : "ct",
+		"office_id" : 0
+	},
+	{
+		"route_num" : 36,
+		"loop_num" : "25",
+		"begin_num" : 8766,
+		"end_num" : 8776,
+		"dir" : "nw",
+		"street_name" : "bridge",
+		"suffix" : "ave",
+		"office_id" : 0
+	}
+]}
