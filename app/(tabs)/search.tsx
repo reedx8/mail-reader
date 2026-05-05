@@ -210,6 +210,8 @@ function checkForSuffix(address: string) {
         suffix = 'ter';
         // return suffix;
         return true;
+    } else if (suffix === 'way') {
+        return true;
     } else {
         // return 'none';
         return false;
