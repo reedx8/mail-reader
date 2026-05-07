@@ -40,9 +40,11 @@ const GAP = 10; // Space between the camera and the corners
 // Scan page
 export default function Index() {
     const [selectedOffice] = useState<number>(0);
-    const [selectedRoute, setSelectedRoute] = useState<number>(1);
+    const [selectedRoute, setSelectedRoute] = useState<number>(0);
+    const [missortRoute, setMissortRoute] = useState<number[]>([]); // if address is not on selectedRoute
     const [loopResult, setLoopResult] = useState<string[]>([]); // loop could be a number (2), number plus letter (eg 16b), or dismount/drive off (D.O.)
     // const [loopResult, setLoopResult] = useState<string>(''); // loop could be a number (2), number plus letter (eg 16b), or dismount/drive off (D.O.)
+    const [pickerRoutes, setPickerRoutes] = useState<number[]>([]);
     const [scannedAddress, setScannedAddress] = useState<string>('');
     const prevScannedAddress = useRef<string>(''); // this and lastSpokenAt are used to prevent never ending speech (happens with loopResult[], not loopResult, fyi)
     const lastSpokenAt = useRef<number>(0);
@@ -52,7 +54,7 @@ export default function Index() {
     // const imageURL = 'https://www.svgbasics.com/rasters/text_ex1.png';
     const isFocused = useIsFocused();
     const device = useCameraDevice(cameraDirection);
-    const routes = [1, 3, 5, 6, 7, 12, 14, 15, 16, 21, 22, 24, 25, 26, 29, 36];
+    // const routes = [1, 3, 5, 6, 7, 12, 14, 15, 16, 21, 22, 24, 25, 26, 29, 36];
 
     useEffect(() => {
         if (loopResult.length > 0) {
@@ -61,21 +63,65 @@ export default function Index() {
             // Speech.speak(String(loopResult), {
 
             if (loopResult.length > 1) {
-                Speech.speak('Multiple loops found', {
-                    language: 'en-US',
-                    rate: 1,
-                    pitch: 0.7,
-                });
+                // console.log(missortRoute.length);
+                if (missortRoute.length === 1) {
+                    Speech.speak(
+                        String(`Missorted mail. Route ${missortRoute[0]}`),
+                        {
+                            language: 'en-US',
+                            rate: 1,
+                            pitch: 0.7,
+                        },
+                    );
+                } else if (missortRoute.length > 1) {
+                    Speech.speak('Mail assigned to multiple routes', {
+                        language: 'en-US',
+                        rate: 1,
+                        pitch: 0.7,
+                    });
+                } else {
+                    Speech.speak('Multiple loops found', {
+                        language: 'en-US',
+                        rate: 1,
+                        pitch: 0.7,
+                    });
+                }
             } else {
-                Speech.speak(String(loopResult[0]), {
-                    language: 'en-US',
-                    rate: 1,
-                    pitch: 0.7,
-                });
+                if (missortRoute.length > 0) {
+                    Speech.speak(
+                        String(`Missorted mail. Route ${missortRoute[0]}`),
+                        {
+                            language: 'en-US',
+                            rate: 1,
+                            pitch: 0.7,
+                        },
+                    );
+                } else {
+                    Speech.speak(String(loopResult[0]), {
+                        language: 'en-US',
+                        rate: 1,
+                        pitch: 0.7,
+                    });
+                }
             }
             lastSpokenAt.current = Date.now();
         }
-    }, [loopResult, scannedAddress]);
+    }, [loopResult, scannedAddress, missortRoute]);
+
+    useEffect(() => {
+        async function getAllRoutes() {
+            const result: Schema[] | unknown[] = await db.getAllAsync(
+                `SELECT route_num FROM routes`,
+            );
+
+            if (result && result.length > 0) {
+                setPickerRoutes(result.map((r) => (r as Schema).route_num));
+                setSelectedRoute((result as Schema[])[0].route_num)
+                // console.log(result);
+            }
+        }
+        getAllRoutes();
+    }, []);
 
     const lookupAddressInDb = Worklets.createRunOnJS(
         async (match: string[], fullAddress: string) => {
@@ -135,15 +181,59 @@ export default function Index() {
                 }
 
                 const result: Schema[] | unknown[] = await db.getAllAsync(
-                    'SELECT loop_num FROM loops WHERE office_id = ? AND route_num = ? AND street_name = ? AND suffix = ? AND ? BETWEEN begin_num AND end_num',
-                    [selectedOffice, Number(selectedRoute), streetName, suffix, streetNum],
+                    'SELECT route_num, loop_num FROM loops WHERE office_id = ? AND street_name = ? AND suffix = ? AND ? BETWEEN begin_num AND end_num',
+                    [selectedOffice, streetName, suffix, streetNum],
                 );
 
+                // const result: Schema[] | unknown[] = await db.getAllAsync(
+                //     'SELECT loop_num FROM loops WHERE office_id = ? AND route_num = ? AND street_name = ? AND suffix = ? AND ? BETWEEN begin_num AND end_num',
+                //     [
+                //         selectedOffice,
+                //         Number(selectedRoute),
+                //         streetName,
+                //         suffix,
+                //         streetNum,
+                //     ],
+                // );
+
                 if (result && result.length > 0) {
-                    setLoopResult(
-                        result.map((result) => (result as Schema).loop_num),
-                    );
-                    setScannedAddress(fullAddress);
+                    let multipleRoutes = false;
+                    if ((result as Schema[]).length > 1) {
+                        // Handles 2+ matches where either multiple loops in same route (common), or multiple routes (very rare/never)
+                        // Ex 1: result = [{"loop_num": "7", "route_num": 1}, {"loop_num": "2", "route_num": 3}]
+                        // Ex 2: result = [{"loop_num": "1", "route_num": 1}, {"loop_num": "2", "route_num": 1}]
+
+                        const firstRoute = (result as Schema[])[0].route_num;
+                        for (const match of result) {
+                            if (firstRoute !== (match as Schema).route_num) {
+                                multipleRoutes = true;
+                            }
+                        }
+
+                        if (multipleRoutes) {
+                            setMissortRoute(
+                                result.map((r) => (r as Schema).route_num),
+                            );
+                        } else setMissortRoute([]);
+                    } else if (
+                        (result as Schema[])[0].route_num === selectedRoute
+                    ) {
+                        // 1 match + current route selected is same as route returned from query (avg case)
+                        setMissortRoute([]);
+                    } else if (
+                        (result as Schema[])[0].route_num !== selectedRoute
+                    ) {
+                        // 1 match + current route is different from route returned from query
+                        setMissortRoute([(result as Schema[])[0].route_num]);
+
+                        // setMissortRoute(
+                        //     result.map((r) => (r as Schema).route_num),
+                        // );
+                        // setLoopResult([]);
+                    }
+
+                    setLoopResult(result.map((r) => (r as Schema).loop_num));
+                    setScannedAddress(fullAddress.toUpperCase());
                     prevScannedAddress.current = fullAddress;
                 }
 
@@ -359,39 +449,76 @@ export default function Index() {
                 )}
             </View>
             {/* <Text style={styles.text2}>{loopResultShared.value}</Text> */}
-            <View
-                style={{
-                    flex: 1,
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    gap: 5,
-                    justifyContent: 'center',
-                    // alignContent: 'center',
-                    // marginBottom: 50,
-                }}
-            >
-                <Text style={styles.text2}>
-                    {loopResult[0]}
-                    {/* {loopResult} */}
-                    {/* {loopResult === -1 || loopResult === 0 ? '' : loopResult} */}
-                </Text>
-                {loopResult.length > 1 && (
-                    <Text style={styles.text4}>
-                        (Other Loops: {loopResult[1]}
-                        {loopResult.map(
-                            (loopResult, index) =>
-                                index > 1 && (
-                                    <Text key={index} style={styles.text4}>
-                                        {', '}
-                                        {loopResult}
-                                    </Text>
-                                ),
-                        )}
-                        )
+            {missortRoute.length === 0 && (
+                <View
+                    style={{
+                        flex: 1,
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        gap: 5,
+                        justifyContent: 'center',
+                        // alignContent: 'center',
+                        // marginBottom: 50,
+                    }}
+                >
+                    <Text style={styles.text2}>
+                        {loopResult[0]}
+                        {/* {loopResult} */}
+                        {/* {loopResult === -1 || loopResult === 0 ? '' : loopResult} */}
                     </Text>
-                )}
-                <Text style={styles.text3}>{scannedAddress}</Text>
-            </View>
+                    {loopResult.length > 1 && (
+                        <Text style={styles.text4}>
+                            (Other Loops: {loopResult[1]}
+                            {loopResult.map(
+                                (loop, index) =>
+                                    index > 1 && (
+                                        <Text key={index} style={styles.text4}>
+                                            {', '}
+                                            {loop}
+                                        </Text>
+                                    ),
+                            )}
+                            )
+                        </Text>
+                    )}
+                    <Text style={styles.text3}>{scannedAddress}</Text>
+                </View>
+            )}
+            {missortRoute.length === 1 && (
+                <View style={styles.missortContainer}>
+                    <View style={styles.missortBg}>
+                        <Text style={styles.missortRouteText}>Route</Text>
+                        <Text style={styles.missortRouteText2}>
+                            {missortRoute[0]}
+                        </Text>
+                    </View>
+                    <Text style={styles.text3}>{scannedAddress}</Text>
+                </View>
+            )}
+            {missortRoute.length > 1 && (
+                <View style={styles.missortContainer}>
+                    <View style={styles.missortBg}>
+                        <Text style={styles.missortRouteText}>Route</Text>
+                        <Text style={styles.missortRouteText2}>
+                            {missortRoute[0]}
+                        </Text>
+                        <Text style={styles.missortRouteText3}>
+                            (Other routes: {missortRoute[1]}
+                            {missortRoute.map(
+                                (route, index) =>
+                                    index > 1 && (
+                                        <Text key={index}>
+                                            {', '}
+                                            {route}
+                                        </Text>
+                                    ),
+                            )}
+                            )
+                        </Text>
+                    </View>
+                    <Text style={styles.text3}>{scannedAddress}</Text>
+                </View>
+            )}
             <View
                 style={{ flexDirection: 'row', alignItems: 'center', gap: 10 }}
             >
@@ -456,7 +583,7 @@ export default function Index() {
                     }
                     style={styles.picker}
                 >
-                    {routes.map((routeNum, index) => (
+                    {pickerRoutes.map((routeNum, index) => (
                         <Picker.Item
                             label={'Route ' + routeNum}
                             value={routeNum}
@@ -464,56 +591,6 @@ export default function Index() {
                             key={index}
                         />
                     ))}
-                    {/* <Picker.Item
-                        label='Route 1'
-                        value={1}
-                        style={styles.text}
-                    />
-                    <Picker.Item
-                        label='Route 3'
-                        value={3}
-                        style={styles.text}
-                    />
-                    <Picker.Item
-                        label='Route 7'
-                        value={7}
-                        style={styles.text}
-                    />
-                    <Picker.Item
-                        label='Route 12'
-                        value={12}
-                        style={styles.text}
-                    />
-                    <Picker.Item
-                        label='Route 14'
-                        value={14}
-                        style={styles.text}
-                    />
-                    <Picker.Item
-                        label='Route 15'
-                        value={15}
-                        style={styles.text}
-                    />
-                    <Picker.Item
-                        label='Route 16'
-                        value={16}
-                        style={styles.text}
-                    />
-                    <Picker.Item
-                        label='Route 21'
-                        value={21}
-                        style={styles.text}
-                    />
-                    <Picker.Item
-                        label='Route 25'
-                        value={25}
-                        style={styles.text}
-                    />
-                    <Picker.Item
-                        label='Route 29'
-                        value={29}
-                        style={styles.text}
-                    /> */}
                 </Picker>
             </View>
         </View>
@@ -539,7 +616,7 @@ const styles = StyleSheet.create({
     },
     text2: {
         color: '#fff',
-        fontSize: 60,
+        fontSize: 80,
     },
     text3: {
         color: '#fff',
@@ -548,6 +625,32 @@ const styles = StyleSheet.create({
     text4: {
         color: 'red',
         fontSize: 21,
+    },
+    missortContainer: {
+        // backgroundColor: 'red',
+        flex: 1,
+        justifyContent: 'center',
+        gap: 8,
+    },
+    missortBg: {
+        backgroundColor: 'red',
+        paddingVertical: 2,
+        borderRadius: 4,
+    },
+    missortRouteText: {
+        color: 'white',
+        fontSize: 26,
+        textAlign: 'center',
+    },
+    missortRouteText2: {
+        color: 'white',
+        fontSize: 94,
+        textAlign: 'center',
+    },
+    missortRouteText3: {
+        color: 'white',
+        fontSize: 21,
+        textAlign: 'center',
     },
     title: {
         fontSize: 34,
