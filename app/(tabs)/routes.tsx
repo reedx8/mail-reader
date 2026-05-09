@@ -73,47 +73,9 @@ export default function Routes() {
                     [currentRoute],
                 );
 
-                if (data) {
-                    let prevLoopNum = '-1';
-                    let streetsOnLoop = [];
-
-                    // let prevStreet = '';
-                    // let prevStretsNumbers = [];
-
-                    const formattedData = new Map<string, string[]>();
-
-                    // Iterate over every record (row) in Loops table
-                    for (const row of data as LoopsSchema[]) {
-                        // console.log(row.loop_num)
-                        let streetAddress = '';
-
-                        // format street address depending on if 1 address or an address range
-                        if (row.begin_num === row.end_num) {
-                            // 1 address
-                            streetAddress = `${row.begin_num} ${row.dir} ${row.street_name} ${row.suffix}`.toUpperCase();
-                        } else {
-                            // address range
-                            streetAddress = `${row.begin_num} - ${row.end_num} ${row.dir} ${row.street_name} ${row.suffix}`.toUpperCase();
-                        }
-
-                        if (
-                            row.loop_num === prevLoopNum ||
-                            prevLoopNum === '-1'
-                        ) {
-                            // collect addresses on same loop (or first street) into streetsOnLoop[]
-                            prevLoopNum = row.loop_num;
-                            streetsOnLoop.push(streetAddress);
-                        } else {
-                            // Add collected addresses (streetsOnLoop[]) on same loop to formatted data, now that weve reached new loop #
-                            formattedData.set(prevLoopNum, streetsOnLoop);
-                            streetsOnLoop = [];
-                            streetsOnLoop.push(streetAddress);
-                            prevLoopNum = row.loop_num;
-                        }
-                    }
-                    // and add last loop too
-                    formattedData.set(prevLoopNum, streetsOnLoop)
-
+                if (data && data.length > 0) {
+                    // let formattedData = getSingleAddresses(data);
+                    let formattedData = formatAndGroupData(data);
                     setCurrentLoops(formattedData);
                 } else {
                     setCurrentLoops([0]);
@@ -151,8 +113,20 @@ export default function Routes() {
                     // )}
                 />
             </View>
-            <ScrollView style={{ width: '100%', height: "100%" }}>
+            <ScrollView style={{ width: '100%', height: '100%' }}>
                 {[...currentLoops.entries()].map(([loopNum, streets]) => (
+                    <View key={loopNum} style={styles.loopRow}>
+                        <Text style={styles.loopNumText}>Loop {loopNum}:</Text>
+                        {streets.map((street: any, index: any) => (
+                            <Text style={styles.streetText} key={index}>
+                                {street[0] === street[1]
+                                    ? `${street[0]} ${street[2]}`
+                                    : `${street[0]}-${street[1]} ${street[2]}`}
+                            </Text>
+                        ))}
+                    </View>
+                ))}
+                {/* {[...currentLoops.entries()].map(([loopNum, streets]) => (
                     <View key={loopNum} style={styles.loopRow}>
                         <Text style={styles.loopNumText}>Loop {loopNum}:</Text>
                         {streets.map((street: any, index: any) => (
@@ -161,7 +135,7 @@ export default function Routes() {
                             </Text>
                         ))}
                     </View>
-                ))}
+                ))} */}
             </ScrollView>
         </View>
     );
@@ -226,13 +200,169 @@ const styles = StyleSheet.create({
     streetText: {
         color: 'white',
         fontSize: 22,
-        fontWeight: '100'
+        fontWeight: '100',
+        letterSpacing: 0.8,
+        marginBottom: 1.4,
     },
-    loopNumText : {
+    loopNumText: {
         color: 'white',
         fontSize: 26,
     },
     loopRow: {
-        marginBottom: 10
-    }
+        marginBottom: 10,
+    },
 });
+
+
+
+// Format data into a simpler Map, and group similar streets within loop, for improved readability
+function formatAndGroupData(data: LoopsSchema[] | unknown[]) {
+    if (!data || data.length === 0 || !isLoopsSchema(data[0])) {
+        return new Map();
+    }
+    type streetType = [number, number, string]; // <[street's_min, street's_max, full_street_name]>
+    const formattedData = new Map<string, streetType[]>(); // <loop_num, [streetType]
+    const visitedStreets = new Map<string, [number, number]>(); // <full_street_name, [min, max]>
+    let prevLoop = data[0].loop_num;
+
+    // Iterate over every row in Loops table
+    for (const row of data as LoopsSchema[]) {
+        const fullStreetName = `${row.dir} ${row.street_name} ${row.suffix}`;
+        if (prevLoop === row.loop_num) {
+            // 1st entry, or same loop as previous loop: get min + max of each street in loop
+            if (visitedStreets.has(fullStreetName)) {
+                if (
+                    row.end_num > (visitedStreets.get(fullStreetName)?.[1] || 0)
+                ) {
+                    const currMin = visitedStreets.get(fullStreetName)?.[0];
+                    visitedStreets.set(fullStreetName, [
+                        currMin || 0,
+                        row.end_num,
+                    ]);
+                }
+                if (
+                    row.begin_num <
+                    (visitedStreets.get(fullStreetName)?.[0] || 0)
+                ) {
+                    const currMax = visitedStreets.get(fullStreetName)?.[1];
+                    visitedStreets.set(fullStreetName, [
+                        row.begin_num,
+                        currMax || 0,
+                    ]);
+                }
+            } else {
+                visitedStreets.set(fullStreetName, [
+                    row.begin_num,
+                    row.end_num,
+                ]);
+            }
+        } else {
+            // New loop: add all previous loop's streets to formattedData, then add current row's data
+            let streetsOnLoop: streetType[] = [];
+            for (let [name, num] of visitedStreets) {
+                streetsOnLoop.push([
+                    num[0],
+                    num[1],
+                    capitalizeStreetName(name),
+                ]);
+                // streetsOnLoop.push([num[0], num[1], name]);
+            }
+            formattedData.set(prevLoop, streetsOnLoop);
+            visitedStreets.clear();
+
+            visitedStreets.set(fullStreetName, [row.begin_num, row.end_num]);
+            prevLoop = row.loop_num;
+        }
+    }
+
+    // and add last entry in data as well
+    for (let [k, v] of visitedStreets) {
+        formattedData.set(prevLoop, [[v[0], v[1], capitalizeStreetName(k)]]);
+    }
+
+    // console.log(formattedData);
+    return formattedData;
+}
+
+function capitalizeStreetName(streetName: string) {
+    let words = streetName.split(' ');
+    let dir = '';
+    let formattedName = '';
+    if (isDirection(words[0])) {
+        dir = words[0].toUpperCase();
+        formattedName = dir + ' '; // dir may not exist in street name
+    }
+    for (let i = 1; i < words.length; ++i) {
+        formattedName +=
+            words[i].charAt(0).toUpperCase() +
+            words[i].slice(1).toLowerCase() +
+            ' ';
+    }
+    return formattedName;
+}
+
+function isDirection(data: string) {
+    let word = data.toLowerCase();
+    return (
+        word === 'n' ||
+        word === 'nw' ||
+        word === 'ne' ||
+        word === 's' ||
+        word === 'sw' ||
+        word === 'se' ||
+        word === 'e' ||
+        word === 'w'
+    );
+}
+function isLoopsSchema(item: any): item is LoopsSchema {
+    return (
+        item !== null &&
+        typeof item === 'object' &&
+        'loop_num' in item &&
+        'street_name' in item
+    );
+}
+
+// (not used, formatAndGroupData() replaced it) Reformat data such that single addresses from db are not outputted to UI as a range (eg "200 Main st", not "200 - 200 Main st"). For better readability.
+function getSingleAddresses(data: any) {
+    let prevLoopNum = '-1';
+    let streetsOnLoop = [];
+
+    // let prevStreet = '';
+    // let prevStretsNumbers = [];
+
+    const formattedData = new Map<string, string[]>();
+
+    // Iterate over every record (row) in Loops table
+    for (const row of data as LoopsSchema[]) {
+        // console.log(row.loop_num)
+        let streetAddress = '';
+
+        // Check if 1 address or an address range
+        if (row.begin_num === row.end_num) {
+            // 1 address
+            streetAddress =
+                `${row.begin_num} ${row.dir} ${row.street_name} ${row.suffix}`.toUpperCase();
+        } else {
+            // address range
+            streetAddress =
+                `${row.begin_num} - ${row.end_num} ${row.dir} ${row.street_name} ${row.suffix}`.toUpperCase();
+        }
+
+        if (row.loop_num === prevLoopNum || prevLoopNum === '-1') {
+            // collect addresses on same loop (or first street) into streetsOnLoop[]
+            prevLoopNum = row.loop_num;
+            streetsOnLoop.push(streetAddress);
+        } else {
+            // Add collected addresses (streetsOnLoop[]) on same loop to formatted data, now that weve reached new loop #
+            formattedData.set(prevLoopNum, streetsOnLoop);
+            streetsOnLoop = [];
+            streetsOnLoop.push(streetAddress);
+            prevLoopNum = row.loop_num;
+        }
+    }
+    // and add last loop too
+    formattedData.set(prevLoopNum, streetsOnLoop);
+
+    return formattedData;
+}
