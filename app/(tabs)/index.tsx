@@ -181,7 +181,7 @@ export default function Index() {
                 }
 
                 const result: Schema[] | unknown[] = await db.getAllAsync(
-                    'SELECT route_num, loop_num FROM loops WHERE office_id = ? AND street_name = ? AND suffix = ? AND ? BETWEEN begin_num AND end_num',
+                    'SELECT DISTINCT route_num, loop_num FROM loops WHERE office_id = ? AND street_name = ? AND suffix = ? AND ? BETWEEN begin_num AND end_num',
                     [selectedOffice, streetName, suffix, streetNum],
                 );
 
