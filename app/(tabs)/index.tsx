@@ -20,6 +20,7 @@ import Feather from '@expo/vector-icons/Feather';
 import { Picker } from '@react-native-picker/picker';
 import * as Speech from 'expo-speech';
 
+// Loops table schema
 type Schema = {
     id: number;
     begin_num: number;
@@ -29,6 +30,9 @@ type Schema = {
     suffix: string;
     loop_num: string;
     route_num: number;
+    office_num: number;
+    street_side: string;
+    drive_off: boolean;
 };
 
 const SCANNER_WIDTH = 325;

@@ -19,6 +19,8 @@ type LoopsSchema = {
     loop_num: string;
     route_num: number;
     office_num: number;
+    street_side: string;
+    drive_off: boolean;
 };
 
 type PickerSchema = {
@@ -213,8 +215,6 @@ const styles = StyleSheet.create({
     },
 });
 
-
-
 // Format data into a simpler Map, and group similar streets within loop, for improved readability
 function formatAndGroupData(data: LoopsSchema[] | unknown[]) {
     if (!data || data.length === 0 || !isLoopsSchema(data[0])) {
@@ -275,10 +275,12 @@ function formatAndGroupData(data: LoopsSchema[] | unknown[]) {
         }
     }
 
-    // and add last entry in data as well
-    for (let [k, v] of visitedStreets) {
-        formattedData.set(prevLoop, [[v[0], v[1], capitalizeStreetName(k)]]);
+    // and add last loop to formattedData as well
+    let streetsOnLoop: streetType[] = [];
+    for (let [name, num] of visitedStreets) {
+        streetsOnLoop.push([num[0], num[1], capitalizeStreetName(name)]);
     }
+    formattedData.set(prevLoop, streetsOnLoop);
 
     // console.log(formattedData);
     return formattedData;
