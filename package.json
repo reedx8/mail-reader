@@ -5,13 +5,14 @@
     "scripts": {
         "start": "expo start",
         "reset-project": "node ./scripts/reset-project.js",
-        "android": "expo run:android",
-        "ios": "expo run:ios",
+        "android": "APP_VARIANT=development expo run:android",
+        "ios": "APP_VARIANT=development expo run:ios",
         "web": "expo start --web",
         "lint": "expo lint",
         "dev:ios": "APP_VARIANT=development npx expo prebuild --clean && npx expo run:ios --device",
         "tunnel": "APP_VARIANT=development npx expo start --tunnel --scheme mailreader-dev",
-        "preview:ios": "APP_VARIANT=preview npx expo prebuild --clean && npx expo run:ios --configuration Release --device"
+        "preview:ios": "APP_VARIANT=preview npx expo prebuild --clean && npx expo run:ios --configuration Release --device",
+        "postinstall": "patch-package"
     },
     "dependencies": {
         "@bear-block/vision-camera-ocr": "^1.1.2",
@@ -52,6 +53,7 @@
         "@types/react": "~19.1.0",
         "eslint": "^9.25.0",
         "eslint-config-expo": "~10.0.0",
+        "patch-package": "^8.0.1",
         "typescript": "~5.9.2"
     },
     "private": true
