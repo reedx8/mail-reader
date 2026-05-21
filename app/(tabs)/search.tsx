@@ -112,6 +112,7 @@ export default function Search() {
                 onChangeText={(text) => setAddress(text)}
                 style={styles.input}
                 placeholder='Search for an address'
+                placeholderTextColor={'lightgray'} // android-only
                 // autoComplete={'address-line1'}
                 autoComplete={'off'}
                 clearButtonMode={'always'}

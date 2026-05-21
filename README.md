@@ -18,4 +18,4 @@ iOS Mobile App utilizing computer vision to match mail to the correct loop withi
 
 4. (Preview build) To build and run without a dev server on device, use `npm run preview:ios`.
 
-If you instead want to run via via an emulator, run `npm run ios` (Xcode) or `npm run android` (Android Studio). See https://docs.expo.dev/get-started/set-up-your-environment/
+If you instead want to run via an emulator, run `npm run ios` (Xcode) or `npm run android` (Android Studio). See https://docs.expo.dev/get-started/set-up-your-environment/

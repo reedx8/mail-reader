@@ -2,11 +2,12 @@
 // import TextRecognition from '@react-native-ml-kit/text-recognition';
 import { performOcr } from '@bear-block/vision-camera-ocr';
 import { useEffect, useRef, useState } from 'react';
-import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
+import { Image, Platform, Pressable, StyleSheet, Text, View } from 'react-native';
 import {
     Camera,
     CameraPosition,
     useCameraDevice,
+    useCameraFormat,
     useFrameProcessor,
 } from 'react-native-vision-camera';
 import { Worklets } from 'react-native-worklets-core'; // Allows react state (eg loopResult) to be updated from workflets frameProcessor function
@@ -53,12 +54,14 @@ export default function Index() {
     const prevScannedAddress = useRef<string>(''); // this and lastSpokenAt are used to prevent never ending speech (happens with loopResult[], not loopResult, fyi)
     const lastSpokenAt = useRef<number>(0);
     const [cameraDirection, setCameraDirection] =
-        useState<CameraPosition>('back'); // front, back, or external
+        useState<CameraPosition>('front'); // front, *back, or external
     const [cameraActive, setCameraActive] = useState<boolean>(true);
     // const imageURL = 'https://www.svgbasics.com/rasters/text_ex1.png';
     const isFocused = useIsFocused();
     const device = useCameraDevice(cameraDirection);
-    // const routes = [1, 3, 5, 6, 7, 12, 14, 15, 16, 21, 22, 24, 25, 26, 29, 36];
+    const targetFps = 10;
+    const format = useCameraFormat(device, [{fps:targetFps}]) // needed for android studio
+    
 
     useEffect(() => {
         if (loopResult.length > 0) {
@@ -405,9 +408,10 @@ export default function Index() {
                             device={device}
                             isActive={cameraActive && isFocused}
                             frameProcessor={frameProcessor}
-                            fps={10}
+                            fps={targetFps}
                             isMirrored={false}
                             photoQualityBalance='quality'
+                            format={format} // Needed for android studio
                         />
                         <View
                             style={[
@@ -585,13 +589,15 @@ export default function Index() {
                     onValueChange={(itemValue, itemIndex) =>
                         setSelectedRoute(itemValue)
                     }
-                    style={styles.picker}
+                    style={Platform.OS === 'android' ? styles.pickerAndroid : styles.pickerIOS}
+                    mode={'dropdown'} // android-only
+                    dropdownIconColor={'white'} // android-only
                 >
                     {pickerRoutes.map((routeNum, index) => (
                         <Picker.Item
                             label={'Route ' + routeNum}
                             value={routeNum}
-                            style={styles.text}
+                            style={Platform.OS === 'android' ? styles.textAndroid: styles.text}
                             key={index}
                         />
                     ))}
@@ -661,7 +667,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         color: '#fff',
     },
-    picker: {
+    pickerIOS: {
         width: 200,
         height: 200,
         // height: 270,
@@ -669,6 +675,16 @@ const styles = StyleSheet.create({
         color: '#fff',
         padding: 0,
         margin: 0,
+    },
+    pickerAndroid: {
+        width: 200,
+        height: 200,
+        color: 'white',
+        // fontSize: 40,
+    },
+    textAndroid: {
+        color: 'black',
+        fontSize: 24,
     },
     button: {
         backgroundColor: 'white',
