@@ -2,12 +2,20 @@
 // import TextRecognition from '@react-native-ml-kit/text-recognition';
 import { performOcr } from '@bear-block/vision-camera-ocr';
 import { useEffect, useRef, useState } from 'react';
-import { Image, Platform, Pressable, StyleSheet, Text, View } from 'react-native';
+import {
+    Image,
+    Platform,
+    Pressable,
+    StyleSheet,
+    Text,
+    View,
+} from 'react-native';
 import {
     Camera,
     CameraPosition,
     useCameraDevice,
     useCameraFormat,
+    useCameraPermission,
     useFrameProcessor,
 } from 'react-native-vision-camera';
 import { Worklets } from 'react-native-worklets-core'; // Allows react state (eg loopResult) to be updated from workflets frameProcessor function
@@ -54,14 +62,24 @@ export default function Index() {
     const prevScannedAddress = useRef<string>(''); // this and lastSpokenAt are used to prevent never ending speech (happens with loopResult[], not loopResult, fyi)
     const lastSpokenAt = useRef<number>(0);
     const [cameraDirection, setCameraDirection] =
-        useState<CameraPosition>('front'); // front, *back, or external
+        useState<CameraPosition>('back'); // front, *back, or external
     const [cameraActive, setCameraActive] = useState<boolean>(true);
     // const imageURL = 'https://www.svgbasics.com/rasters/text_ex1.png';
     const isFocused = useIsFocused();
     const device = useCameraDevice(cameraDirection);
-    const targetFps = 10;
-    const format = useCameraFormat(device, [{fps:targetFps}]) // needed for android studio
-    
+    const targetFps = 10; // 10 default
+    const format = useCameraFormat(device, [
+        { fps: targetFps },
+        { videoResolution: 'max' },
+    ]); // needed for android studio (video res very low w/out videoResolution on iOS)
+    const { hasPermission, requestPermission } = useCameraPermission();
+
+    // (TBD) May or may not be needed for android studio
+    useEffect(() => {
+        if (!hasPermission) {
+            requestPermission();
+        }
+    }, [hasPermission, requestPermission]);
 
     useEffect(() => {
         if (loopResult.length > 0) {
@@ -123,7 +141,7 @@ export default function Index() {
 
             if (result && result.length > 0) {
                 setPickerRoutes(result.map((r) => (r as Schema).route_num));
-                setSelectedRoute((result as Schema[])[0].route_num)
+                setSelectedRoute((result as Schema[])[0].route_num);
                 // console.log(result);
             }
         }
@@ -259,6 +277,100 @@ export default function Index() {
         },
     );
 
+    const processResult = Worklets.createRunOnJS((result: any) => {
+        if (result.text !== undefined) {
+            // const streetRegex =
+            // /^\d+\s+(?:(?:NW|NE|SW|SE|N|S|E|W|NORTH|SOUTH|EAST|WEST)\s+)?(?!NN|SS|EE|WW|NM|UN)[A-Z0-9]+(?:\s+[A-Z0-9]+)*\s+(?:ST|AVE|BLVD|DR|RD|LN|CT|WAY|PL|TER|CIR|HWY|STREET|ROAD|AVENUE|DRIVE|HIGHWAY|LANE|WAY|PLACE|TERRACE|CIRCLE|COURT|BOULEVARD)\.?\s*$/i;
+
+            // previous regex: worked ok for most addresses, but crucially misses addresses with multiple street names
+            // const addressRegex =
+            // /\b(\d{3,6})\s+(n|s|e|w|ne|nw|se|sw|north|south|east|west|northeast|northwest|southeast|southwest)?\s+([a-z]+)\s+(st|street|ave|avenue|rd|road|dr|drive|ln|lane|blvd|boulevard|ct|court|pl|place|hwy|highway|ter|terrace|cir|circle|way)\b/i;
+
+            // new regex: now includes addresses with dots on suffix + up to 4 street names in address + street names that are numbers
+            // const addressRegex = /\b(\d{3,6})\s+(n|s|e|w|ne|nw|se|sw|north|south|east|west|northeast|northwest|southeast|southwest)?\s+([a-z0-9]+)\s+(st|street|ave|avenue|rd|road|dr|drive|ln|lane|blvd|boulevard|ct|court|pl|place|hwy|highway|ter|terrace|cir|circle|way)\b/i;
+            const addressRegex =
+                /\b(\d{3,6})\s+(n|s|e|w|ne|nw|se|sw|north|south|east|west|northeast|northwest|southeast|southwest)?\s+([a-z0-9]+(?:\s+[a-z0-9]+){0,3})\s+(st|street|ave|avenue|rd|road|dr|drive|ln|lane|blvd|boulevard|ct|court|pl|place|hwy|highway|ter|terrace|cir|circle|way)\b/i;
+
+            // const addressRegex = /\b\d{3,6}\s+(n|s|e|w|ne|nw|se|sw|north|south|east|west|northeast|northwest|southeast|southwest)\.?\s+?(?:[a-z0-9]+\s+){1,4}(?:st|street|ave|avenue|rd|road|dr|drive|ln|lane|blvd|boulevard|ct|court|pl|place|hwy|highway|ter|terrace|cir|circle|way)\b/i;
+
+            let scannedText = result.text.trim().toLowerCase();
+            scannedText = scannedText.replace(/\./g, ''); // remove any dots if present
+
+            // const streets = Object.keys(ROUTE_14); // all streets in route
+            // 3) indexOf() solutions:
+            // 3.1: match entire street address exactly (more reliable):
+            // for (let i = 0; i < streets.length; i++) {
+            //     const street = streets[i];
+            //     const indexOfFirst = scannedText.indexOf(street);
+            //     if (indexOfFirst !== -1) {
+            //         updateLoopResult(ROUTE_14[street], street);
+            //         break;
+            //     }
+            // }
+
+            // 3.2: match on street number and name only (less reliable):
+            // for (let i = 0; i < streets.length; i++) {
+            //     // find street number in scanned text first:
+            //     const streetNum = streets[i].split(' ')[0];
+            //     const indexOfFirst = scannedText.indexOf(streetNum);
+            //     if (indexOfFirst !== -1) {
+            //         // Now find if street name also matches at that position/index
+            //         const streetName = streets[i].split(' ')[2];
+            //         const addressParts = scannedText
+            //             .slice(indexOfFirst, 100)
+            //             .split(' ', 4);
+            //         // console.log('Address Parts: ', addressParts);
+            //         if (addressParts.join(' ').match(streetRegex)) {
+            //             console.log('Street Name: ', streetName);
+            //             if (streetName === addressParts[2]) {
+            //                 console.log(
+            //                     'Street Address: ',
+            //                     addressParts.join(' '),
+            //                 );
+            //                 updateLoopResult(
+            //                     ROUTE_14[streets[i]],
+            //                     streets[i],
+            //                 );
+            //                 break;
+            //             }
+            //         }
+            //     }
+
+            // 2) includes() solution:
+            // for (let i = 0; i < streets.length; i++) {
+            //     const street = streets[i];
+            //     if (scannedText.includes(street)) {
+            //         updateLoopResult(ROUTE_14[street], street);
+            //         break;
+            //     }
+            // }
+
+            // 1.) regex solution
+            // first find an address anywhere in the text
+            const match = scannedText.match(addressRegex);
+            if (match) {
+                const fullAddress =
+                    match[1] + ' ' + match[2] + ' ' + match[3] + ' ' + match[4];
+                // console.log('Street Address: ', fullAddress);
+
+                // Now check if that address is in the route
+                lookupAddressInDb(match, fullAddress);
+
+                // for (let i = 0; i < streets.length; i++) {
+                //     if (fullAddress.includes(streets[i])) {
+                //         // Display the found loop and address
+                //         updateLoopResult(
+                //             ROUTE_14[fullAddress],
+                //             fullAddress,
+                //         );
+                //         break;
+                //     }
+                // }
+                // updateLoopResult(ROUTE_14[fullAddress], fullAddress);
+            }
+        }
+    });
+
     const frameProcessor = useFrameProcessor(
         (frame) => {
             'worklet';
@@ -266,109 +378,19 @@ export default function Index() {
             const result = performOcr(frame, {
                 includeBoxes: true,
                 includeConfidence: true,
-                recognitionLevel: 'accurate',
-                recognitionLanguages: ['en-US'],
+                recognitionLevel: 'accurate', // iOS
+                recognitionLanguages: ['en-US'], // iOS
             });
             if (result?.text) {
+                // console.log(result.text);
+                // console.log(JSON.stringify(result))
                 const confidence = result.blocks?.[0]?.lines?.[0].confidence;
-                if (confidence && confidence === 1) {
-                    if (result.text !== undefined) {
-                        // const streetRegex =
-                        // /^\d+\s+(?:(?:NW|NE|SW|SE|N|S|E|W|NORTH|SOUTH|EAST|WEST)\s+)?(?!NN|SS|EE|WW|NM|UN)[A-Z0-9]+(?:\s+[A-Z0-9]+)*\s+(?:ST|AVE|BLVD|DR|RD|LN|CT|WAY|PL|TER|CIR|HWY|STREET|ROAD|AVENUE|DRIVE|HIGHWAY|LANE|WAY|PLACE|TERRACE|CIRCLE|COURT|BOULEVARD)\.?\s*$/i;
-
-                        // previous regex: worked ok for most addresses, but crucially misses addresses with multiple street names
-                        // const addressRegex =
-                        // /\b(\d{3,6})\s+(n|s|e|w|ne|nw|se|sw|north|south|east|west|northeast|northwest|southeast|southwest)?\s+([a-z]+)\s+(st|street|ave|avenue|rd|road|dr|drive|ln|lane|blvd|boulevard|ct|court|pl|place|hwy|highway|ter|terrace|cir|circle|way)\b/i;
-
-                        // new regex: now includes addresses with dots on suffix + up to 4 street names in address + street names that are numbers
-                        // const addressRegex = /\b(\d{3,6})\s+(n|s|e|w|ne|nw|se|sw|north|south|east|west|northeast|northwest|southeast|southwest)?\s+([a-z0-9]+)\s+(st|street|ave|avenue|rd|road|dr|drive|ln|lane|blvd|boulevard|ct|court|pl|place|hwy|highway|ter|terrace|cir|circle|way)\b/i;
-                        const addressRegex =
-                            /\b(\d{3,6})\s+(n|s|e|w|ne|nw|se|sw|north|south|east|west|northeast|northwest|southeast|southwest)?\s+([a-z0-9]+(?:\s+[a-z0-9]+){0,3})\s+(st|street|ave|avenue|rd|road|dr|drive|ln|lane|blvd|boulevard|ct|court|pl|place|hwy|highway|ter|terrace|cir|circle|way)\b/i;
-
-                        // const addressRegex = /\b\d{3,6}\s+(n|s|e|w|ne|nw|se|sw|north|south|east|west|northeast|northwest|southeast|southwest)\.?\s+?(?:[a-z0-9]+\s+){1,4}(?:st|street|ave|avenue|rd|road|dr|drive|ln|lane|blvd|boulevard|ct|court|pl|place|hwy|highway|ter|terrace|cir|circle|way)\b/i;
-
-                        let scannedText = result.text.trim().toLowerCase();
-                        scannedText = scannedText.replace(/\./g, ''); // remove any dots if present
-
-                        // const streets = Object.keys(ROUTE_14); // all streets in route
-                        // 3) indexOf() solutions:
-                        // 3.1: match entire street address exactly (more reliable):
-                        // for (let i = 0; i < streets.length; i++) {
-                        //     const street = streets[i];
-                        //     const indexOfFirst = scannedText.indexOf(street);
-                        //     if (indexOfFirst !== -1) {
-                        //         updateLoopResult(ROUTE_14[street], street);
-                        //         break;
-                        //     }
-                        // }
-
-                        // 3.2: match on street number and name only (less reliable):
-                        // for (let i = 0; i < streets.length; i++) {
-                        //     // find street number in scanned text first:
-                        //     const streetNum = streets[i].split(' ')[0];
-                        //     const indexOfFirst = scannedText.indexOf(streetNum);
-                        //     if (indexOfFirst !== -1) {
-                        //         // Now find if street name also matches at that position/index
-                        //         const streetName = streets[i].split(' ')[2];
-                        //         const addressParts = scannedText
-                        //             .slice(indexOfFirst, 100)
-                        //             .split(' ', 4);
-                        //         // console.log('Address Parts: ', addressParts);
-                        //         if (addressParts.join(' ').match(streetRegex)) {
-                        //             console.log('Street Name: ', streetName);
-                        //             if (streetName === addressParts[2]) {
-                        //                 console.log(
-                        //                     'Street Address: ',
-                        //                     addressParts.join(' '),
-                        //                 );
-                        //                 updateLoopResult(
-                        //                     ROUTE_14[streets[i]],
-                        //                     streets[i],
-                        //                 );
-                        //                 break;
-                        //             }
-                        //         }
-                        //     }
-
-                        // 2) includes() solution:
-                        // for (let i = 0; i < streets.length; i++) {
-                        //     const street = streets[i];
-                        //     if (scannedText.includes(street)) {
-                        //         updateLoopResult(ROUTE_14[street], street);
-                        //         break;
-                        //     }
-                        // }
-
-                        // 1.) regex solution
-                        // first find an address anywhere in the text
-                        const match = scannedText.match(addressRegex);
-                        if (match) {
-                            const fullAddress =
-                                match[1] +
-                                ' ' +
-                                match[2] +
-                                ' ' +
-                                match[3] +
-                                ' ' +
-                                match[4];
-                            // console.log('Street Address: ', fullAddress);
-
-                            // Now check if that address is in the route
-                            lookupAddressInDb(match, fullAddress);
-
-                            // for (let i = 0; i < streets.length; i++) {
-                            //     if (fullAddress.includes(streets[i])) {
-                            //         // Display the found loop and address
-                            //         updateLoopResult(
-                            //             ROUTE_14[fullAddress],
-                            //             fullAddress,
-                            //         );
-                            //         break;
-                            //     }
-                            // }
-                            // updateLoopResult(ROUTE_14[fullAddress], fullAddress);
-                        }
-                    }
+                if (confidence && confidence === 1 && Platform.OS === 'ios') {
+                    // iOS: only iOS seems to have confidence values, so use it for enhanced accuracy + db performance
+                    processResult(result);
+                } else {
+                    // Android, macos, windows, and web (not iOS)
+                    processResult(result);
                 }
                 // console.log('Confidence: ', result.blocks?.[0]?.lines?.[0].confidence );
             }
@@ -412,6 +434,7 @@ export default function Index() {
                             isMirrored={false}
                             photoQualityBalance='quality'
                             format={format} // Needed for android studio
+                            // {...(Platform.OS === 'android' ? {format: format}: {})} // Alt: needed for android studio (use instead if exp perf problems on iOS)
                         />
                         <View
                             style={[
@@ -589,7 +612,11 @@ export default function Index() {
                     onValueChange={(itemValue, itemIndex) =>
                         setSelectedRoute(itemValue)
                     }
-                    style={Platform.OS === 'android' ? styles.pickerAndroid : styles.pickerIOS}
+                    style={
+                        Platform.OS === 'android'
+                            ? styles.pickerAndroid
+                            : styles.pickerIOS
+                    }
                     mode={'dropdown'} // android-only
                     dropdownIconColor={'white'} // android-only
                 >
@@ -597,7 +624,11 @@ export default function Index() {
                         <Picker.Item
                             label={'Route ' + routeNum}
                             value={routeNum}
-                            style={Platform.OS === 'android' ? styles.textAndroid: styles.text}
+                            style={
+                                Platform.OS === 'android'
+                                    ? styles.textAndroid
+                                    : styles.text
+                            }
                             key={index}
                         />
                     ))}
