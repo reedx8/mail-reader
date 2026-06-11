@@ -50,7 +50,10 @@ const CORNER_SIZE = 20; // Length of the corner lines
 const CORNER_THICKNESS = 1; // Thickness of the lines
 const GAP = 10; // Space between the camera and the corners
 
-// Scan page
+/**
+ * Home page for the app, which contains scanning addresses via the phones camera feature
+ * @returns Home page component
+ */
 export default function Index() {
     const [selectedOffice] = useState<number>(0);
     const [selectedRoute, setSelectedRoute] = useState<number>(0);
@@ -638,6 +641,9 @@ export default function Index() {
     );
 }
 
+/**
+ * Styling the home page
+ */
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -768,7 +774,3 @@ const styles = StyleSheet.create({
     bottomRight: { bottom: 0, right: 0 },
 });
 
-// async function getLoop(imageURL : string) {
-//     const result = await TextRecognition.recognize(imageURL);
-//     return result.text;
-// }

@@ -13,6 +13,10 @@ type Schema = {
     route_num: number;
 };
 
+/**
+ * This component allows for searching the entire db for queried string's associated route and loop number
+ * @returns The Search page component
+ */
 export default function Search() {
     const [selectedOffice] = useState<number>(0);
     const [address, setAddress] = useState<string>('');
@@ -165,11 +169,20 @@ export default function Search() {
         </View>
     );
 }
+
+/**
+ * Checks if queried `address` entered in the page's text field contains a street suffix in its string
+ * @param address - A string containing the queried address, eg "1200 n main st"
+ * @returns A boolean true/false
+ * @example
+ * checkForSuffix("1200 n main street") // Returns True
+ * checkForSuffix("1200 n main") // Returns False
+ */
 function checkForSuffix(address: string) {
     let suffix = address.split(' ').slice(-1)[0];
 
     if (suffix === 'steet' || suffix === 'st') {
-        suffix = 'st';
+        suffix = 'st'; // Not used
         // return suffix;
         return true;
     } else if (suffix === 'avenue' || suffix === 'ave') {
@@ -219,11 +232,19 @@ function checkForSuffix(address: string) {
     }
 }
 
+/**
+ * Checks if queried `address` entered in the page's text field contains an address suffix/direction in its string
+ * @param address - A string containting the queried address, eg "1200 n main st"
+ * @returns A boolean true/false
+ * @example
+ * checkForDir("1200 north main st") // Returns True
+ * checkForDir("1200 main st") // Returns False
+ */
 function checkForDir(address: string) {
     let dir = address.split(' ').slice(1, 2)[0];
 
     if (dir === 'north' || dir === 'n') {
-        dir = 'n';
+        dir = 'n'; // Not used
         // return dir;
         return true;
     } else if (dir === 'south' || dir === 's') {
@@ -260,6 +281,9 @@ function checkForDir(address: string) {
     }
 }
 
+/**
+ * Styling the Search component
+ */
 const styles = StyleSheet.create({
     container: {
         flex: 1,

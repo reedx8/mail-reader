@@ -28,6 +28,10 @@ type PickerSchema = {
     value: number;
 };
 
+/**
+ * Cheat sheet view for each route in the database
+ * @returns Routes page component
+ */
 export default function Routes() {
     const [currentOffice] = useState(0);
     const [currentRoute, setCurrentRoute] = useState(1);
@@ -143,6 +147,9 @@ export default function Routes() {
     );
 }
 
+/**
+ * Styling the Routes component
+ */
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -215,12 +222,19 @@ const styles = StyleSheet.create({
     },
 });
 
-// Format data into a simpler Map, and group similar streets within loop, for improved readability
+
+/**
+ * Format a single route's data into a simpler view simply for improved readability for user
+ * @param data - The route's data returned from the expo sqlite db
+ * @returns A Map(), `formattedData<loop_num, [street_min, street_max, full_street_name]>`, containing the simpler view of the db's data
+ * @example
+ * formatAndGroupData({"1": [{1, 2,"main st"},{3, 4,"main st"}], "2": [{1,1,"otter st"}]}) // Returns {"1": [{1,4, "main st", "2": [{1,"otter st"}]}]}
+ */
 function formatAndGroupData(data: LoopsSchema[] | unknown[]) {
     if (!data || data.length === 0 || !isLoopsSchema(data[0])) {
         return new Map();
     }
-    type streetType = [number, number, string]; // <[street's_min, street's_max, full_street_name]>
+    type streetType = [number, number, string];
     const formattedData = new Map<string, streetType[]>(); // <loop_num, [streetType]
     const visitedStreets = new Map<string, [number, number]>(); // <full_street_name, [min, max]>
     let prevLoop = data[0].loop_num;
@@ -286,6 +300,13 @@ function formatAndGroupData(data: LoopsSchema[] | unknown[]) {
     return formattedData;
 }
 
+/**
+ * Formats the full street name for better readability, 
+ * @param streetName - the raw full street name string as it appears in the db, eg "n main st"
+ * @returns A string formattedName, eg "N Main St"
+ * @example
+ * capitalizeStreetName("n main st") // Returns "N Main St"
+ */
 function capitalizeStreetName(streetName: string) {
     let words = streetName.split(' ');
     let dir = '';
@@ -303,6 +324,14 @@ function capitalizeStreetName(streetName: string) {
     return formattedName;
 }
 
+/**
+ * Simply a utility function to test if param (a single word) is a direction (eg n, nw, e, etc)
+ * @param data - A string containing a single word passed from caller function
+ * @returns A boolean whether param is a direction
+ * @example
+ * isDirection("n") // Returns True
+ * isDirection("main") // Returns False
+ */
 function isDirection(data: string) {
     let word = data.toLowerCase();
     return (
@@ -316,6 +345,12 @@ function isDirection(data: string) {
         word === 'w'
     );
 }
+
+/**
+ * A utility function to check if the data is of the type LoopsSchema
+ * @param item - data from the expo sqlite db
+ * @returns A boolean true/false
+ */
 function isLoopsSchema(item: any): item is LoopsSchema {
     return (
         item !== null &&
@@ -325,7 +360,11 @@ function isLoopsSchema(item: any): item is LoopsSchema {
     );
 }
 
-// (not used, formatAndGroupData() replaced it) Reformat data such that single addresses from db are not outputted to UI as a range (eg "200 Main st", not "200 - 200 Main st"). For better readability.
+/**
+ * (Not used, `formatAndGroupData()` replaced it) Reformat data such that single addresses from db are not outputted to UI as a range (eg "200 Main st", not "200 - 200 Main st"). For better readability.
+ * @param data 
+ * @returns 
+ */
 function getSingleAddresses(data: any) {
     let prevLoopNum = '-1';
     let streetsOnLoop = [];
