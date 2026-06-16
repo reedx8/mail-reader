@@ -42,26 +42,26 @@ const getAdaptiveIcon = () => {
 
 const getUniqueIdentifier = () => {
     if (IS_DEV) {
-        return 'com.anonymous.mailreader.dev';
+        return 'com.fullstaxdev.mailreader.dev';
     }
 
     if (IS_PREVIEW) {
-        return 'com.anonymous.mailreader.preview';
+        return 'com.fullstaxdev.mailreader.preview';
     }
 
-    return 'com.anonymous.mailreader';
+    return 'com.fullstaxdev.mailreader';
 };
 
 const getAppName = () => {
     if (IS_DEV) {
-        return 'Mail Reader (Dev)';
+        return 'MailReader (Dev)';
     }
 
     if (IS_PREVIEW) {
-        return 'Mail Reader (Preview)';
+        return 'MailReader (Preview)';
     }
 
-    return 'Mail Reader';
+    return 'MailReader';
 };
 
 const getIcon = () => {
