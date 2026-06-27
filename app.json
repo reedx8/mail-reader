@@ -13,7 +13,8 @@
             "infoPlist": {
                 "NSCameraUsageDescription": "$(PRODUCT_NAME) needs access to your Camera."
             },
-            "bundleIdentifier": "com.fullstaxdev.mailreader"
+            "bundleIdentifier": "com.fullstaxdev.mailreader",
+            "buildNumber": "2"
         },
         "android": {
             "adaptiveIcon": {
