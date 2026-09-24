@@ -14,7 +14,7 @@
                 "NSCameraUsageDescription": "$(PRODUCT_NAME) needs access to your Camera."
             },
             "bundleIdentifier": "com.fullstaxdev.mailreader",
-            "buildNumber": "2"
+            "buildNumber": "3"
         },
         "android": {
             "adaptiveIcon": {
